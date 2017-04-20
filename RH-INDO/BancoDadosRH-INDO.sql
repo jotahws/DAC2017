@@ -53,7 +53,7 @@ create table Cidade(
 
 create table Estado(
 	id int not null auto_increment,
-    sigla varchar(2),
+    uf varchar(2),
     nome varchar(50),
     primary key(id)
 );

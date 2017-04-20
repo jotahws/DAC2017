@@ -8,7 +8,8 @@ create table Funcionario(
 create table EdicaoAtividade(
 	id int not null auto_increment,
     idAtividade int,
-    horas time,
+    inicio date,
+    fim date,
     descricao varchar(100),
     statusAprovacao varchar(20),
     primary key(id),
