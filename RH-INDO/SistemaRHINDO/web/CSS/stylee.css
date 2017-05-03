@@ -8,13 +8,14 @@ and open the template in the editor.
     Author     : MauMau
 */
 
-.centrologin{
-    margin: 110px 0 ;
+.panel-default {
+opacity: 0.9;
+margin-top:100px;
 }
-.alinhadireita{
-    padding-right: 36%; 
-    text-align: right ;
+.form-group.last { 
+    margin-bottom:0px; 
 }
-#textologin{
-    margin-left:20px ;
+
+.page-title {
+    text-align:center;
 }
