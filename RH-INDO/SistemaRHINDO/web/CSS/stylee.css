@@ -18,3 +18,11 @@ and open the template in the editor.
 #textologin{
     margin-left:20px ;
 }
+
+.glyphicon-lg{
+    font-size: 50px;
+}
+
+.lista-lat{
+    background-color: #888888;
+}
