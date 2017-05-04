@@ -12,10 +12,9 @@
         <title>Funcionários</title>
     </head>
     <body>
-        <%@ include file="pre-fabricado/cabecalho.jsp" %>
         <div class="container">
             <div class="col-md-4 lista-lat">
-
+                <h1>Tela Funcionarios</h1>
             </div>
             <div class="corpo col-md-8">
 

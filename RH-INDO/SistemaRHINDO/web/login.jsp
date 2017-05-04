@@ -46,7 +46,7 @@
                             </form>
                         </div>
                         <div class="panel-footer">
-                            <a href="http://www.jquery2dotnet.com">Esqueceu a senha?</a></div>
+                            <a href="forgotPswDados.jsp">Esqueceu a senha?</a></div>
                     </div>
                 </div>
             </div>
