@@ -48,10 +48,14 @@ and open the template in the editor.
     background-color: #f8f8f8
 }
 
-.corpo legend {
-    padding-top: 1px;
+.corpo legend h2 {
+    padding-top: 10px;
 }
 
-.formulario { 
+.legenda{
+    padding-top: 10px;
+}
+
+.cadastro { 
     margin: 20px;
 }

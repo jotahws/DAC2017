@@ -25,7 +25,7 @@
                 <!-- corpo da página -->
                 <div class="col-md-12 corpo">
                     <fieldset>
-                        <form class="formulario">
+                        <form class="cadastro">
                             <div class="row">
                                 <legend>Geral</legend>
                                 <div class="form-group col-md-6">
