@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="salario">Salário:</label>
-                                    <input type="number" class="form-control" id="salario">
+                                    <input type="number" class="form-control" id="salario" placeholder="R$:">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="requisitos">Requisitos:</label>
@@ -70,11 +70,10 @@
                                     <label for="imposto">Desconto de Imposto (%):</label>
                                     <input type="number" class="form-control" id="imposto" placeholder="%">
                                 </div>
-                                <div class="form-group col-md-2"></div>
-                                <div class="form-group col-md-2">
-                                    <label for="button" >&nbsp</label>
-                                    <button type="submit" id="botao" class="btn btn-primary form-control">Cadastrar</button>  
-                                </div>
+                            </div>
+                            <div class="text-right">
+                                <button type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
+                                <button class="btn btn-danger">Excluir</button>  
                             </div>
                         </form>
                     </fieldset>
