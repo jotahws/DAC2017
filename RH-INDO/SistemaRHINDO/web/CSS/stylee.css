@@ -5,12 +5,11 @@ and open the template in the editor.
 */
 /* 
     Created on : 03/05/2017, 15:06:36
-    Author     : MauMau
 */
 
 .panel-default {
-opacity: 0.9;
-margin-top:100px;
+    opacity: 0.9;
+    margin-top:100px;
 }
 .form-group.last { 
     margin-bottom:0px; 
@@ -24,10 +23,35 @@ margin-top:100px;
     margin-left:20px ;
 }
 
-.glyphicon-lg{
-    font-size: 50px;
+.lista-lat {
 }
 
-.lista-lat{
-    background-color: #888888;
+.row-busca-titulo {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.row-busca-titulo h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.row-lista-corpo {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.corpo{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    background-color: #f8f8f8
+}
+
+.corpo legend {
+    padding-top: 1px;
+}
+
+.formulario { 
+    margin: 20px;
 }
