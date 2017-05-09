@@ -5,16 +5,61 @@ and open the template in the editor.
 */
 /* 
     Created on : 03/05/2017, 15:06:36
-    Author     : MauMau
 */
 
-.centrologin{
-    margin: 110px 0 ;
+.panel-default {
+    opacity: 0.9;
+    margin-top:100px;
 }
-.alinhadireita{
-    padding-right: 36%; 
-    text-align: right ;
+.form-group.last { 
+    margin-bottom:0px; 
 }
+
+.page-title {
+    text-align:center;
+}
+
 #textologin{
     margin-left:20px ;
+}
+
+.lista-lat {
+}
+
+.row-busca-titulo {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.row-busca-titulo h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.row-lista-corpo {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.corpo{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    background-color: #f8f8f8;
+}
+
+.corpo legend h2 {
+    padding-top: 10px;
+}
+
+.legenda{
+    padding-top: 10px;
+}
+
+.cadastro { 
+    margin: 20px;
+}
+
+textarea {
+    resize: vertical;
 }

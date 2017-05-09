@@ -13,34 +13,44 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="CSS/stylee.css"/>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
-        <title>JSP Page</title>
+        <title>Login - Sistema RHINDO</title>
     </head>
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4  centrologin">
-                    <h2 id="textologin">Sistema RH-INDO</h2><br/>
-                    <div class="form-group">
-                        <form action="LoginServlet" method="POST">
-                            <div class="row">
-                                <label class="col-md-3 text-right " >Login:</label><input class="col-md-5" type="text"><br/>
-                                <div class="col-md-3"></div>
-                            </div>
-                            <div class="row">
-                                <label class="col-md-3 text-right" >Senha:</label><input class="col-md-5" type="password"><br/>
-                            </div><br/>
-                            <div class="row alinhadireita">
-
-                                <a href="recuperarsenha.jsp" class="">Esqueci minha senha</a><br/>
-                                <input type="submit" class="btn btn-default " value="Entrar">
-                            </div>
-                        </form>
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h2 class="page-title">Sistema RH-INDO</h2></div>
+                        <div class="panel-body">
+                            <form class="form-horizontal" role="form" action="LoginServlet" method="POST">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">
+                                        Login:</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" placeholder="login" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">
+                                        Senha:</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" placeholder="senha" required>
+                                    </div>
+                                </div>
+                                <div class="form-group last">
+                                    <div class="col-sm-offset-9 col-sm-3">
+                                        <button type="submit" class="btn btn-success btn-sm">
+                                            Entrar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="panel-footer">
+                            <a href="forgotPswDados.jsp">Esqueceu a senha?</a></div>
                     </div>
                 </div>
-                <div class="col-md-4"></div>
             </div>
-
         </div>
+
     </body>
 </html>
