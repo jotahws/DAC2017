@@ -13,7 +13,7 @@
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="CSS/stylee.css"/>
         <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
-        <title>JSP Page</title>
+        <title>Login - Sistema RHINDO</title>
     </head>
     <body>
         <div class="container">

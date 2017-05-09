@@ -9,9 +9,24 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Folha de Pagamento - Sistema RHINDO</title>
     </head>
     <body>
-        <h1>Tela Fechar Folha</h1>
+        <%@include file="/pre-fabricado/cabecalho.jsp" %>
+        <div class="container">
+            <!-- Row do input pesquisar: -->
+            <div class="row row-busca-titulo">
+                <div class="col-md-8 titulo">
+                    <h1 class="col-md-10">Fechar Folha</h1>
+                </div>
+            </div>
+            <!-- Row do cadastro: -->
+            <div class="row row-lista-corpo">
+                <!-- corpo da página -->
+                <div class="col-md-12 corpo">
+                    <legend>Fechar folha de Pagamento</legend>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

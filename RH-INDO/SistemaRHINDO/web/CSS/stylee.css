@@ -45,7 +45,7 @@ and open the template in the editor.
     border: 1px solid #ddd;
     border-radius: 5px;
     padding-bottom: 20px;
-    background-color: #f8f8f8
+    background-color: #f8f8f8;
 }
 
 .corpo legend h2 {
@@ -58,4 +58,8 @@ and open the template in the editor.
 
 .cadastro { 
     margin: 20px;
+}
+
+textarea {
+    resize: vertical;
 }
