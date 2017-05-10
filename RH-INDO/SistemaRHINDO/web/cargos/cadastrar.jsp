@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
+                                <button type="submit" id="botao" class="btn btn-primary">Cadastrar</button>  
                             </div>
                         </form>
                     </fieldset>

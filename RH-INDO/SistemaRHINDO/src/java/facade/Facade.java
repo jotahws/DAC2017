@@ -5,10 +5,27 @@
  */
 package facade;
 
+import beans.Departamento;
+import beans.Estado;
+import daos.DepartamentoDAO;
+import daos.EstadoDAO;
+import java.sql.SQLException;
+
 /**
  *
  * @author JotaWind
  */
 public class Facade {
-    
+
+    public Estado buscaEstado(String uf) throws ClassNotFoundException {
+        EstadoDAO estadoDAO = new EstadoDAO();
+        return estadoDAO.buscaEstadoPorUF(uf);
+    }
+
+    public void insereDepto(Departamento depto) throws ClassNotFoundException, SQLException {
+        DepartamentoDAO deptoDAO = new DepartamentoDAO();
+        deptoDAO.inserirDepto(depto);
+
+    }
+
 }

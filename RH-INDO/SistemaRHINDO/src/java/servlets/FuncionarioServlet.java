@@ -11,8 +11,11 @@ import beans.Departamento;
 import beans.Endereco;
 import beans.Estado;
 import beans.Funcionario;
+import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,44 +44,49 @@ public class FuncionarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String action = request.getParameter("action");
+        Facade facade = new Facade();
 
         if ("register".equals(action)) {
-            //Cadastrar
+            try {
+                //Cadastrar
+                String nome = request.getParameter("nome");
+                String cpf = request.getParameter("cpf");
+                String rg = request.getParameter("rg");
+                String celular = request.getParameter("celular");
+                String email = request.getParameter("email");
+                String depto = request.getParameter("depto");
+                String perfilFunc = request.getParameter("perfil");
+                String cep = request.getParameter("cep");
+                String rua = request.getParameter("rua");
+                String numero = request.getParameter("numero");
+                String bairro = request.getParameter("bairro");
+                String cidade = request.getParameter("cidade");
+                String uf = request.getParameter("uf");
 
-            String nome = request.getParameter("nome");
-            String cpf = request.getParameter("cpf");
-            String rg = request.getParameter("rg");
-            String celular = request.getParameter("celular");
-            String email = request.getParameter("email");
-            String depto = request.getParameter("depto");
-            String perfilFunc = request.getParameter("perfil");
-            String cep = request.getParameter("cep");
-            String rua = request.getParameter("rua");
-            String numero = request.getParameter("numero");
-            String bairro = request.getParameter("bairro");
-            String cidade = request.getParameter("cidade");
-            String estado = request.getParameter("estado");
+                Estado estado = facade.buscaEstado(uf);
+                Cidade objCidade = new Cidade();
+                objCidade.setNome(cidade);
+                objCidade.setEstado(estado);
+                Endereco endereco = new Endereco();
+                endereco.setCep(cep);
+                try {
+                    endereco.setNumero(Integer.parseInt(numero));
+                } catch(NumberFormatException ex){
+                    System.out.println("Caracteres inválidos no inteiro");
+                }
+                endereco.setRua(rua);
+                endereco.setBairro(bairro);
+                endereco.setCidade(objCidade);
 
-            Estado objEstado = new Estado();
-            objEstado.setNome(estado);          
-            Cidade objCidade = new Cidade();
-            objCidade.setNome(cidade);  
-            objCidade.setEstado(objEstado);
-            Endereco endereco = new Endereco();
-            endereco.setCep(cep);
-            endereco.setNumero(Integer.parseInt(numero));
-            endereco.setRua(rua);
-            endereco.setBairro(bairro);
-            endereco.setCidade(objCidade);
-            
-            Cargo cargo = new Cargo();
-            cargo.setNome(perfilFunc);
-            Departamento departamento = new Departamento();
-            departamento.setNome(depto);
-            Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, departamento);
-            
-            
-            
+                Cargo cargo = new Cargo();
+                cargo.setNome(perfilFunc);
+                Departamento departamento = new Departamento();
+                departamento.setNome(depto);
+                Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, departamento);
+            } catch (ClassNotFoundException ex) {
+                System.out.println("Classe não encontrada");
+            }
+
         }
 
     }

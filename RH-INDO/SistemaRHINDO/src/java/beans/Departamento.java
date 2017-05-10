@@ -21,6 +21,11 @@ public class Departamento implements Serializable {
     public Departamento() {
     }
 
+    public Departamento(String nome, String localizacao) {
+        this.nome = nome;
+        this.localizacao = localizacao;
+    }
+
     public List<Funcionario> getFuncionarios() {
         return funcionarios;
     }

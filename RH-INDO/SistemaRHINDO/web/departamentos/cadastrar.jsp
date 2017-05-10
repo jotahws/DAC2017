@@ -23,23 +23,24 @@
             </div>
             <!-- Row do cadastro: -->
             <div class="row row-lista-corpo">
+                ${status}
                 <!-- corpo da página -->
                 <div class="col-md-12 corpo">
                     <fieldset>
-                        <form class="cadastro">
+                        <form method="POST" action="${pageContext.request.contextPath}/DeptoServlet?action=register"  class="cadastro">
                             <div class="row">
                                 <legend>Dados do Departamento</legend>
                                 <div class="form-group col-md-6">
                                     <label for="nome">Nome:</label>
-                                    <input type="text" class="form-control" id="nome" placeholder="Ex. Depto Financeiro">
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex. Depto Financeiro">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="localizacao">Localização</label>
-                                    <input type="text" class="form-control" id="localizacao" placeholder="Ex. 20º Andar">
+                                    <input type="text" class="form-control" id="localizacao" name="localizacao" placeholder="Ex. Sala 10">
                                 </div>                                
                             </div>
                             <div class="text-right">
-                                <button type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
+                                <button type="submit" id="botao" class="btn btn-primary">Cadastrar</button>  
                             </div>
                         </form>
                     </fieldset>

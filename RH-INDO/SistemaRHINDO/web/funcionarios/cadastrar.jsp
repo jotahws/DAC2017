@@ -89,9 +89,17 @@
                                     <label for="cidade">Cidade</label>
                                     <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Ex. Curitiba"/>
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-1">
+                                    <label for="uf">UF</label>
+                                    <select class="form-control" id="uf" name="uf">
+                                        <option>RS</option>
+                                        <option>SC</option>
+                                        <option>PR</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
                                     <label for="estado">Estado</label>
-                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Ex. Paraná"/>
+                                    <input type="text" class="form-control" disabled id="estado" name="estado"/>
                                 </div>
                             </div>
                             <div class="text-right">
