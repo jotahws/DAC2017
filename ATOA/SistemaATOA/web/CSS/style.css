@@ -1,0 +1,19 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/05/2017, 10:20:41
+    Author     : MauMau
+
+*/
+
+/* TELA LOGIN */
+.page-title {
+    text-align:center;
+}
+.panel-default {
+    opacity: 0.9;
+    margin-top:100px;
+}
