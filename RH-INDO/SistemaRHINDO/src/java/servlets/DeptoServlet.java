@@ -50,18 +50,17 @@ public class DeptoServlet extends HttpServlet {
             Departamento depto = new Departamento(nome, localizacao);
             try {
                 facade.insereDepto(depto);
-                request.setAttribute("status", "<div class=\"alert alert-success alert-dismissable\">\n"
-                        + "                    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
-                        + "                    <strong>Successo!</strong> O novo departamento foi cadastrado.\n"
-                        + "                </div>");
+//                request.setAttribute("status", "<div class=\"alert alert-success alert-dismissable\">\n"
+//                        + "                    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
+//                        + "                    <strong>Successo!</strong> O novo departamento foi cadastrado.\n"
+//                        + "                </div>");
             } catch (Exception ex) {
-                request.setAttribute("status", "<div class=\"alert alert-danger alert-dismissable\">\n"
-                        + "                    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
-                        + "                    <strong>Ops!</strong> Ocorreu um erro ao cadastrar o departamento. Tente novamente mais tarde.\n"
-                        + "                </div>");
+//                request.setAttribute("status", "<div class=\"alert alert-danger alert-dismissable\">\n"
+//                        + "                    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
+//                        + "                    <strong>Ops!</strong> Ocorreu um erro ao cadastrar o departamento. Tente novamente mais tarde.\n"
+//                        + "                </div>");
             }
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/departamentos/cadastrar.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("departamentos/cadastrar.jsp");
 
         }
     }
