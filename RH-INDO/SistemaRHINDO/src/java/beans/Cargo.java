@@ -5,6 +5,7 @@
  */
 package beans;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author JotaWind
  */
-public class Cargo {
+public class Cargo implements Serializable {
     
     private String nome;
     private double salario;

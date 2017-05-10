@@ -5,8 +5,15 @@
  */
 package servlets;
 
+import beans.Cargo;
+import beans.Cidade;
+import beans.Departamento;
+import beans.Endereco;
+import beans.Estado;
+import beans.Funcionario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +39,48 @@ public class FuncionarioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FuncionarioServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FuncionarioServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        String action = request.getParameter("action");
+
+        if ("register".equals(action)) {
+            //Cadastrar
+
+            String nome = request.getParameter("nome");
+            String cpf = request.getParameter("cpf");
+            String rg = request.getParameter("rg");
+            String celular = request.getParameter("celular");
+            String email = request.getParameter("email");
+            String depto = request.getParameter("depto");
+            String perfilFunc = request.getParameter("perfil");
+            String cep = request.getParameter("cep");
+            String rua = request.getParameter("rua");
+            String numero = request.getParameter("numero");
+            String bairro = request.getParameter("bairro");
+            String cidade = request.getParameter("cidade");
+            String estado = request.getParameter("estado");
+
+            Estado objEstado = new Estado();
+            objEstado.setNome(estado);          
+            Cidade objCidade = new Cidade();
+            objCidade.setNome(cidade);  
+            objCidade.setEstado(objEstado);
+            Endereco endereco = new Endereco();
+            endereco.setCep(cep);
+            endereco.setNumero(Integer.parseInt(numero));
+            endereco.setRua(rua);
+            endereco.setBairro(bairro);
+            endereco.setCidade(objCidade);
+            
+            Cargo cargo = new Cargo();
+            cargo.setNome(perfilFunc);
+            Departamento departamento = new Departamento();
+            departamento.setNome(depto);
+            Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, departamento);
+            
+            
+            
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

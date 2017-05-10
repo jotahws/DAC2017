@@ -5,15 +5,17 @@
  */
 package beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author JotaWind
  */
-public class Cidade {
+public class Cidade implements Serializable {
     
     private String nome;
+    private Estado estado;
     private List<Endereco> enderecos;
 
     public Cidade() {
@@ -33,6 +35,14 @@ public class Cidade {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
     
     

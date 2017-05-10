@@ -5,13 +5,14 @@
  */
 package beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author JotaWind
  */
-public class Estado {
+public class Estado implements Serializable {
 
     private String nome;
     private String uf;

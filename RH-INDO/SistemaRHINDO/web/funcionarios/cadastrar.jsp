@@ -25,34 +25,34 @@
                 <!-- corpo da página -->
                 <div class="col-md-12 corpo">
                     <fieldset>
-                        <form class="cadastro">
+                        <form action="../FuncionarioServlet?action=register" method="POST" class="cadastro">
                             <div class="row">
                                 <legend>Geral</legend>
                                 <div class="form-group col-md-6">
                                     <label for="nome">Nome:</label>
-                                    <input type="text" class="form-control" id="nome" placeholder="Maria dos Santos">
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Maria dos Santos">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="cpf">CPF:</label>
-                                    <input type="text" class="form-control" id="cpf" >
+                                    <input type="text" class="form-control" id="cpf" name="cpf">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="rg">RG:</label>
-                                    <input type="text" class="form-control" id="rg">
+                                    <input type="text" class="form-control" id="rg" name="rg">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-2">
                                     <label for="celular">Celular</label>
-                                    <input type="text" class="form-control" id="celular">
+                                    <input type="text" class="form-control" id="celular" name="celular">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="joe@exemplo.com">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="joe@exemplo.com">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="depto">Departamento</label>
-                                    <select class="form-control" id="depto">
+                                    <select class="form-control" id="depto" name="depto">
                                         <option>Recursos Humanos</option>
                                         <option>Desenvolvimento</option>
                                         <option>Financeiro</option>
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="perfil">Perfil do Funcionário</label>
-                                    <select class="form-control" id="perfil">
+                                    <select class="form-control" id="perfil" name="perfil">
                                         <option>Funcionário comum</option>
                                         <option>Gerente</option>
                                         <option>Gerente RH</option>
@@ -71,27 +71,27 @@
                                 <legend>Endereço</legend>
                                 <div class="form-group col-md-4">
                                     <label for="cep">CEP</label>
-                                    <input type="text" class="form-control" id="cep"/>
+                                    <input type="text" class="form-control" id="cep" name="cep"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="rua">Rua</label>
-                                    <input type="text" class="form-control" id="rua" placeholder="Ex. Rua das Dores"/>
+                                    <input type="text" class="form-control" id="rua" name="rua" placeholder="Ex. Rua das Dores"/>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="numero">Número</label>
-                                    <input type="number" class="form-control" id="numero"/>
+                                    <input type="number" class="form-control" id="numero" name="numero"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="bairro">Bairro</label>
-                                    <input type="text" class="form-control" id="bairro" placeholder="Ex. São Francisco"/>
+                                    <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Ex. São Francisco"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="cidade">Cidade</label>
-                                    <input type="text" class="form-control" id="cidade" placeholder="Ex. Curitiba"/>
+                                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Ex. Curitiba"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="estado">Estado</label>
-                                    <input type="text" class="form-control" id="estado" placeholder="Ex. Paraná"/>
+                                    <input type="text" class="form-control" id="estado" name="estado" placeholder="Ex. Paraná"/>
                                 </div>
                             </div>
                             <div class="text-right">

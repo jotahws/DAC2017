@@ -22,6 +22,17 @@ public class Funcionario implements Serializable {
     private Cargo cargo;
     private Departamento departamento;
 
+    public Funcionario(String nome, String rg, String cpf, String celular, String email, Endereco endereco, Cargo cargo, Departamento departamento) {
+        this.nome = nome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.celular = celular;
+        this.email = email;
+        this.endereco = endereco;
+        this.cargo = cargo;
+        this.departamento = departamento;
+    }    
+    
     public Funcionario() {
     }
 

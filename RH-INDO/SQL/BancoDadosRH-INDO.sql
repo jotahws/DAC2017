@@ -39,6 +39,7 @@ create table Endereco(
     rua varchar(100),
     numero varchar(5),
     cep varchar(9),
+    bairro varchar(45),
     primary key(id),
     foreign key(idCidade) references Cidade(id)
 );
