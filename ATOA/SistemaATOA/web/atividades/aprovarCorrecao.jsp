@@ -1,6 +1,6 @@
 <%-- 
-    Document   : relatorios
-    Created on : 10/05/2017, 11:04:23
+    Document   : aprovarCorrecao
+    Created on : 11/05/2017, 16:09:51
     Author     : MauMau
 --%>
 
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Relatórios - Sistema ATOA</title>
+        <title>Correcao Atividade - Sistema ATOA</title>
     </head>
     <body>
         <%@include file="/pre-fabricado/cabecalhoG.jsp" %>

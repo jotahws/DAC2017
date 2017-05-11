@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 10/05/2017, 11:05:10
+    Document   : atividadesPendente
+    Created on : 11/05/2017, 16:01:30
     Author     : MauMau
 --%>
 
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Atividades Pendentes - Sistema ATOA</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%@include file="/pre-fabricado/cabecalhoF.jsp" %>
     </body>
 </html>
