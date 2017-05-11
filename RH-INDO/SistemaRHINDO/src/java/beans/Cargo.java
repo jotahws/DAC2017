@@ -14,14 +14,23 @@ import java.util.List;
  * @author JotaWind
  */
 public class Cargo implements Serializable {
-    
+
     private String nome;
     private double salario;
     private String requisitos;
-    private Date horaMinima;
+    private int cargaMinima;
+    private double descImposto;
     private List<Funcionario> funcionarios;
 
     public Cargo() {
+    }
+
+    public Cargo(String nome, double salario, String requisitos, int cargaMinima, double descImposto) {
+        this.nome = nome;
+        this.salario = salario;
+        this.requisitos = requisitos;
+        this.cargaMinima = cargaMinima;
+        this.descImposto = descImposto;
     }
 
     public List<Funcionario> getFuncionarios() {
@@ -30,6 +39,14 @@ public class Cargo implements Serializable {
 
     public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    public double getDescImposto() {
+        return descImposto;
+    }
+
+    public void setDescImposto(double descImposto) {
+        this.descImposto = descImposto;
     }
 
     public String getNome() {
@@ -56,13 +73,12 @@ public class Cargo implements Serializable {
         this.requisitos = requisitos;
     }
 
-    public Date getHoraMinima() {
-        return horaMinima;
+    public int getCargaMinima() {
+        return cargaMinima;
     }
 
-    public void setHoraMinima(Date horaMinima) {
-        this.horaMinima = horaMinima;
+    public void setCargaMinima(int cargaMinima) {
+        this.cargaMinima = cargaMinima;
     }
-    
-    
+
 }

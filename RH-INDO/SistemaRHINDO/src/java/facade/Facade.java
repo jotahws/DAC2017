@@ -5,8 +5,10 @@
  */
 package facade;
 
+import beans.Cargo;
 import beans.Departamento;
 import beans.Estado;
+import daos.CargoDAO;
 import daos.DepartamentoDAO;
 import daos.EstadoDAO;
 import java.sql.SQLException;
@@ -26,6 +28,11 @@ public class Facade {
         DepartamentoDAO deptoDAO = new DepartamentoDAO();
         deptoDAO.inserirDepto(depto);
 
+    }
+
+    public void insereCargo(Cargo cargo) throws ClassNotFoundException, SQLException {
+        CargoDAO cargoDAO = new CargoDAO();
+        cargoDAO.inserirCargo(cargo);
     }
 
 }

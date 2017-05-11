@@ -5,8 +5,11 @@
  */
 package servlets;
 
+import beans.Cargo;
+import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,17 +35,36 @@ public class CargoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CargoServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CargoServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        String action = request.getParameter("action");
+        Facade facade = new Facade();
+
+        if ("register".equals(action)) {
+            //Cadastrar
+            String nome = request.getParameter("nome");
+            String salario = request.getParameter("salario");
+            String cargaMinima = request.getParameter("carga");
+            String requisitos = request.getParameter("requisitos");
+            String descImposto = request.getParameter("imposto");
+
+            try {
+                Cargo cargo = new Cargo(nome, Double.parseDouble(salario), requisitos, Integer.parseInt(cargaMinima), Double.parseDouble(descImposto));
+                facade.insereCargo(cargo);
+            } catch (ClassNotFoundException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("class not found: "  + ex.getMessage());
+                }
+            } catch (NumberFormatException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("O formato no número escolhido é inválido");
+                }
+            } catch (SQLException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde" + ex.getMessage());
+                }
+            }
+
+            response.sendRedirect("cargos/cadastrar.jsp");
         }
     }
 

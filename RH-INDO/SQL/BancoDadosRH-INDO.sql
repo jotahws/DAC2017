@@ -58,3 +58,8 @@ create table Estado(
     nome varchar(50),
     primary key(id)
 );
+
+ALTER TABLE `sistema_rhindo`.`Cargo` 
+CHANGE COLUMN `horasMinimas` `horasMinimas` INT NULL DEFAULT NULL ,
+CHANGE COLUMN `descontoImposto` `descontoImposto` DOUBLE NULL DEFAULT NULL ,
+CHANGE COLUMN `requisitos` `requisitos` VARCHAR(1000) NULL DEFAULT NULL ;

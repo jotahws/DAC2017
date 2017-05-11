@@ -46,11 +46,11 @@
                                     <label for="celular">Celular</label>
                                     <input type="text" class="form-control" id="celular" name="celular">
                                 </div>
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="email">Email</label>
                                     <input type="email" class="form-control" id="email" name="email" placeholder="joe@exemplo.com">
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label for="depto">Departamento</label>
                                     <select class="form-control" id="depto" name="depto">
                                         <option>Recursos Humanos</option>
@@ -59,6 +59,14 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
+                                    <label for="cargo">Cargo</label>
+                                    <select class="form-control" id="cargo" name="cargo">
+                                        <option>mkting</option>
+                                        <option>backenf</option>
+                                        <option>frontend</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
                                     <label for="perfil">Perfil do Funcionário</label>
                                     <select class="form-control" id="perfil" name="perfil">
                                         <option>Funcionário comum</option>

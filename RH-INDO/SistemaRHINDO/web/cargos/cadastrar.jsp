@@ -22,31 +22,32 @@
             </div>
             <!-- Row do cadastro: -->
             <div class="row row-lista-corpo">
+                ${status}
                 <!-- corpo da página -->
                 <div class="col-md-12 corpo">
                     <fieldset>
-                        <form class="cadastro">
+                        <form method="POST" action="${pageContext.request.contextPath}/CargoServlet?action=register" class="cadastro">
                             <div class="row">
                                 <legend>Dados do Cargo</legend>
                                 <div class="form-group col-md-6">
                                     <label for="nome">Nome:</label>
-                                    <input type="text" class="form-control" id="nome" placeholder="Ex. Marketing">
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex. Marketing">
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="salario">Salário:</label>
-                                    <input type="number" class="form-control" id="salario" placeholder="R$:">
+                                    <input type="number" class="form-control" id="salario" name="salario" placeholder="R$:">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="carga">Carga de Trabalho (Horas/Mês):</label>
-                                    <input type="number" class="form-control" id="carga" placeholder="Horas/Mês" value="">
+                                    <input type="number" class="form-control" id="carga" name="carga" placeholder="Horas/Mês" value="">
                                 </div>
                                 <div class="form-group col-md-8">
                                     <label for="requisitos">Requisitos:</label>
-                                    <textarea class="form-control" rows="3"></textarea>
+                                    <textarea class="form-control" id="requisitos" name="requisitos" rows="3"></textarea>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="imposto">Desconto de Imposto (%):</label>
-                                    <input type="number" class="form-control" id="imposto" placeholder="%">
+                                    <input type="number" class="form-control" id="imposto" name="imposto" placeholder="%">
                                 </div>
                             </div>
                             <div class="text-right">

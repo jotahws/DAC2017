@@ -54,11 +54,18 @@ public class DeptoServlet extends HttpServlet {
 //                        + "                    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
 //                        + "                    <strong>Successo!</strong> O novo departamento foi cadastrado.\n"
 //                        + "                </div>");
-            } catch (Exception ex) {
+            } catch (ClassNotFoundException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("class not found: "  + ex.getMessage());
+                }
 //                request.setAttribute("status", "<div class=\"alert alert-danger alert-dismissable\">\n"
 //                        + "                    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
 //                        + "                    <strong>Ops!</strong> Ocorreu um erro ao cadastrar o departamento. Tente novamente mais tarde.\n"
 //                        + "                </div>");
+            }catch (SQLException ex){
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde: "  + ex.getMessage());
+                }
             }
             response.sendRedirect("departamentos/cadastrar.jsp");
 
