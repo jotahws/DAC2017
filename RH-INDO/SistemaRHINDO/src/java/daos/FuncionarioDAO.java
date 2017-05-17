@@ -6,8 +6,10 @@
 package daos;
 
 import beans.Cargo;
+import beans.Cidade;
 import beans.Departamento;
 import beans.Endereco;
+import beans.Estado;
 import beans.Funcionario;
 import conexao.ConnectionFactory;
 import facade.Facade;
@@ -26,7 +28,7 @@ import java.util.List;
 public class FuncionarioDAO {
 
     private final String insertFunc = "insert into Funcionario (idCargo, idDepartamento, idEndereco, nome, cpf, rg, email, celular, perfil) values(?,?,?,?,?,?,?,?,?)";
-    private final String listFunc = "SELECT * FROM Funcionario";
+    private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id;";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -65,18 +67,38 @@ public class FuncionarioDAO {
             stmt = con.prepareStatement(listFunc);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                int idCargo = rs.getInt("idcargo");
-                int idDepto = rs.getInt("iddepartamento");
-                int idEndereco = rs.getInt("idendereco");
-                String nome = rs.getString("nome");
-                String cpf = rs.getString("cpf");
-                String rg = rs.getString("rg");
-                String email = rs.getString("email");
-                String celular = rs.getString("celular");
-                String perfil = rs.getString("perfil");
-                Endereco endereco = facade.buscaEnderecoPorID(idEndereco);
-                Departamento depto = facade.buscaDeptoPorID(idDepto);
-                Cargo cargo = facade.buscaCargoPorID(idCargo);
+                //funcionario
+                String nome = rs.getString("f.nome");
+                String cpf = rs.getString("f.cpf");
+                String rg = rs.getString("f.rg");
+                String email = rs.getString("f.email");
+                String celular = rs.getString("f.celular");
+                String perfil = rs.getString("f.perfil");
+                //Endereco
+                String rua = rs.getString("e.rua");
+                int numero = rs.getInt("e.numero");
+                String cep = rs.getString("e.cep");
+                String bairro = rs.getString("e.bairro");
+                //Cidade
+                String nomeCidade = rs.getString("cid.nome");
+                //Estado
+                String nomeEstado = rs.getString("est.nome");
+                String uf = rs.getString("est.uf");
+                //Depto
+                String nomeDepto = rs.getString("d.nome");
+                String localizacao = rs.getString("d.localizacao");
+                //Cargo
+                String nomeCargo = rs.getString("c.nome");
+                double salario = rs.getDouble("c.salario");
+                String requisitos = rs.getString("c.requisitos");
+                int horasMinimas = rs.getInt("c.horasMinimas");
+                double descontoImposto = rs.getDouble("c.descontoImposto");
+
+                Estado estado = new Estado(nomeEstado, uf);
+                Cidade cidade = new Cidade(nomeCidade, estado);
+                Endereco endereco = new Endereco(rua, cep, numero, bairro, cidade);
+                Departamento depto = new Departamento(nomeDepto, localizacao);
+                Cargo cargo = new Cargo(nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
                 Funcionario func = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, depto, perfil);
                 lista.add(func);
             }

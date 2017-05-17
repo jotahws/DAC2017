@@ -73,12 +73,8 @@ public class CarregaListaFuncServlet extends HttpServlet {
 
             try {
                 List<Funcionario> funcionarios = facade.carregaListaFunc();
-                for (Funcionario func : funcionarios) {
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println(func.getNome() + "<br>" + funcionarios.size());
-                    }
-                }
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios");
+                request.setAttribute("funcs", funcionarios);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/index.jsp");
                 rd.forward(request, response);
             } catch (ClassNotFoundException ex) {
                 try (PrintWriter out = response.getWriter()) {

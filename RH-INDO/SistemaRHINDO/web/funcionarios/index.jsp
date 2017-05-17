@@ -4,6 +4,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,17 +37,13 @@
                 <!-- lista de funcioarios: -->
                 <div class="col-md-4 lista-lat">
                     <div class="list-group">
-                        <a class="list-group-item">func 1</a>
-                        <a class="list-group-item">func 2</a>
-                        <a class="list-group-item">func 3</a>
-                        <a class="list-group-item">func 4</a>
-                        <a class="list-group-item">func 5</a>
-                        <a class="list-group-item">func 6</a>
-                        <a class="list-group-item">func 7</a>
-                        <a class="list-group-item">func 8</a>
-                        <a class="list-group-item">func 9</a>
-                        <a class="list-group-item">func 10</a>
-                        <a class="list-group-item">func 11</a>
+                        <jsp:useBean id="funcionario" class="beans.Funcionario"/>
+                        <c:set var="lista" value="${funcs}"/>
+                        <c:forEach var="item" items="${lista}">
+                            <a class="list-group-item">
+                                <c:out value="${item.nome}"/>
+                            </a>
+                        </c:forEach>
                     </div>
                 </div>
                 <!-- corpo da página -->
