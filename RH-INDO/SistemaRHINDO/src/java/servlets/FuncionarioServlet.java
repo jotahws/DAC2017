@@ -14,6 +14,7 @@ import beans.Funcionario;
 import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -55,6 +56,7 @@ public class FuncionarioServlet extends HttpServlet {
                 String celular = request.getParameter("celular");
                 String email = request.getParameter("email");
                 String depto = request.getParameter("depto");
+                String cargo = request.getParameter("cargo");
                 String perfilFunc = request.getParameter("perfil");
                 String cep = request.getParameter("cep");
                 String rua = request.getParameter("rua");
@@ -62,29 +64,30 @@ public class FuncionarioServlet extends HttpServlet {
                 String bairro = request.getParameter("bairro");
                 String cidade = request.getParameter("cidade");
                 String uf = request.getParameter("uf");
-
+                //Criando um endereco com cidade e estado
                 Estado estado = facade.buscaEstado(uf);
                 Cidade objCidade = new Cidade();
                 objCidade.setNome(cidade);
                 objCidade.setEstado(estado);
                 Endereco endereco = new Endereco();
                 endereco.setCep(cep);
-                try {
-                    endereco.setNumero(Integer.parseInt(numero));
-                } catch(NumberFormatException ex){
-                    System.out.println("Caracteres inválidos no inteiro");
-                }
+                endereco.setNumero(Integer.parseInt(numero));
                 endereco.setRua(rua);
                 endereco.setBairro(bairro);
                 endereco.setCidade(objCidade);
-
-                Cargo cargo = new Cargo();
-                cargo.setNome(perfilFunc);
+                //criando cargo e departamento
+                Cargo objCargo = facade.buscaCargo(cargo);
                 Departamento departamento = new Departamento();
                 departamento.setNome(depto);
-                Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, departamento);
+                //criando funcionario
+                Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, objCargo, departamento, perfilFunc);
+                facade.insereFuncionario(funcionario);
             } catch (ClassNotFoundException ex) {
                 System.out.println("Classe não encontrada");
+            } catch (NumberFormatException ex) {
+                System.out.println("Caracteres inválidos no inteiro");
+            } catch (SQLException ex) {
+                System.out.println("Ocorreu um erro com Banco de Dados, tente novamente mais tarde.");
             }
 
         }

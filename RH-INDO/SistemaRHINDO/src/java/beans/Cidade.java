@@ -13,12 +13,17 @@ import java.util.List;
  * @author JotaWind
  */
 public class Cidade implements Serializable {
-    
+
     private String nome;
     private Estado estado;
     private List<Endereco> enderecos;
 
     public Cidade() {
+    }
+
+    public Cidade(String nome, Estado estado) {
+        this.nome = nome;
+        this.estado = estado;
     }
 
     public List<Endereco> getEnderecos() {
@@ -44,6 +49,5 @@ public class Cidade implements Serializable {
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
-    
-    
+
 }

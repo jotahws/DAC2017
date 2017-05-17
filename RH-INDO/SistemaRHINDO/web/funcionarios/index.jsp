@@ -26,7 +26,7 @@
                 <div class="col-md-8 titulo">
                     <h1 class="col-md-10">Funcionários</h1>
                     <div class="text-right">
-                        <a href="cadastrar.jsp" class="btn btn-info col-md-2">Novo</a>
+                        <a href="${pageContext.request.contextPath}/CarregaListaFuncServlet?action=register" class="btn btn-info col-md-2">Novo</a>
                     </div>
                 </div>
             </div>

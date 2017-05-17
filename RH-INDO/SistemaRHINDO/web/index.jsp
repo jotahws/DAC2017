@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : index.jsp
     Created on : Apr 29, 2017, 6:15:25 PM
@@ -21,7 +22,7 @@
             <div class="container">
                 <h1>Index.jsp</h1>
                 <h4>(redirecionar para funcionarios ou para login)</h4>
-                <a href="funcionarios">Funcionarios</a> <br>
+                <a href="CarregaListaFuncServlet?action=listaFuncionarios">Funcionarios</a> <br>
                 <a href="login.jsp">login</a>                
             </div>
         </div>

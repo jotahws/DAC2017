@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -25,7 +27,7 @@
                 <!-- corpo da página -->
                 <div class="col-md-12 corpo">
                     <fieldset>
-                        <form action="../FuncionarioServlet?action=register" method="POST" class="cadastro">
+                        <form action="${pageContext.request.contextPath}/FuncionarioServlet?action=register" method="POST" class="cadastro">
                             <div class="row">
                                 <legend>Geral</legend>
                                 <div class="form-group col-md-6">
@@ -53,18 +55,27 @@
                                 <div class="form-group col-md-2">
                                     <label for="depto">Departamento</label>
                                     <select class="form-control" id="depto" name="depto">
-                                        <option>Recursos Humanos</option>
-                                        <option>Desenvolvimento</option>
-                                        <option>Financeiro</option>
+                                        <jsp:useBean id="depto" class="beans.Departamento"/>
+                                        <c:set var="lista" value="${deptos}"/>
+                                        <c:forEach var="item" items="${lista}">
+                                            <option>
+                                                <c:out value="${item.nome}"/>
+                                            </option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="cargo">Cargo</label>
                                     <select class="form-control" id="cargo" name="cargo">
-                                        <option>mkting</option>
-                                        <option>backenf</option>
-                                        <option>frontend</option>
+                                        <jsp:useBean id="cargo" class="beans.Cargo"/>
+                                        <c:set var="lista" value="${cargos}"/>
+                                        <c:forEach var="item" items="${lista}">
+                                            <option> <!-- value=" {item.id} " -->
+                                                <c:out value="${item.nome}"/>
+                                            </option>
+                                        </c:forEach>
                                     </select>
+
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="perfil">Perfil do Funcionário</label>
@@ -100,14 +111,18 @@
                                 <div class="form-group col-md-1">
                                     <label for="uf">UF</label>
                                     <select class="form-control" id="uf" name="uf">
-                                        <option>RS</option>
-                                        <option>SC</option>
-                                        <option>PR</option>
+                                        <jsp:useBean id="uf" class="beans.Estado"/>
+                                        <c:set var="lista" value="${estados}"/>
+                                        <c:forEach var="item" items="${lista}">
+                                            <option>
+                                                <c:out value="${item.uf}"/>
+                                            </option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="estado">Estado</label>
-                                    <input type="text" class="form-control" disabled id="estado" name="estado"/>
+                                    <input type="text" class="form-control" disabled id="estado" name="estado" value=""/>
                                 </div>
                             </div>
                             <div class="text-right">
@@ -119,4 +134,5 @@
             </div>
         </div>
     </body>
+    <script src="${pageContext.request.contextPath}/javascript/scripts.js"></script>
 </html>

@@ -62,4 +62,8 @@ create table Estado(
 ALTER TABLE `sistema_rhindo`.`Cargo` 
 CHANGE COLUMN `horasMinimas` `horasMinimas` INT NULL DEFAULT NULL ,
 CHANGE COLUMN `descontoImposto` `descontoImposto` DOUBLE NULL DEFAULT NULL ,
-CHANGE COLUMN `requisitos` `requisitos` VARCHAR(1000) NULL DEFAULT NULL ;
+CHANGE COLUMN `requisitos` `requisitos` VARCHAR(1000) NULL DEFAULT NULL ,
+ADD COLUMN `perfil` VARCHAR(45) NULL AFTER `celular`;
+
+ALTER TABLE `sistema_rhindo`.`Endereco` 
+CHANGE COLUMN `numero` `numero` INT NULL DEFAULT NULL ;

@@ -30,8 +30,8 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Funcionários<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="${pageContext.request.contextPath}/funcionarios">Lista de Funcionários</a></li>
-                                <li><a href="${pageContext.request.contextPath}/funcionarios/cadastrar.jsp">Novo Funcionário</a></li>
+                                <li><a href="${pageContext.request.contextPath}/CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcionários</a></li>
+                                <li><a href="${pageContext.request.contextPath}/CarregaListaFuncServlet?action=register">Novo Funcionário</a></li>
                             </ul>
                         </li>       
                         <li class="dropdown">
