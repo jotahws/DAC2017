@@ -80,9 +80,9 @@
                                 <div class="form-group col-md-2">
                                     <label for="perfil">Perfil do Funcionário</label>
                                     <select class="form-control" id="perfil" name="perfil">
-                                        <option>Funcionário comum</option>
-                                        <option>Gerente</option>
-                                        <option>Gerente RH</option>
+                                        <option value="FUNCIONARIO">Funcionário Comum</option>
+                                        <option value="GERENTE">Gerente</option>
+                                        <option value="GERENTE-RH">Gerente RH</option>
                                     </select>
                                 </div>
                             </div>

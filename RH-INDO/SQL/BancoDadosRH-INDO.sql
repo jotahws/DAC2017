@@ -71,3 +71,6 @@ ADD COLUMN `perfil` VARCHAR(45) NULL AFTER `celular`;
 
 ALTER TABLE `sistema_rhindo`.`Endereco` 
 CHANGE COLUMN `numero` `numero` INT NULL DEFAULT NULL ;
+
+ALTER TABLE `sistema_rhindo`.`Funcionario`
+ADD COLUMN `senha` VARCHAR(45) NULL AFTER `perfil`;

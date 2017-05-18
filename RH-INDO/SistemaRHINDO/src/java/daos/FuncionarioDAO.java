@@ -29,6 +29,7 @@ public class FuncionarioDAO {
 
     private final String insertFunc = "insert into Funcionario (idCargo, idDepartamento, idEndereco, nome, cpf, rg, email, celular, perfil) values(?,?,?,?,?,?,?,?,?)";
     private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id;";
+    private final String verificaLogin = "SELECT email, perfil, nome FROM funcionario WHERE email=? AND senha=?";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -112,6 +113,35 @@ public class FuncionarioDAO {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }
         }
+    }
+
+    public Funcionario fazLogin(String login, String senha) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(verificaLogin);
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String perfil = rs.getString("perfil");
+                Funcionario func = new Funcionario();
+                func.setNome(nome);
+                func.setEmail(email);
+                func.setPerfil(perfil);
+                return func;
+            }
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+                con.close();
+            } catch (Exception ex) {
+
+            }
+        }
+        return null;
     }
 
 }

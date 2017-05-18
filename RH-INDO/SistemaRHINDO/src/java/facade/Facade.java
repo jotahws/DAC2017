@@ -100,4 +100,9 @@ public class Facade {
         return endDAO.buscaIdEndereco(endereco);
     }
 
+    public Funcionario verificaLogin(String login, String senha) throws ClassNotFoundException, SQLException {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        return funcDAO.fazLogin(login, senha);
+    }
+
 }

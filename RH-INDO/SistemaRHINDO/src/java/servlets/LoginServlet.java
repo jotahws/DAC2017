@@ -5,13 +5,20 @@
  */
 package servlets;
 
+import beans.Funcionario;
+import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,18 +39,44 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
+        Facade facade = new Facade();
+
+        String login = request.getParameter("login");
+        String senha = request.getParameter("senha");
+
+        try {
+            Funcionario func = facade.verificaLogin(login, senha);
+ 
+            HttpSession session = request.getSession();
+            session.setAttribute("funcionario", func);
+
+
+            if ("GERENTE-RH".equals(func.getPerfil())) {
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/CarregaListaFuncServlet?action=listaFuncionarios");
+                rd.forward(request, response);
+            } else if ("GERENTE".equals(func.getPerfil())) {
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+                rd.forward(request, response);
+            } else if ("FUNCIONARIO".equals(func.getPerfil())) {
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+                rd.forward(request, response);
+            }
+
+        } catch (ClassNotFoundException ex) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("ERRO NO CLASS NOT FOUND" + ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            try (PrintWriter out = response.getWriter()) {
+                out.println("ERRO NO SQL" + ex.getMessage());
+            }
+        } catch (NullPointerException ex){
+            try (PrintWriter out = response.getWriter()) {
+                out.println("<h1>DADOS INVÁLIDOS</h1>");
+            }
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -86,3 +119,5 @@ public class LoginServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+
+//        try (PrintWriter out = response.getWriter()) {

@@ -6,6 +6,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean scope="session" id="funcionario" class="beans.Funcionario"/>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,6 +22,7 @@
         <div class="jumbotron">
             <div class="container">
                 <h1>Index.jsp</h1>
+                <jsp:getProperty name="funcionario" property="nome"/>
                 <h4>(redirecionar para funcionarios ou para login)</h4>
                 <a href="CarregaListaFuncServlet?action=listaFuncionarios">Funcionarios</a> <br>
                 <a href="login.jsp">login</a>                

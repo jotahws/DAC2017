@@ -22,25 +22,24 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><h2 class="page-title">Sistema RH-INDO</h2></div>
                         <div class="panel-body">
-                            <form class="form-horizontal" role="form" action="LoginServlet" method="POST">
+                            <form class="form-horizontal" role="form" action="LoginServlet?action=login" method="POST">
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">
                                         Login:</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="login" required>
+                                        <input type="text" class="form-control" name="login" placeholder="login" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-3 control-label">
                                         Senha:</label>
                                     <div class="col-sm-9">
-                                        <input type="password" class="form-control" placeholder="senha" required>
+                                        <input type="password" class="form-control" name="senha" placeholder="senha" required>
                                     </div>
                                 </div>
                                 <div class="form-group last">
                                     <div class="col-sm-offset-9 col-sm-3">
-                                        <button type="submit" class="btn btn-success btn-sm">
-                                            Entrar</button>
+                                        <input type="submit" value="Entrar" class="btn btn-success btn-sm">
                                     </div>
                                 </div>
                             </form>
