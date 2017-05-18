@@ -4,6 +4,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page session="true" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean scope="session" id="funcionarioLogado" class="beans.Funcionario"/>
 
@@ -15,6 +16,21 @@
     </head>
     <body>
         <%@include file="../pre-fabricado/cabecalho.jsp" %>
+
+
+
+       
+        <jsp:getProperty name="funcionarioLogado" property="nome"/>
+        
+        <c:set scope="session" var="funcionarioLogado"/>
+        <c:choose>
+            <c:when  test="${not empty sessionScope.funcionarioLogado }">
+                <a href="oi">oiiii</a>
+            </c:when>
+            <c:otherwise>
+                <a>Tu não ta logado filho</a>
+            </c:otherwise>
+        </c:choose>
         <div class="container">
             <!-- Row do input pesquisar: -->
             <div class="row row-busca-titulo">

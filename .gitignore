@@ -4,3 +4,11 @@
 /RH-INDO/SistemaRHINDO/build/
 /ATOA/SistemaATOA/nbproject/private/
 /ATOA/SistemaATOA/build/
+
+
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
