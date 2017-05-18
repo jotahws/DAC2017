@@ -41,39 +41,47 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         Facade facade = new Facade();
+        String action = request.getParameter("action");
 
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
+        if ("login".equals(action)) {
 
-        try {
-            Funcionario func = facade.verificaLogin(login, senha);
- 
-            HttpSession session = request.getSession();
-            session.setAttribute("funcionarioLogado", func);
+            String login = request.getParameter("login");
+            String senha = request.getParameter("senha");
 
+            try {
+                Funcionario func = facade.verificaLogin(login, senha);
 
-            if ("GERENTE-RH".equals(func.getPerfil())) {
-                response.sendRedirect("CarregaListaFuncServlet?action=listaFuncionarios");
-            } else if ("GERENTE".equals(func.getPerfil())) {
-                response.sendRedirect("index.jsp");
-            } else if ("FUNCIONARIO".equals(func.getPerfil())) {
-                response.sendRedirect("index.jsp");
+                HttpSession session = request.getSession();
+                session.setAttribute("funcionarioLogado", func);
+
+                if ("GERENTE-RH".equals(func.getPerfil())) {
+                    response.sendRedirect("CarregaListaFuncServlet?action=listaFuncionarios");
+                } else if ("GERENTE".equals(func.getPerfil())) {
+                    response.sendRedirect("index.jsp");
+                } else if ("FUNCIONARIO".equals(func.getPerfil())) {
+                    response.sendRedirect("index.jsp");
+                }
+
+            } catch (ClassNotFoundException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("ERRO NO CLASS NOT FOUND" + ex.getMessage());
+                }
+            } catch (SQLException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("ERRO NO SQL" + ex.getMessage());
+                }
+            } catch (NullPointerException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("<h1>DADOS INVÁLIDOS</h1>");
+                }
             }
-
-        } catch (ClassNotFoundException ex) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("ERRO NO CLASS NOT FOUND" + ex.getMessage());
+        } else if ("logout".equals(action)) {
+            HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.invalidate();
             }
-        } catch (SQLException ex) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("ERRO NO SQL" + ex.getMessage());
-            }
-        } catch (NullPointerException ex){
-            try (PrintWriter out = response.getWriter()) {
-                out.println("<h1>DADOS INVÁLIDOS</h1>");
-            }
+            response.sendRedirect("index.jsp");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

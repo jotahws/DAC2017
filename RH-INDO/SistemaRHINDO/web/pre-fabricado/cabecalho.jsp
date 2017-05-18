@@ -51,7 +51,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">Logout <span class="glyphicon glyphicon-log-out"></span></a>
+                            <a href="${pageContext.request.contextPath}/LoginServlet?action=logout">Logout <span class="glyphicon glyphicon-log-out"></span></a>
                         </li>
                     </ul>
                 </div>
