@@ -74,3 +74,19 @@ CHANGE COLUMN `numero` `numero` INT NULL DEFAULT NULL ;
 
 ALTER TABLE `sistema_rhindo`.`Funcionario`
 ADD COLUMN `senha` VARCHAR(45) NULL AFTER `perfil`;
+
+
+
+insert into funcionario(idCargo,idDepartamento,idEndereco,nome,cpf,rg,email,
+celular,perfil,senha) values (1,1,1,'Mauricio de Araujo','07094657935',
+'135034657','araujoito@gmail.com','99494401','GERENTE-RH','1234');
+
+insert into cidade(idEstado,nome) values(1,'Curitiba');
+
+insert into Endereco(idCidade,rua,numero,cep,bairro)
+values(1,'Rua das dores','860','82620130','Tingui');
+
+insert into cargo(nome,salario,requisitos,horasMinimas,descontoImposto)values
+('Analista',3900,'Ser alguma coisa pra analista',40,10);
+
+insert into Departamento(nome,localizacao) values('Desenvolvimento','3 Andar');

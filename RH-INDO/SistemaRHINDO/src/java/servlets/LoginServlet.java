@@ -49,7 +49,7 @@ public class LoginServlet extends HttpServlet {
             Funcionario func = facade.verificaLogin(login, senha);
  
             HttpSession session = request.getSession();
-            session.setAttribute("funcionario", func);
+            session.setAttribute("funcionarioLogado", func);
 
 
             if ("GERENTE-RH".equals(func.getPerfil())) {

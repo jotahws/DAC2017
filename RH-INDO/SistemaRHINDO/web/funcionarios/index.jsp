@@ -5,12 +5,17 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<jsp:useBean scope="session" id="funcionarioLogado" class="beans.Funcionario"/>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
-        <title>Funcionários</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css"/>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css"/>
+        <title>Funcionários </title>
     </head>
     <body>
         <%@include file="../pre-fabricado/cabecalho.jsp" %>
@@ -49,6 +54,8 @@
                 <!-- corpo da página -->
                 <div class="corpo col-md-8 corpo">
                     <fieldset>
+                        
+                        <jsp:getProperty name="funcionarioLogado" property="nome"/>
                         <legend><h2>Carmen Suely Silva</h2></legend>
                         <p class="col-md-6">CPF: 045.192.192-41</p>
                         <p class="col-md-6">RG: 14.192.202-0</p>
