@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class FuncionarioDAO {
 
-    private final String insertFunc = "insert into Funcionario (idCargo, idDepartamento, idEndereco, nome, cpf, rg, email, celular, perfil) values(?,?,?,?,?,?,?,?,?)";
+    private final String insertFunc = "insert into Funcionario (idCargo, idDepartamento, idEndereco, nome, cpf, rg, email, celular, perfil, senha) values(?,?,?,?,?,?,?,?,?,?)";
     private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id;";
     private final String verificaLogin = "SELECT email, perfil, nome FROM funcionario WHERE email=? AND senha=?";
 
@@ -51,6 +51,7 @@ public class FuncionarioDAO {
             stmt.setString(7, funcionario.getEmail());
             stmt.setString(8, funcionario.getCelular());
             stmt.setString(9, funcionario.getPerfil());
+            stmt.setString(10, funcionario.getSenha());
             stmt.executeUpdate();
         } finally {
             try {
@@ -77,6 +78,7 @@ public class FuncionarioDAO {
                 String email = rs.getString("f.email");
                 String celular = rs.getString("f.celular");
                 String perfil = rs.getString("f.perfil");
+                String senha = rs.getString("f.senha");
                 //Endereco
                 int idEnd = rs.getInt("e.id");
                 String rua = rs.getString("e.rua");
@@ -107,7 +109,7 @@ public class FuncionarioDAO {
                 Endereco endereco = new Endereco(idEnd, rua, cep, numero, bairro, cidade);
                 Departamento depto = new Departamento(idDepto, nomeDepto, localizacao);
                 Cargo cargo = new Cargo(idCargo, nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
-                Funcionario func = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, depto, perfil);
+                Funcionario func = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, depto, perfil, senha);
                 lista.add(func);
             }
             return lista;

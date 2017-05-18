@@ -22,8 +22,9 @@ public class Funcionario implements Serializable {
     private Cargo cargo;
     private Departamento departamento;
     private String perfil;
+    private String senha;
 
-    public Funcionario(String nome, String rg, String cpf, String celular, String email, Endereco endereco, Cargo cargo, Departamento departamento, String perfil) {
+    public Funcionario(String nome, String rg, String cpf, String celular, String email, Endereco endereco, Cargo cargo, Departamento departamento, String perfil, String senha) {
         this.nome = nome;
         this.rg = rg;
         this.cpf = cpf;
@@ -33,8 +34,9 @@ public class Funcionario implements Serializable {
         this.cargo = cargo;
         this.departamento = departamento;
         this.perfil = perfil;
-    }    
-    
+        this.senha = senha;
+    }
+
     public Funcionario() {
     }
 
@@ -108,6 +110,14 @@ public class Funcionario implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
 }

@@ -30,17 +30,21 @@
                         <form action="${pageContext.request.contextPath}/FuncionarioServlet?action=register" method="POST" class="cadastro">
                             <div class="row">
                                 <legend>Geral</legend>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="nome">Nome:</label>
                                     <input type="text" class="form-control" id="nome" name="nome" placeholder="Maria dos Santos">
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-2">
                                     <label for="cpf">CPF:</label>
                                     <input type="text" class="form-control" id="cpf" name="cpf">
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="rg">RG:</label>
                                     <input type="text" class="form-control" id="rg" name="rg">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="senha">Senha:</label>
+                                    <input type="password" class="form-control" id="senha" name="senha">
                                 </div>
                             </div>
                             <div class="row">
