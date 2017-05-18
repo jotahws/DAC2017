@@ -53,14 +53,11 @@ public class LoginServlet extends HttpServlet {
 
 
             if ("GERENTE-RH".equals(func.getPerfil())) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/CarregaListaFuncServlet?action=listaFuncionarios");
-                rd.forward(request, response);
+                response.sendRedirect("CarregaListaFuncServlet?action=listaFuncionarios");
             } else if ("GERENTE".equals(func.getPerfil())) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("index.jsp");
             } else if ("FUNCIONARIO".equals(func.getPerfil())) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-                rd.forward(request, response);
+                response.sendRedirect("index.jsp");
             }
 
         } catch (ClassNotFoundException ex) {

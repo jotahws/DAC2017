@@ -1,4 +1,5 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
     Document   : index.jsp
     Created on : Apr 29, 2017, 6:15:25 PM
@@ -23,6 +24,15 @@
             <div class="container">
                 <h1>Index.jsp</h1>
                 <jsp:getProperty name="funcionarioLogado" property="nome"/>
+                <c:choose>
+                    <c:when test="${funcionarioLogado.email == null}">
+                        NAO LOGADO
+                    </c:when>
+                    <c:otherwise>
+                        LOGADO
+                    </c:otherwise>
+                </c:choose>
+                
                 <h4>(redirecionar para funcionarios ou para login)</h4>
                 <a href="CarregaListaFuncServlet?action=listaFuncionarios">Funcionarios</a> <br>
                 <a href="login.jsp">login</a>                
