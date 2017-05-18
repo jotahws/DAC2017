@@ -29,11 +29,6 @@ public class Facade {
         return estadoDAO.buscaEstadoPorUF(uf);
     }
 
-    public Cargo buscaCargo(String cargo) {
-        CargoDAO cargoDAO = new CargoDAO();
-        return cargoDAO.buscaCargoPorNome(cargo);
-    }
-
     public Cargo buscaCargoPorID(int idCargo) throws ClassNotFoundException, SQLException {
         CargoDAO cargoDAO = new CargoDAO();
         return cargoDAO.buscaCargoPorID(idCargo);
@@ -83,21 +78,6 @@ public class Facade {
     public List<Funcionario> carregaListaFunc() throws NullPointerException, ClassNotFoundException, SQLException {
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         return funcDAO.listaFuncionarios();
-    }
-
-    public int getIdCargo(Cargo cargo) {
-        CargoDAO cargoDAO = new CargoDAO();
-        return cargoDAO.buscaIdCargo(cargo);
-    }
-
-    public int getIdDepto(Departamento departamento) {
-        DepartamentoDAO deptoDAO = new DepartamentoDAO();
-        return deptoDAO.buscaIdDepto(departamento);
-    }
-
-    public int getIdEndereco(Endereco endereco) {
-        EnderecoDAO endDAO = new EnderecoDAO();
-        return endDAO.buscaIdEndereco(endereco);
     }
 
     public Funcionario verificaLogin(String login, String senha) throws ClassNotFoundException, SQLException {

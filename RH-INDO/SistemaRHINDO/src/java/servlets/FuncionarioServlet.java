@@ -64,6 +64,9 @@ public class FuncionarioServlet extends HttpServlet {
                 String bairro = request.getParameter("bairro");
                 String cidade = request.getParameter("cidade");
                 String uf = request.getParameter("uf");
+//                try (PrintWriter out = response.getWriter()) {
+//                    out.println( Integer.parseInt(depto) );
+//                }
                 //Criando um endereco com cidade e estado
                 Estado estado = facade.buscaEstado(uf);
                 Cidade objCidade = new Cidade();
@@ -76,19 +79,27 @@ public class FuncionarioServlet extends HttpServlet {
                 endereco.setBairro(bairro);
                 endereco.setCidade(objCidade);
                 //criando cargo e departamento
-                Cargo objCargo = facade.buscaCargo(cargo);
-                Departamento departamento = new Departamento();
-                departamento.setNome(depto);
+                Cargo objCargo = facade.buscaCargoPorID(Integer.parseInt(cargo));
+                Departamento departamento = facade.buscaDeptoPorID(Integer.parseInt(depto));
                 //criando funcionario
                 Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, objCargo, departamento, perfilFunc);
                 facade.insereFuncionario(funcionario);
+
             } catch (ClassNotFoundException ex) {
-                System.out.println("Classe não encontrada");
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("classnotfound EXc" + ex.getMessage());
+                }
             } catch (NumberFormatException ex) {
-                System.out.println("Caracteres inválidos no inteiro");
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Number format exc" + ex.getMessage());
+                }
             } catch (SQLException ex) {
-                System.out.println("Ocorreu um erro com Banco de Dados, tente novamente mais tarde.");
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde" + ex.getMessage());
+                }
             }
+
+            response.sendRedirect("CarregaListaFuncServlet?action=register");
 
         }
 

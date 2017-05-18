@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Endereco implements Serializable {
     
+    private int id;
     private String rua;
     private String cep;
     private int numero;
@@ -24,14 +25,23 @@ public class Endereco implements Serializable {
     public Endereco() {
     }
 
-    public Endereco(String rua, String cep, int numero, String bairro, Cidade cidade) {
+    public Endereco(int id, String rua, String cep, int numero, String bairro, Cidade cidade) {
+        this.id = id;
         this.rua = rua;
         this.cep = cep;
         this.numero = numero;
         this.bairro = bairro;
         this.cidade = cidade;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getRua() {
         return rua;
     }

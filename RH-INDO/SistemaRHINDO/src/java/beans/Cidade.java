@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Cidade implements Serializable {
 
+    private int id;
     private String nome;
     private Estado estado;
     private List<Endereco> enderecos;
@@ -21,9 +22,18 @@ public class Cidade implements Serializable {
     public Cidade() {
     }
 
-    public Cidade(String nome, Estado estado) {
+    public Cidade(int id, String nome, Estado estado) {
+        this.id = id;
         this.nome = nome;
         this.estado = estado;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Endereco> getEnderecos() {

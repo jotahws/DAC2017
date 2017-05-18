@@ -57,12 +57,13 @@ public class CargoDAO {
             stmt = con.prepareStatement(listCargos);
             rs = stmt.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 double salario = rs.getDouble("salario");
                 String requisitos = rs.getString("requisitos");
                 int horasMinimas = rs.getInt("horasMinimas");
                 double descontoImposto = rs.getDouble("descontoImposto");
-                Cargo cargo = new Cargo(nome, salario, requisitos, horasMinimas, descontoImposto);
+                Cargo cargo = new Cargo(id, nome, salario, requisitos, horasMinimas, descontoImposto);
                 lista.add(cargo);
             }
             return lista;
@@ -77,14 +78,6 @@ public class CargoDAO {
         }
     }
 
-    public Cargo buscaCargoPorNome(String cargo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public int buscaIdCargo(Cargo cargo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public Cargo buscaCargoPorID(int idCargo) throws ClassNotFoundException, SQLException {
         try {
             con = new ConnectionFactory().getConnection();
@@ -93,12 +86,13 @@ public class CargoDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 //nomeV, salarioD, requisitosV, horasminimasI, descontoImpostoD
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 Double salario = rs.getDouble("salario");
                 String requisitos = rs.getString("requisitos");
                 int horasMinimas = rs.getInt("horasminimas");
                 Double descontoImposto = rs.getDouble("descontoImposto");
-                Cargo cargo = new Cargo(nome, salario, requisitos, horasMinimas, descontoImposto);
+                Cargo cargo = new Cargo(id, nome, salario, requisitos, horasMinimas, descontoImposto);
                 return cargo;
             }
         } finally {

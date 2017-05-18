@@ -58,7 +58,7 @@
                                         <jsp:useBean id="depto" class="beans.Departamento"/>
                                         <c:set var="lista" value="${deptos}"/>
                                         <c:forEach var="item" items="${lista}">
-                                            <option>
+                                            <option value="${item.id}">
                                                 <c:out value="${item.nome}"/>
                                             </option>
                                         </c:forEach>
@@ -70,19 +70,18 @@
                                         <jsp:useBean id="cargo" class="beans.Cargo"/>
                                         <c:set var="lista" value="${cargos}"/>
                                         <c:forEach var="item" items="${lista}">
-                                            <option> <!-- value=" {item.id} " -->
+                                            <option value="${item.id}">
                                                 <c:out value="${item.nome}"/>
                                             </option>
                                         </c:forEach>
                                     </select>
-
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="perfil">Perfil do Funcionário</label>
                                     <select class="form-control" id="perfil" name="perfil">
                                         <option value="FUNCIONARIO">Funcionário Comum</option>
                                         <option value="GERENTE">Gerente</option>
-                                        <option value="GERENTE-RH">Gerente RH</option>
+                                        <option value="GERENTE-RH">Gerente de RH</option>
                                     </select>
                                 </div>
                             </div>

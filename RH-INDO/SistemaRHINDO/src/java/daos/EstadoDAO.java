@@ -37,8 +37,9 @@ public class EstadoDAO {
             stmt.setString(1, uf);
             rs = stmt.executeQuery();
             if (rs.next()) {
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
-                Estado estado = new Estado(nome, uf);
+                Estado estado = new Estado(id, nome, uf);
                 return estado;
             }
         } catch (SQLException ex) {
@@ -62,9 +63,10 @@ public class EstadoDAO {
             stmt.setString(1, idEstado);
             rs = stmt.executeQuery();
             if (rs.next()) {
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String uf = rs.getString("uf");
-                Estado estado = new Estado(nome, uf);
+                Estado estado = new Estado(id, nome, uf);
                 return estado;
             }
         } finally {
@@ -87,9 +89,10 @@ public class EstadoDAO {
             stmt = con.prepareStatement(listEstados);
             rs = stmt.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String uf = rs.getString("uf");
-                Estado estado = new Estado(nome, uf);
+                Estado estado = new Estado(id, nome, uf);
                 lista.add(estado);
             }
             return lista;

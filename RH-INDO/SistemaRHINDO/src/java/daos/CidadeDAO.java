@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 public class CidadeDAO {
 
     private final String selectCidadeID = "SELECT * FORM Cidade WHERE id=?";
+    private final String insertCidade = "INSERT INTO cidade (idestado, nome) VALUES (?,?)";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -33,11 +35,12 @@ public class CidadeDAO {
             stmt.setInt(1, idCidade);
             rs = stmt.executeQuery();
             if (rs.next()) {
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String idEstado = rs.getString("idEstado");
                 EstadoDAO estDAO = new EstadoDAO();
                 Estado estado = estDAO.buscaEstadoPorID(idEstado);
-                Cidade cidade = new Cidade(nome, estado);
+                Cidade cidade = new Cidade(id, nome, estado);
                 return cidade;
             }
         } finally {
@@ -50,6 +53,31 @@ public class CidadeDAO {
             }
         }
         return null;
+    }
+
+    public Cidade inserirCidade(Cidade cidade) throws ClassNotFoundException, SQLException {
+        try {
+            EstadoDAO estadoDAO = new EstadoDAO();
+            cidade.setEstado(estadoDAO.buscaEstadoPorUF(cidade.getEstado().getUf()));
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(insertCidade, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, cidade.getEstado().getId());
+            stmt.setString(2, cidade.getNome());
+            stmt.executeUpdate();
+            final ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                final int id = rs.getInt(1);
+                cidade.setId(id);
+            }
+            return cidade;
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
     }
 
 }

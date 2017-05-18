@@ -15,6 +15,7 @@ import java.util.List;
  */
 public class Cargo implements Serializable {
 
+    private int id;
     private String nome;
     private double salario;
     private String requisitos;
@@ -31,6 +32,24 @@ public class Cargo implements Serializable {
         this.requisitos = requisitos;
         this.cargaMinima = cargaMinima;
         this.descImposto = descImposto;
+        this.funcionarios = funcionarios;
+    }
+
+    public Cargo(int id, String nome, double salario, String requisitos, int cargaMinima, double descImposto) {
+        this.id = id;
+        this.nome = nome;
+        this.salario = salario;
+        this.requisitos = requisitos;
+        this.cargaMinima = cargaMinima;
+        this.descImposto = descImposto;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Funcionario> getFuncionarios() {

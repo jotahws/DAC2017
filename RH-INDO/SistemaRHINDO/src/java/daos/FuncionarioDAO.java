@@ -38,11 +38,13 @@ public class FuncionarioDAO {
 
     public void inserirFuncionario(Funcionario funcionario) throws ClassNotFoundException, SQLException {
         try {
+            EnderecoDAO endDAO = new EnderecoDAO();
+            funcionario.setEndereco(endDAO.inserirEndereco(funcionario.getEndereco()));
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(insertFunc, Statement.RETURN_GENERATED_KEYS);
-            stmt.setInt(1, facade.getIdCargo(funcionario.getCargo()));
-            stmt.setInt(2, facade.getIdDepto(funcionario.getDepartamento()));
-            stmt.setInt(3, facade.getIdEndereco(funcionario.getEndereco()));
+            stmt.setInt(1, funcionario.getCargo().getId());
+            stmt.setInt(2, funcionario.getDepartamento().getId());
+            stmt.setInt(3, funcionario.getEndereco().getId());
             stmt.setString(4, funcionario.getNome());
             stmt.setString(5, funcionario.getCpf());
             stmt.setString(6, funcionario.getRg());
@@ -76,30 +78,35 @@ public class FuncionarioDAO {
                 String celular = rs.getString("f.celular");
                 String perfil = rs.getString("f.perfil");
                 //Endereco
+                int idEnd = rs.getInt("e.id");
                 String rua = rs.getString("e.rua");
                 int numero = rs.getInt("e.numero");
                 String cep = rs.getString("e.cep");
                 String bairro = rs.getString("e.bairro");
                 //Cidade
+                int idCidade = rs.getInt("cid.id");
                 String nomeCidade = rs.getString("cid.nome");
                 //Estado
+                int idEstado = rs.getInt("est.id");
                 String nomeEstado = rs.getString("est.nome");
                 String uf = rs.getString("est.uf");
                 //Depto
+                int idDepto = rs.getInt("d.id");
                 String nomeDepto = rs.getString("d.nome");
                 String localizacao = rs.getString("d.localizacao");
                 //Cargo
+                int idCargo = rs.getInt("c.id");
                 String nomeCargo = rs.getString("c.nome");
                 double salario = rs.getDouble("c.salario");
                 String requisitos = rs.getString("c.requisitos");
                 int horasMinimas = rs.getInt("c.horasMinimas");
                 double descontoImposto = rs.getDouble("c.descontoImposto");
 
-                Estado estado = new Estado(nomeEstado, uf);
-                Cidade cidade = new Cidade(nomeCidade, estado);
-                Endereco endereco = new Endereco(rua, cep, numero, bairro, cidade);
-                Departamento depto = new Departamento(nomeDepto, localizacao);
-                Cargo cargo = new Cargo(nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
+                Estado estado = new Estado(idEstado, nomeEstado, uf);
+                Cidade cidade = new Cidade(idCidade, nomeCidade, estado);
+                Endereco endereco = new Endereco(idEnd, rua, cep, numero, bairro, cidade);
+                Departamento depto = new Departamento(idDepto, nomeDepto, localizacao);
+                Cargo cargo = new Cargo(idCargo, nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
                 Funcionario func = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, depto, perfil);
                 lista.add(func);
             }

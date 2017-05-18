@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Departamento implements Serializable {
     
+    private int id;
     private String nome;
     private String localizacao;
     private List<Funcionario> funcionarios; 
@@ -21,9 +22,23 @@ public class Departamento implements Serializable {
     public Departamento() {
     }
 
+    public Departamento(int id, String nome, String localizacao) {
+        this.id = id;
+        this.nome = nome;
+        this.localizacao = localizacao;
+    }
+
     public Departamento(String nome, String localizacao) {
         this.nome = nome;
         this.localizacao = localizacao;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<Funcionario> getFuncionarios() {

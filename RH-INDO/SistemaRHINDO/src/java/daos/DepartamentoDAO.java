@@ -23,8 +23,8 @@ public class DepartamentoDAO {
 
     private final String insertDepto = "INSERT INTO Departamento (nome, localizacao) VALUES (?,?)";
     private final String listDeptos = "SELECT * FROM Departamento";
-    private final String selectDeptoID = "SELECT * FORM Departamento WHERE id=?";
-    
+    private final String selectDeptoID = "SELECT * FROM Departamento WHERE id=?";
+
     private Connection con = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -54,9 +54,10 @@ public class DepartamentoDAO {
             stmt = con.prepareStatement(listDeptos);
             rs = stmt.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String localizacao = rs.getString("localizacao");
-                Departamento depto = new Departamento(nome, localizacao);
+                Departamento depto = new Departamento(id, nome, localizacao);
                 lista.add(depto);
             }
             return lista;
@@ -71,21 +72,19 @@ public class DepartamentoDAO {
         }
     }
 
-    public int buscaIdDepto(Departamento departamento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public Departamento buscaDeptoPorID(int idDepto) throws ClassNotFoundException, SQLException {
-        
+
         try {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(selectDeptoID);
             stmt.setInt(1, idDepto);
             rs = stmt.executeQuery();
             if (rs.next()) {
+                int id = rs.getInt("id");
                 String nome = rs.getString("nome");
                 String localizacao = rs.getString("localizacao");
-                Departamento depto = new Departamento(nome, localizacao);
+                Departamento depto = new Departamento(id, nome, localizacao);
                 return depto;
             }
         } finally {
