@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,20 +15,38 @@
     </head>
     <body>
         <%@include file="/pre-fabricado/cabecalho.jsp" %>
-        <div class="container">
-            <!-- Row do input pesquisar: -->
-            <div class="row row-busca-titulo">
-                <div class="col-md-8 titulo">
-                    <h1 class="col-md-10">Relatórios</h1>
-                </div>
-            </div>
-            <!-- Row do cadastro: -->
-            <div class="row row-lista-corpo">
-                <!-- corpo da página -->
-                <div class="col-md-12 corpo">
-                    <legend>Lista de Relatórios</legend>
-                </div>
-            </div>
-        </div>
+        <c:choose>
+            <c:when test="${funcionarioLogado.email == null}">
+                <c:redirect url="/login.jsp"/>
+            </c:when>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO') || (funcionarioLogado.perfil == 'GERENTE')}">
+                        <div class="container">
+                            <h1>Acesso Negado.</h1>
+                            <h2>Você não pode acessar a essa página</h2>
+                            TA LOGADO MAS É FUNCIONARIO OU GERENTE COMUM
+                        </div>
+                    </c:when>
+                    <c:otherwise> 
+                        <div class="container">
+                            <!-- Row do input pesquisar: -->
+                            <div class="row row-busca-titulo">
+                                <div class="col-md-8 titulo">
+                                    <h1 class="col-md-10">Relatórios</h1>
+                                </div>
+                            </div>
+                            <!-- Row do cadastro: -->
+                            <div class="row row-lista-corpo">
+                                <!-- corpo da página -->
+                                <div class="col-md-12 corpo">
+                                    <legend>Lista de Relatórios</legend>
+                                </div>
+                            </div>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </c:otherwise>
+        </c:choose>
     </body> 
 </html>
