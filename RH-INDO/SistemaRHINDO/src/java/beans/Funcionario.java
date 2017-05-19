@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public class Funcionario implements Serializable {
 
+    private int id;
     private String nome;
     private String rg;
     private String cpf;
@@ -23,6 +24,20 @@ public class Funcionario implements Serializable {
     private Departamento departamento;
     private String perfil;
     private String senha;
+
+    public Funcionario(int id, String nome, String rg, String cpf, String celular, String email, Endereco endereco, Cargo cargo, Departamento departamento, String perfil, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.celular = celular;
+        this.email = email;
+        this.endereco = endereco;
+        this.cargo = cargo;
+        this.departamento = departamento;
+        this.perfil = perfil;
+        this.senha = senha;
+    }
 
     public Funcionario(String nome, String rg, String cpf, String celular, String email, Endereco endereco, Cargo cargo, Departamento departamento, String perfil, String senha) {
         this.nome = nome;
@@ -38,6 +53,14 @@ public class Funcionario implements Serializable {
     }
 
     public Funcionario() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPerfil() {

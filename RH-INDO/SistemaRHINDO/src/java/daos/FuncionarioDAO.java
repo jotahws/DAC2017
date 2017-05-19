@@ -72,6 +72,7 @@ public class FuncionarioDAO {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 //funcionario
+                int idFunc = rs.getInt("f.id");
                 String nome = rs.getString("f.nome");
                 String cpf = rs.getString("f.cpf");
                 String rg = rs.getString("f.rg");
@@ -109,7 +110,7 @@ public class FuncionarioDAO {
                 Endereco endereco = new Endereco(idEnd, rua, cep, numero, bairro, cidade);
                 Departamento depto = new Departamento(idDepto, nomeDepto, localizacao);
                 Cargo cargo = new Cargo(idCargo, nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
-                Funcionario func = new Funcionario(nome, rg, cpf, celular, email, endereco, cargo, depto, perfil, senha);
+                Funcionario func = new Funcionario(idFunc, nome, rg, cpf, celular, email, endereco, cargo, depto, perfil, senha);
                 lista.add(func);
             }
             return lista;

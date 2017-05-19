@@ -25,7 +25,6 @@
                         <div class="container">
                             <h1>Acesso Negado.</h1>
                             <h2>Você não pode acessar a essa página</h2>
-                            TA LOGADO MAS É FUNCIONARIO OU GERENTE COMUM
                         </div>
                     </c:when>
                     <c:otherwise>                    
@@ -55,7 +54,7 @@
                                         <jsp:useBean id="funcionario" class="beans.Funcionario"/>
                                         <c:set var="lista" value="${funcs}"/>
                                         <c:forEach var="item" items="${lista}">
-                                            <a class="list-group-item">
+                                            <a href="#${item.id}" role="tab" data-toggle="tab" class="list-group-item">
                                                 <c:out value="${item.nome}"/>
                                             </a>
                                         </c:forEach>
@@ -64,26 +63,35 @@
                                 <!-- corpo da página -->
                                 <div class="corpo col-md-8 corpo">
                                     <fieldset>
-
-                                        <legend><h2>Carmen Suely Silva</h2></legend>
-                                        <p class="col-md-6">CPF: 045.192.192-41</p>
-                                        <p class="col-md-6">RG: 14.192.202-0</p>
-                                        <p class="col-md-6">Celular: (41) 9.9709-5866</p>
-                                        <p class="col-md-6">Email: carmenlindinha@yahoo.com</p>
-                                        <p class="col-md-6">Perfil do Funcionário: Gerente de RH</p>
-                                        <p class="col-md-6">Departamento: Recursos Humanos</p>
-                                        <legend>Endereço</legend>
-                                        <p class="col-md-6">CEP: 80.320-200</p>
-                                        <p class="col-md-6">Rua: Doracy Cezzarino</p>
-                                        <p class="col-md-6">Número: 138</p>
-                                        <p class="col-md-6">Bairro: Portão</p>
-                                        <p class="col-md-6">Cidade: Curitiba</p>
-                                        <p class="col-md-6">Estado: Paraná</p>
-                                        <div class="text-right">
-                                            <a class="btn btn-primary">Editar</a>
-                                            <a class="btn btn-success">Folha de Pagamento</a>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="">
+                                                <h1 class="text-center cor-disabled">Selecione um funcionário</h1>
+                                                <h1 class="text-center"><span class="glyphicon glyphicon-hand-left cor-disabled gi-5x"></span></h1>
+                                            </div>
+                                            <c:forEach var="item" items="${lista}">
+                                                <div role="tabpanel" class="tab-pane" id="${item.id}">
+                                                    <legend><h2>${item.nome}</h2></legend>
+                                                    <p class="col-md-6">CPF: ${item.cpf}</p>
+                                                    <p class="col-md-6">RG: ${item.rg}</p>
+                                                    <p class="col-md-6">Celular: ${item.celular}</p>
+                                                    <p class="col-md-6">Email: ${item.email}</p>
+                                                    <p class="col-md-6">Perfil do Funcionário: ${item.perfil}</p>
+                                                    <p class="col-md-6">Departamento: ${item.departamento.nome}</p>
+                                                    <p class="col-md-6">Cargo: ${item.cargo.nome}</p>
+                                                    <legend>Endereço</legend>
+                                                    <p class="col-md-6">CEP: ${item.endereco.cep}</p>
+                                                    <p class="col-md-6">Rua: ${item.endereco.rua}</p>
+                                                    <p class="col-md-6">Número: ${item.endereco.numero}</p>
+                                                    <p class="col-md-6">Bairro: ${item.endereco.bairro}</p>
+                                                    <p class="col-md-6">Cidade: ${item.endereco.cidade.nome}</p>
+                                                    <p class="col-md-6">Estado: ${item.endereco.cidade.estado.nome}</p>
+                                                    <div class="text-right">
+                                                        <a class="btn btn-primary">Editar</a>
+                                                        <a class="btn btn-success">Folha de Pagamento</a>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
                                         </div>
-
                                     </fieldset>
                                 </div>
                             </div>

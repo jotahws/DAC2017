@@ -63,3 +63,12 @@ and open the template in the editor.
 textarea {
     resize: vertical;
 }
+
+.cor-disabled{
+    color: #ddd;
+}
+
+.gi-5x{
+    font-size: 4em;
+    
+}

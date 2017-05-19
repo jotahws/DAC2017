@@ -25,7 +25,6 @@
                     <div class="container">
                         <h1>Acesso Negado.</h1>
                         <h2>Você não pode acessar a essa página</h2>
-                        TA LOGADO MAS É FUNCIONARIO OU GERENTE COMUM
                     </div>
                 </c:when>
                 <c:otherwise> 
