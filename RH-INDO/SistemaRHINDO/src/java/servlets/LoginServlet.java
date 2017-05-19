@@ -56,9 +56,9 @@ public class LoginServlet extends HttpServlet {
 
                 if ("GERENTE-RH".equals(func.getPerfil())) {
                     response.sendRedirect("CarregaListaFuncServlet?action=listaFuncionarios");
-                } else if ("GERENTE".equals(func.getPerfil())) {
-                    response.sendRedirect("index.jsp");
-                } else if ("FUNCIONARIO".equals(func.getPerfil())) {
+                } else if (("GERENTE".equals(func.getPerfil())) || ("FUNCIONARIO".equals(func.getPerfil()))) {
+                    response.sendRedirect("relatoriosF.jsp");
+                } else {
                     response.sendRedirect("index.jsp");
                 }
 

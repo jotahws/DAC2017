@@ -7,7 +7,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean scope="session" id="funcionarioLogado" class="beans.Funcionario"/>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,23 +20,29 @@
     </head>
 
     <body>
-        <div class="jumbotron">
-            <div class="container">
-                <h1>Index.jsp</h1>
-                <jsp:getProperty name="funcionarioLogado" property="nome"/>
+        <%@include file="/pre-fabricado/cabecalho.jsp" %>
+        <c:choose>
+            <c:when test="${funcionarioLogado.email == null}">
+                <c:redirect url="/login.jsp"/>
+            </c:when>
+            <c:otherwise>
                 <c:choose>
-                    <c:when test="${funcionarioLogado.email == null}">
-                        NAO LOGADO
+                    <c:when test="${(funcionarioLogado.perfil == 'GERENTE') || (funcionarioLogado.perfil == 'FUNCIONARIO')}">
+                        <c:redirect url="/relatoriosF.jsp"/>
                     </c:when>
-                    <c:otherwise>
-                        LOGADO
+                    <c:when test="${(funcionarioLogado.perfil == 'GERENTE-RH')}">
+                        <c:redirect url="CarregaListaFuncServlet?action=listaFuncionarios"/>
+                    </c:when>
+                    <c:otherwise> 
+                        <div class="jumbotron">
+                            <div class="container">
+                                <h2>Você não possui nenhum perfil de funcionário válido.</h2>
+                                <h4>Verifique sua conta com um Gerente de RH e tente novamente.</h4>
+                            </div>
+                        </div>
                     </c:otherwise>
                 </c:choose>
-                
-                <h4>(redirecionar para funcionarios ou para login)</h4>
-                <a href="CarregaListaFuncServlet?action=listaFuncionarios">Funcionarios</a> <br>
-                <a href="login.jsp">login</a>                
-            </div>
-        </div>
+            </c:otherwise>
+        </c:choose>
     </body>
 </html>

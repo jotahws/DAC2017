@@ -4,9 +4,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page session="true" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:useBean scope="session" id="funcionarioLogado" class="beans.Funcionario"/>
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +21,7 @@
             </c:when>
             <c:otherwise>
                 <c:choose>
-                    <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO') || (funcionarioLogado.perfil == 'GERENTE')}">
+                    <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
                             <h2>Você não pode acessar a essa página</h2>
