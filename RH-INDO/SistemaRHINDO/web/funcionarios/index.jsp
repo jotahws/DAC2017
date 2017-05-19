@@ -54,7 +54,7 @@
                                         <jsp:useBean id="funcionario" class="beans.Funcionario"/>
                                         <c:set var="lista" value="${funcs}"/>
                                         <c:forEach var="item" items="${lista}">
-                                            <a href="#${item.id}" role="tab" data-toggle="tab" class="list-group-item">
+                                            <a href="#${item.id}" role="tab" data-toggle="tab" class=" list-group-item">
                                                 <c:out value="${item.nome}"/>
                                             </a>
                                         </c:forEach>
@@ -69,7 +69,7 @@
                                                 <h1 class="text-center"><span class="glyphicon glyphicon-hand-left cor-disabled gi-5x"></span></h1>
                                             </div>
                                             <c:forEach var="item" items="${lista}">
-                                                <div role="tabpanel" class="tab-pane" id="${item.id}">
+                                                <div role="tabpanel" class="tab-pane fade" id="${item.id}">
                                                     <legend><h2>${item.nome}</h2></legend>
                                                     <p class="col-md-6">CPF: ${item.cpf}</p>
                                                     <p class="col-md-6">RG: ${item.rg}</p>
