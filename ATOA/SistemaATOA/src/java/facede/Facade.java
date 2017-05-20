@@ -9,6 +9,6 @@ package facede;
  *
  * @author MauMau
  */
-public class Facede {
+public class Facade {
     
 }
