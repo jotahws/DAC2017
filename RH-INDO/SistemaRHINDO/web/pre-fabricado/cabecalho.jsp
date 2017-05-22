@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/javascript/jquery.maskedinput.js"></script>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/stylee.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"/>     
     </head>
@@ -42,14 +43,14 @@
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Departamentos<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="${pageContext.request.contextPath}/departamentos">Lista de Departamentos</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/CarregaListaDeptoServlet?action=listaDeptos">Lista de Departamentos</a></li>
                                         <li><a href="${pageContext.request.contextPath}/departamentos/cadastrar.jsp">Novo Departamento</a></li>
                                     </ul>
                                 </li>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Cargos<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="${pageContext.request.contextPath}/cargos">Lista de Cargos</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/CarregaListaCargoServlet?action=listaCargos">Lista de Cargos</a></li>
                                         <li><a href="${pageContext.request.contextPath}/cargos/cadastrar.jsp">Novo Cargo</a></li>
                                     </ul>
                                 </li>

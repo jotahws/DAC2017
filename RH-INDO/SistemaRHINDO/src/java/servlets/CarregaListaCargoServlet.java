@@ -5,8 +5,13 @@
  */
 package servlets;
 
+import beans.Cargo;
+import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +37,32 @@ public class CarregaListaCargoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CarregaListaCargoServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CarregaListaCargoServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        String action = request.getParameter("action");
+        Facade facade = new Facade();
+
+        if ("listaCargos".equals(action)) {
+
+            try {
+                List<Cargo> cargos = facade.carregaListaCargos();
+                request.setAttribute("cargos", cargos);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cargos/index.jsp");
+                rd.forward(request, response);
+            } catch (ClassNotFoundException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Class not found: " + ex.getMessage());
+                }
+            } catch (SQLException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Ocorreu um erro no Banco de Dados, tente novamente mais tarde: " + ex.getMessage());
+                }
+            } catch (NullPointerException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("NULL POINTER EXCEPTION: " + ex.getMessage());
+                }
+            }
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

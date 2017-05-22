@@ -42,7 +42,7 @@
                                 <div class="col-md-8 titulo">
                                     <h1 class="col-md-10">Departamentos</h1>
                                     <div class="text-right">
-                                        <a href="cadastrar.jsp" class="btn btn-info col-md-2">Novo</a>
+                                        <a href="${pageContext.request.contextPath}/departamentos/cadastrar.jsp" class="btn btn-info col-md-2">Novo</a>
                                     </div>
                                 </div>
                             </div>
@@ -51,33 +51,46 @@
                                 <!-- lista de cargos -->
                                 <div class="col-md-4 lista-lat">
                                     <div class="list-group">
-                                        <a class="list-group-item">Depto 1</a>
-                                        <a class="list-group-item">Depto 2</a>
-                                        <a class="list-group-item">Depto 3</a>
-                                        <a class="list-group-item">Depto 4</a>
-                                        <a class="list-group-item">Depto 5</a>
-                                        <a class="list-group-item">Depto 6</a>       
+                                        <jsp:useBean id="departamento" class="beans.Departamento"/>
+                                        <c:set var="lista" value="${deptos}"/>
+                                        <c:forEach var="item" items="${lista}">
+                                            <a href="#${item.id}" role="tab" data-toggle="tab" class=" list-group-item">
+                                                <c:out value="${item.nome}"/>
+                                            </a>
+                                        </c:forEach>      
                                     </div>
                                 </div>
                                 <!-- corpo da página -->
                                 <div class="corpo col-md-8 corpo">
+
                                     <fieldset>
                                         <legend class="legenda">Editar Departamento</legend>
-                                        <form class="cadastro">
-                                            <div class="row">
-                                                <div class="form-group col-md-6">
-                                                    <label for="nome">Nome:</label>
-                                                    <input type="text" class="form-control" id="nome" placeholder="Ex. Depto Financeiro">
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="">
+                                                <h1 class="unselectable text-center cor-disabled">Selecione um departamento</h1>
+                                                <h1 class="text-center"><span class="glyphicon glyphicon-hand-left cor-disabled gi-5x"></span></h1>
+                                            </div>
+                                            <c:forEach var="item" items="${lista}">
+                                                <div role="tabpanel" class="tab-pane fade" id="${item.id}">
+                                                    <form method="POST" action="DeptoServlet?action=edit&idDepto=${item.id}" class="cadastro">
+                                                        <div class="row">
+                                                            <div class="form-group col-md-6">
+                                                                <label for="nome">Nome:</label>
+                                                                <input type="text" class="form-control" name="nome" id="nome" value="${item.nome}">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label for="localizacao">Localização</label>
+                                                                <input type="text" class="form-control" name="localizacao" id="localizacao" value="${item.localizacao}">
+                                                            </div>                                
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <input type="submit" id="botao" value="Salvar Alterações" class="btn btn-primary"/>  
+                                                            <a href="DeptoServlet?action=delete&idDepto=${item.id}" class="btn btn-danger">Excluir</a>  
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="localizacao">Localização</label>
-                                                    <input type="text" class="form-control" id="localizacao" placeholder="Ex. 20º Andar">
-                                                </div>                                
-                                            </div>
-                                            <div class="text-right">
-                                                <button type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
-                                            </div>
-                                        </form>
+                                            </c:forEach>
+                                        </div>
                                     </fieldset>
                                 </div>
                             </div>

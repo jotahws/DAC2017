@@ -65,7 +65,7 @@
                                     <fieldset>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active" id="">
-                                                <h1 class="text-center cor-disabled">Selecione um funcionário</h1>
+                                                <h1 class="unselectable text-center cor-disabled">Selecione um funcionário</h1>
                                                 <h1 class="text-center"><span class="glyphicon glyphicon-hand-left cor-disabled gi-5x"></span></h1>
                                             </div>
                                             <c:forEach var="item" items="${lista}">

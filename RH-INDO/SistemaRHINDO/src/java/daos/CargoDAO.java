@@ -24,7 +24,9 @@ public class CargoDAO {
     private final String insertCargo = "INSERT INTO cargo (nome, salario, requisitos, horasminimas, descontoimposto) VALUES (?,?,?,?,?)";
     private final String listCargos = "SELECT * FROM cargo";
     private final String selectCargoID = "SELECT * FROM cargo WHERE id=?";
-
+    private final String updateCargo = "UPDATE Cargo SET nome=?, salario=?, requisitos=?, horasMinimas=?, descontoImposto=? WHERE id=?;";
+    private final String deleteCargo = "DELETE FROM cargo WHERE id=?;";
+    
     private Connection con = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -105,6 +107,44 @@ public class CargoDAO {
             }
         }
         return null;
+    }
+
+    public void editarCargo(Cargo cargo) throws SQLException, ClassNotFoundException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(updateCargo, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, cargo.getNome());
+            stmt.setDouble(2, cargo.getSalario());
+            stmt.setString(3, cargo.getRequisitos());
+            stmt.setInt(4, cargo.getCargaMinima());
+            stmt.setDouble(5, cargo.getDescImposto());
+            stmt.setInt(6, cargo.getId());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+
+    }
+
+    public void excluirCargo(int cargo) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(deleteCargo, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, cargo);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
     }
 
 }

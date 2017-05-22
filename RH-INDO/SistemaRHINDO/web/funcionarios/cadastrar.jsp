@@ -155,4 +155,6 @@
         </c:choose>
     </body>
     <script src="${pageContext.request.contextPath}/javascript/scripts.js"></script>
+    <script src="${pageContext.request.contextPath}/javascript/jquery.maskedinput.js"></script>
+
 </html>

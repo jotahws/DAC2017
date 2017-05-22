@@ -24,6 +24,8 @@ public class DepartamentoDAO {
     private final String insertDepto = "INSERT INTO Departamento (nome, localizacao) VALUES (?,?)";
     private final String listDeptos = "SELECT * FROM Departamento";
     private final String selectDeptoID = "SELECT * FROM Departamento WHERE id=?";
+    private final String updateDepto = "UPDATE Departamento SET nome=?, localizacao=? WHERE id=?;";
+    private final String deleteDepto = "DELETE FROM DEPARTAMENTO WHERE id=?;";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -72,7 +74,6 @@ public class DepartamentoDAO {
         }
     }
 
-
     public Departamento buscaDeptoPorID(int idDepto) throws ClassNotFoundException, SQLException {
 
         try {
@@ -97,6 +98,40 @@ public class DepartamentoDAO {
             }
         }
         return null;
+    }
+
+    public void editarDepto(Departamento departamento) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(updateDepto, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, departamento.getNome());
+            stmt.setString(2, departamento.getLocalizacao());
+            stmt.setInt(3, departamento.getId());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void excluirDepto(int idDepto) throws SQLException, ClassNotFoundException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(deleteDepto, Statement.RETURN_GENERATED_KEYS);            
+            stmt.setInt(1, idDepto);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
     }
 
 }

@@ -10,6 +10,8 @@ import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +54,7 @@ public class CargoServlet extends HttpServlet {
                 facade.insereCargo(cargo);
             } catch (ClassNotFoundException ex) {
                 try (PrintWriter out = response.getWriter()) {
-                    out.println("class not found: "  + ex.getMessage());
+                    out.println("class not found: " + ex.getMessage());
                 }
             } catch (NumberFormatException ex) {
                 try (PrintWriter out = response.getWriter()) {
@@ -65,6 +67,42 @@ public class CargoServlet extends HttpServlet {
             }
 
             response.sendRedirect("cargos/cadastrar.jsp");
+
+        } else if ("edit".equals(action)) {
+            try {
+                String idCargo = request.getParameter("idCargo");
+                String nome = request.getParameter("nome");
+                String imposto = request.getParameter("imposto");
+                String salario = request.getParameter("salario");
+                String requisitos = request.getParameter("requisitos");
+                String carga = request.getParameter("carga");
+                Cargo cargo = new Cargo(Integer.parseInt(idCargo), nome, Double.parseDouble(salario), requisitos, Integer.parseInt(carga), Double.parseDouble(imposto));
+                facade.editarCargo(cargo);
+            } catch (ClassNotFoundException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("class not found: " + ex.getMessage());
+                }
+            } catch (SQLException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde: " + ex.getMessage());
+                }
+            }
+            response.sendRedirect("CarregaListaCargoServlet?action=listaCargos");
+
+        } else if ("delete".equals(action)) {
+            try {
+                String idCargo = request.getParameter("idCargo");                
+                facade.excluirCargo(Integer.parseInt(idCargo));
+            } catch (SQLException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde: " + ex.getMessage());
+                }
+            } catch (ClassNotFoundException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("Class not Found Ex: " + ex.getMessage());
+                }
+            }
+            response.sendRedirect("CarregaListaCargoServlet?action=listaCargos");
         }
     }
 

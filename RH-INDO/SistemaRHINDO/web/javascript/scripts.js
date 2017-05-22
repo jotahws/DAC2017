@@ -7,7 +7,7 @@
 
 $(document).ready(function () {   
 
-    $("#estado").val($('#uf option:selected').text());
-
+    $('.field-cep').mask('00000-000');
+    
 });
 

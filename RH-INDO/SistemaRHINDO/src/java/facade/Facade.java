@@ -17,7 +17,7 @@ import daos.EstadoDAO;
 import daos.FuncionarioDAO;
 import java.sql.SQLException;
 import java.util.List;
- 
+
 /**
  *
  * @author JotaWind
@@ -47,7 +47,6 @@ public class Facade {
     public void insereDepto(Departamento depto) throws ClassNotFoundException, SQLException {
         DepartamentoDAO deptoDAO = new DepartamentoDAO();
         deptoDAO.inserirDepto(depto);
-
     }
 
     public void insereFuncionario(Funcionario funcionario) throws ClassNotFoundException, SQLException {
@@ -83,6 +82,26 @@ public class Facade {
     public Funcionario verificaLogin(String login, String senha) throws ClassNotFoundException, SQLException {
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         return funcDAO.fazLogin(login, senha);
+    }
+
+    public void editarDepartamento(Departamento departamento) throws ClassNotFoundException, SQLException {
+        DepartamentoDAO deptoDAO = new DepartamentoDAO();
+        deptoDAO.editarDepto(departamento);
+    }
+
+    public void editarCargo(Cargo cargo) throws SQLException, ClassNotFoundException {
+        CargoDAO cargoDAO = new CargoDAO();
+        cargoDAO.editarCargo(cargo);
+    }
+
+    public void excluirDepartamento(int idDepto) throws SQLException, ClassNotFoundException {
+        DepartamentoDAO deptoDAO = new DepartamentoDAO();
+        deptoDAO.excluirDepto(idDepto);
+    }
+
+    public void excluirCargo(int cargo) throws SQLException, ClassNotFoundException {
+        CargoDAO cargoDAO = new CargoDAO();
+        cargoDAO.excluirCargo(cargo);
     }
 
 }
