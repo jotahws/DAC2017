@@ -44,12 +44,12 @@ public class Facade {
         return endDAO.buscaEnderecoPorID(idEndereco);
     }
 
-    public void insereDepto(Departamento depto) throws ClassNotFoundException, SQLException {
+    public void insereDepto(Departamento depto) throws ClassNotFoundException, SQLException, NullPointerException {
         DepartamentoDAO deptoDAO = new DepartamentoDAO();
         deptoDAO.inserirDepto(depto);
     }
 
-    public void insereFuncionario(Funcionario funcionario) throws ClassNotFoundException, SQLException {
+    public void insereFuncionario(Funcionario funcionario) throws ClassNotFoundException, SQLException, NullPointerException {
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         funcDAO.inserirFuncionario(funcionario);
     }

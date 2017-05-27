@@ -83,21 +83,12 @@ public class FuncionarioServlet extends HttpServlet {
                 Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, objCargo, departamento, perfilFunc, senha);
                 facade.insereFuncionario(funcionario);
 
-            } catch (ClassNotFoundException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("classnotfound EXc" + ex.getMessage());
-                }
-            } catch (NumberFormatException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Number format exc" + ex.getMessage());
-                }
-            } catch (SQLException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde" + ex.getMessage());
-                }
+            } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException ex) {                
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/cadastrar.jsp?action=register&status=error");
+                rd.forward(request, response);
             }
 
-            response.sendRedirect("CarregaListaFuncServlet?action=register");
+            response.sendRedirect("CarregaListaFuncServlet?action=register&status=success");
 
         }
 

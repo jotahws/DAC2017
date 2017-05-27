@@ -31,7 +31,7 @@ public class DepartamentoDAO {
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
 
-    public void inserirDepto(Departamento depto) throws ClassNotFoundException, SQLException {
+    public void inserirDepto(Departamento depto) throws ClassNotFoundException, SQLException, NullPointerException {
         try {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(insertDepto, Statement.RETURN_GENERATED_KEYS);

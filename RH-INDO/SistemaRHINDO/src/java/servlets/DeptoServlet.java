@@ -50,24 +50,12 @@ public class DeptoServlet extends HttpServlet {
             Departamento depto = new Departamento(nome, localizacao);
             try {
                 facade.insereDepto(depto);
-//                request.setAttribute("status", "<div class=\"alert alert-success alert-dismissable\">\n"
-//                        + "                    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
-//                        + "                    <strong>Successo!</strong> O novo departamento foi cadastrado.\n"
-//                        + "                </div>");
-            } catch (ClassNotFoundException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("class not found: " + ex.getMessage());
-                }
-//                request.setAttribute("status", "<div class=\"alert alert-danger alert-dismissable\">\n"
-//                        + "                    <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n"
-//                        + "                    <strong>Ops!</strong> Ocorreu um erro ao cadastrar o departamento. Tente novamente mais tarde.\n"
-//                        + "                </div>");
-            } catch (SQLException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde: " + ex.getMessage());
-                }
+            } catch (ClassNotFoundException | SQLException | NullPointerException ex) {
+                //response.sendRedirect("departamentos/cadastrar.jsp?status=error");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/departamentos/cadastrar.jsp?status=error");
+                rd.forward(request, response);
             }
-            response.sendRedirect("departamentos/cadastrar.jsp");
+            response.sendRedirect("departamentos/cadastrar.jsp?status=success");
 
         } else if ("edit".equals(action)) {
             try {
@@ -89,7 +77,7 @@ public class DeptoServlet extends HttpServlet {
 
         } else if ("delete".equals(action)) {
             try {
-                String idDepto = request.getParameter("idDepto");                
+                String idDepto = request.getParameter("idDepto");
                 facade.excluirDepartamento(Integer.parseInt(idDepto));
             } catch (ClassNotFoundException ex) {
                 try (PrintWriter out = response.getWriter()) {

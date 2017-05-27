@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,21 +53,12 @@ public class CargoServlet extends HttpServlet {
             try {
                 Cargo cargo = new Cargo(nome, Double.parseDouble(salario), requisitos, Integer.parseInt(cargaMinima), Double.parseDouble(descImposto));
                 facade.insereCargo(cargo);
-            } catch (ClassNotFoundException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("class not found: " + ex.getMessage());
-                }
-            } catch (NumberFormatException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("O formato no número escolhido é inválido");
-                }
-            } catch (SQLException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde" + ex.getMessage());
-                }
+            } catch (ClassNotFoundException | SQLException | NumberFormatException ex) {
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cargos/cadastrar.jsp?status=error");
+                rd.forward(request, response);
             }
 
-            response.sendRedirect("cargos/cadastrar.jsp");
+            response.sendRedirect("cargos/cadastrar.jsp?status=success");
 
         } else if ("edit".equals(action)) {
             try {
@@ -91,7 +83,7 @@ public class CargoServlet extends HttpServlet {
 
         } else if ("delete".equals(action)) {
             try {
-                String idCargo = request.getParameter("idCargo");                
+                String idCargo = request.getParameter("idCargo");
                 facade.excluirCargo(Integer.parseInt(idCargo));
             } catch (SQLException ex) {
                 try (PrintWriter out = response.getWriter()) {

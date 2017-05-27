@@ -75,8 +75,83 @@ CHANGE COLUMN `numero` `numero` INT NULL DEFAULT NULL ;
 ALTER TABLE `sistema_rhindo`.`Funcionario`
 ADD COLUMN `senha` VARCHAR(45) NULL AFTER `perfil`;
 
+-- TRIGGERS PARA ENVIAR UM ERRO QUANDO ELE TENTA INSERIR STRING SEM NADA 
+-- tb DEPARTAMENTO
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty` BEFORE INSERT ON `Departamento` 
+FOR EACH ROW
+BEGIN
+	if (new.localizacao = "") OR (new.nome = "") then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb CARGO
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_cargo$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_cargo` BEFORE INSERT ON `Cargo` 
+FOR EACH ROW
+BEGIN
+	if (new.nome = '') OR (new.requisitos = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb Cidade
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_cidade$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_cidade` BEFORE INSERT ON `Cidade` 
+FOR EACH ROW
+BEGIN
+	if (new.nome = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb Endereco
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_endereco$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_endereco` BEFORE INSERT ON `Endereco` 
+FOR EACH ROW
+BEGIN
+	if (new.rua = '') OR (new.cep = '') OR (new.bairro = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb Estado
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_estado$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_estado` BEFORE INSERT ON `Estado` 
+FOR EACH ROW
+BEGIN
+	if (new.uf = '') OR (new.nome = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb Funcionario
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_funcionario$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_funcionario` BEFORE INSERT ON `Funcionario` 
+FOR EACH ROW
+BEGIN
+	if (new.nome = '') OR (new.cpf = '') OR (new.rg = '') OR (new.celular = '') OR (new.email = '') OR (new.perfil = '') OR (new.senha = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
 
 
+
+ -- ALGUNS INSERTS
 insert into funcionario(idCargo,idDepartamento,idEndereco,nome,cpf,rg,email,
 celular,perfil,senha) values (1,1,1,'Mauricio de Araujo','07094657935',
 '135034657','araujoito@gmail.com','99494401','GERENTE-RH','1234');

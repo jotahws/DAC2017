@@ -36,7 +36,7 @@ public class FuncionarioDAO {
     private ResultSet rs = null;
     private Facade facade;
 
-    public void inserirFuncionario(Funcionario funcionario) throws ClassNotFoundException, SQLException {
+    public void inserirFuncionario(Funcionario funcionario) throws ClassNotFoundException, SQLException, NullPointerException {
         try {
             EnderecoDAO endDAO = new EnderecoDAO();
             funcionario.setEndereco(endDAO.inserirEndereco(funcionario.getEndereco()));

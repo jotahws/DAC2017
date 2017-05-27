@@ -37,7 +37,20 @@
                         </div>
                         <!-- Row do cadastro: -->
                         <div class="row row-lista-corpo">
-                            ${status}
+                            <c:choose>
+                                    <c:when test="${(param.status == 'success')}">
+                                        <div class="alert alert-success alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p> <strong>Successo!</strong> O novo cargo foi cadastrado.</p>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${(param.status == 'error')}">
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p> <strong>Ops!</strong> Ocorreu um erro ao cadastrar o cargo. Tente novamente.</p>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                             <!-- corpo da página -->
                             <div class="col-md-12 corpo">
                                 <fieldset>
