@@ -104,4 +104,9 @@ public class Facade {
         cargoDAO.excluirCargo(cargo);
     }
 
+    public Funcionario buscaFuncionarioPorID(int idFunc) throws ClassNotFoundException, SQLException{
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        return funcDAO.buscaFuncPorID(idFunc);
+    }
+
 }

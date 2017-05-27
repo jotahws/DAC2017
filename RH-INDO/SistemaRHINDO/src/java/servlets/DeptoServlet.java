@@ -52,7 +52,6 @@ public class DeptoServlet extends HttpServlet {
             try {
                 facade.insereDepto(depto);
             } catch (ClassNotFoundException | SQLException | NullPointerException ex) {
-                //response.sendRedirect("departamentos/cadastrar.jsp?status=error");
                 status = "error";
             }
             response.sendRedirect("departamentos/cadastrar.jsp?status="+status);

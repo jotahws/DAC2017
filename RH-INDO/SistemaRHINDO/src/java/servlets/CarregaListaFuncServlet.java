@@ -89,6 +89,24 @@ public class CarregaListaFuncServlet extends HttpServlet {
                     out.println("NULL POINTER EXCEPTION: " + ex.getMessage());
                 }
             }
+        } else if ("edit".equals(action)) {
+            try {
+                String idFunc = request.getParameter("id");
+                Funcionario func = facade.buscaFuncionarioPorID(Integer.parseInt(idFunc));
+                List<Cargo> cargos = facade.carregaListaCargos();
+                List<Departamento> deptos = facade.carregaListaDeptos();
+                List<Estado> estados = facade.carregaListaUF();
+                request.setAttribute("func", func);
+                request.setAttribute("cargos", cargos);
+                request.setAttribute("deptos", deptos);
+                request.setAttribute("estados", estados);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/editar.jsp");
+                rd.forward(request, response);
+            } catch (Exception ex) {
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/editar.jsp?status=errorID");
+                rd.forward(request, response);
+            }
+
         }
     }
 

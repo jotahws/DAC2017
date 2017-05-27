@@ -30,6 +30,7 @@ public class FuncionarioDAO {
     private final String insertFunc = "insert into Funcionario (idCargo, idDepartamento, idEndereco, nome, cpf, rg, email, celular, perfil, senha) values(?,?,?,?,?,?,?,?,?,?)";
     private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id;";
     private final String verificaLogin = "SELECT email, perfil, nome FROM funcionario WHERE email=? AND senha=?";
+    private final String selectFuncID = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id AND f.id=?";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -154,4 +155,63 @@ public class FuncionarioDAO {
         return null;
     }
 
+    public Funcionario buscaFuncPorID(int idFunc) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(selectFuncID);
+            stmt.setInt(1, idFunc);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                //funcionario
+                String nome = rs.getString("f.nome");
+                String cpf = rs.getString("f.cpf");
+                String rg = rs.getString("f.rg");
+                String email = rs.getString("f.email");
+                String celular = rs.getString("f.celular");
+                String perfil = rs.getString("f.perfil");
+                String senha = rs.getString("f.senha");
+                //Endereco
+                int idEnd = rs.getInt("e.id");
+                String rua = rs.getString("e.rua");
+                int numero = rs.getInt("e.numero");
+                String cep = rs.getString("e.cep");
+                String bairro = rs.getString("e.bairro");
+                //Cidade
+                int idCidade = rs.getInt("cid.id");
+                String nomeCidade = rs.getString("cid.nome");
+                //Estado
+                int idEstado = rs.getInt("est.id");
+                String nomeEstado = rs.getString("est.nome");
+                String uf = rs.getString("est.uf");
+                //Depto
+                int idDepto = rs.getInt("d.id");
+                String nomeDepto = rs.getString("d.nome");
+                String localizacao = rs.getString("d.localizacao");
+                //Cargo
+                int idCargo = rs.getInt("c.id");
+                String nomeCargo = rs.getString("c.nome");
+                double salario = rs.getDouble("c.salario");
+                String requisitos = rs.getString("c.requisitos");
+                int horasMinimas = rs.getInt("c.horasMinimas");
+                double descontoImposto = rs.getDouble("c.descontoImposto");
+                //instanciar
+                Estado estado = new Estado(idEstado, nomeEstado, uf);
+                Cidade cidade = new Cidade(idCidade, nomeCidade, estado);
+                Endereco endereco = new Endereco(idEnd, rua, cep, numero, bairro, cidade);
+                Departamento depto = new Departamento(idDepto, nomeDepto, localizacao);
+                Cargo cargo = new Cargo(idCargo, nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
+                Funcionario func = new Funcionario(idFunc, nome, rg, cpf, celular, email, endereco, cargo, depto, perfil, senha);
+                return func;
+            }
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+        return null;
+    }
 }
