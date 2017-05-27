@@ -46,6 +46,7 @@ public class FuncionarioServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         Facade facade = new Facade();
+        String status = "success";
 
         if ("register".equals(action)) {
             try {
@@ -83,12 +84,11 @@ public class FuncionarioServlet extends HttpServlet {
                 Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, objCargo, departamento, perfilFunc, senha);
                 facade.insereFuncionario(funcionario);
 
-            } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException ex) {                
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/cadastrar.jsp?action=register&status=error");
-                rd.forward(request, response);
+            } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException ex) {                                
+                status = "error";
             }
 
-            response.sendRedirect("CarregaListaFuncServlet?action=register&status=success");
+            response.sendRedirect("CarregaListaFuncServlet?action=register&status="+status);
 
         }
 

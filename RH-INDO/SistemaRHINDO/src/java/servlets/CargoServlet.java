@@ -41,6 +41,7 @@ public class CargoServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         Facade facade = new Facade();
+        String status = "success";
 
         if ("register".equals(action)) {
             //Cadastrar
@@ -54,11 +55,10 @@ public class CargoServlet extends HttpServlet {
                 Cargo cargo = new Cargo(nome, Double.parseDouble(salario), requisitos, Integer.parseInt(cargaMinima), Double.parseDouble(descImposto));
                 facade.insereCargo(cargo);
             } catch (ClassNotFoundException | SQLException | NumberFormatException ex) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/cargos/cadastrar.jsp?status=error");
-                rd.forward(request, response);
+                status = "error";
             }
 
-            response.sendRedirect("cargos/cadastrar.jsp?status=success");
+            response.sendRedirect("cargos/cadastrar.jsp?status="+status);
 
         } else if ("edit".equals(action)) {
             try {

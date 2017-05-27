@@ -41,6 +41,7 @@ public class DeptoServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         Facade facade = new Facade();
+        String status = "success";
 
         if ("register".equals(action)) {
             //Cadastrar
@@ -52,10 +53,9 @@ public class DeptoServlet extends HttpServlet {
                 facade.insereDepto(depto);
             } catch (ClassNotFoundException | SQLException | NullPointerException ex) {
                 //response.sendRedirect("departamentos/cadastrar.jsp?status=error");
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/departamentos/cadastrar.jsp?status=error");
-                rd.forward(request, response);
+                status = "error";
             }
-            response.sendRedirect("departamentos/cadastrar.jsp?status=success");
+            response.sendRedirect("departamentos/cadastrar.jsp?status="+status);
 
         } else if ("edit".equals(action)) {
             try {
