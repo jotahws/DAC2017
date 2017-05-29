@@ -94,6 +94,11 @@ public class Facade {
         cargoDAO.editarCargo(cargo);
     }
 
+    public void editarFuncionario(Funcionario funcionario) throws ClassNotFoundException, SQLException, NullPointerException {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        funcDAO.editarFunc(funcionario);
+    }
+
     public void excluirDepartamento(int idDepto) throws SQLException, ClassNotFoundException {
         DepartamentoDAO deptoDAO = new DepartamentoDAO();
         deptoDAO.excluirDepto(idDepto);
@@ -104,7 +109,12 @@ public class Facade {
         cargoDAO.excluirCargo(cargo);
     }
 
-    public Funcionario buscaFuncionarioPorID(int idFunc) throws ClassNotFoundException, SQLException{
+    public void excluirFuncionario(int idFunc) throws ClassNotFoundException, SQLException {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        funcDAO.excluirFuncionario(idFunc);
+    }
+
+    public Funcionario buscaFuncionarioPorID(int idFunc) throws ClassNotFoundException, SQLException {
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         return funcDAO.buscaFuncPorID(idFunc);
     }

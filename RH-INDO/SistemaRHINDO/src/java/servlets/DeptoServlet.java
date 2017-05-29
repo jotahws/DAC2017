@@ -54,7 +54,7 @@ public class DeptoServlet extends HttpServlet {
             } catch (ClassNotFoundException | SQLException | NullPointerException ex) {
                 status = "error";
             }
-            response.sendRedirect("departamentos/cadastrar.jsp?status="+status);
+            response.sendRedirect("departamentos/cadastrar.jsp?status=" + status);
 
         } else if ("edit".equals(action)) {
             try {
@@ -63,31 +63,22 @@ public class DeptoServlet extends HttpServlet {
                 String localizacao = request.getParameter("localizacao");
                 Departamento departamento = new Departamento(Integer.parseInt(idDepto), nome, localizacao);
                 facade.editarDepartamento(departamento);
-            } catch (ClassNotFoundException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("class not found: " + ex.getMessage());
-                }
-            } catch (SQLException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde: " + ex.getMessage());
-                }
+                status = "successEdit";
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
+
             }
-            response.sendRedirect("CarregaListaDeptoServlet?action=listaDeptos");
+            response.sendRedirect("CarregaListaDeptoServlet?action=listaDeptos&status="+status);
 
         } else if ("delete".equals(action)) {
             try {
                 String idDepto = request.getParameter("idDepto");
                 facade.excluirDepartamento(Integer.parseInt(idDepto));
-            } catch (ClassNotFoundException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("class not found: " + ex.getMessage());
-                }
-            } catch (SQLException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde: " + ex.getMessage());
-                }
+                status = "successDelete";
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
             }
-            response.sendRedirect("CarregaListaDeptoServlet?action=listaDeptos");
+            response.sendRedirect("CarregaListaDeptoServlet?action=listaDeptos&status=" + status);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -58,7 +58,7 @@ public class CargoServlet extends HttpServlet {
                 status = "error";
             }
 
-            response.sendRedirect("cargos/cadastrar.jsp?status="+status);
+            response.sendRedirect("cargos/cadastrar.jsp?status=" + status);
 
         } else if ("edit".equals(action)) {
             try {
@@ -70,31 +70,21 @@ public class CargoServlet extends HttpServlet {
                 String carga = request.getParameter("carga");
                 Cargo cargo = new Cargo(Integer.parseInt(idCargo), nome, Double.parseDouble(salario), requisitos, Integer.parseInt(carga), Double.parseDouble(imposto));
                 facade.editarCargo(cargo);
-            } catch (ClassNotFoundException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("class not found: " + ex.getMessage());
-                }
-            } catch (SQLException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde: " + ex.getMessage());
-                }
+                status = "successEdit";
+            } catch (ClassNotFoundException | SQLException | NumberFormatException ex) {
+                status = "error";
             }
-            response.sendRedirect("CarregaListaCargoServlet?action=listaCargos");
+            response.sendRedirect("CarregaListaCargoServlet?action=listaCargos&status=" + status);
 
         } else if ("delete".equals(action)) {
             try {
                 String idCargo = request.getParameter("idCargo");
                 facade.excluirCargo(Integer.parseInt(idCargo));
-            } catch (SQLException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Estamos com problemas no Banco de Dados, tente novamente mais tarde: " + ex.getMessage());
-                }
-            } catch (ClassNotFoundException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("Class not Found Ex: " + ex.getMessage());
-                }
+                status = "successDelete";
+            } catch (SQLException | ClassNotFoundException ex) {
+                status = "error";
             }
-            response.sendRedirect("CarregaListaCargoServlet?action=listaCargos");
+            response.sendRedirect("CarregaListaCargoServlet?action=listaCargos&status=" + status);
         }
     }
 

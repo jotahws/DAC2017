@@ -70,11 +70,11 @@ public class CarregaListaFuncServlet extends HttpServlet {
                 }
             }
         } else if ("listaFuncionarios".equals(action)) {
-
             try {
+                String status = request.getParameter("status");
                 List<Funcionario> funcionarios = facade.carregaListaFunc();
                 request.setAttribute("funcs", funcionarios);
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/index.jsp");
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/index.jsp?status="+status);
                 rd.forward(request, response);
             } catch (ClassNotFoundException ex) {
                 try (PrintWriter out = response.getWriter()) {
@@ -92,6 +92,7 @@ public class CarregaListaFuncServlet extends HttpServlet {
         } else if ("edit".equals(action)) {
             try {
                 String idFunc = request.getParameter("id");
+                String error = request.getParameter("error");
                 Funcionario func = facade.buscaFuncionarioPorID(Integer.parseInt(idFunc));
                 List<Cargo> cargos = facade.carregaListaCargos();
                 List<Departamento> deptos = facade.carregaListaDeptos();
@@ -102,8 +103,8 @@ public class CarregaListaFuncServlet extends HttpServlet {
                 request.setAttribute("estados", estados);
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/editar.jsp");
                 rd.forward(request, response);
-            } catch (Exception ex) {
-                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/editar.jsp?status=errorID");
+            } catch (IOException | ClassNotFoundException | NumberFormatException | SQLException | ServletException ex) {
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/funcionarios/editar.jsp?status=error");
                 rd.forward(request, response);
             }
 

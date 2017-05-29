@@ -61,6 +61,26 @@
                                     </div>
                                 </div>
                                 <!-- corpo da página -->
+                                <c:choose>
+                                    <c:when test="${(param.status == 'successDelete')}">
+                                        <div class="col-md-8 alert alert-warning alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p> <span class="glyphicon glyphicon-trash"></span> O departamento foi <strong>excluído</strong> com sucesso.</p>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${(param.status == 'successEdit')}">
+                                        <div class="col-md-8 alert alert-success alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p> <span class="glyphicon glyphicon-edit"></span> <strong>Successo!</strong> O departamento foi editado.</p>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${(param.status == 'error')}">
+                                        <div class="col-md-8 alert alert-danger alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p> <strong>Ops!</strong> Ocorreu um erro! Tente novamente.</p>
+                                        </div>
+                                    </c:when>                                    
+                                </c:choose>
                                 <div class="corpo col-md-8 corpo">
 
                                     <fieldset>

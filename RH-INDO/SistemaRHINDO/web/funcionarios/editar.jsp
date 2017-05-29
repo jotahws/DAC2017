@@ -38,29 +38,23 @@
                             <!-- Row do cadastro: -->
                             <div class="row row-lista-corpo">
                                 <c:choose>
-                                    <c:when test="${(param.status == 'success')}">
-                                        <div class="alert alert-success alert-dismissable">
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <p> <strong>Successo!</strong> O funcionário foi editado.</p>
-                                        </div>
-                                    </c:when>
-                                    <c:when test="${(param.status == 'error')}">
-                                        <div class="alert alert-danger alert-dismissable">
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <p> <strong>Ops!</strong> Ocorreu um erro ao editar o funcionário. Tente novamente.</p>
-                                        </div>
-                                    </c:when>
                                     <c:when test="${(param.status == 'errorID')}">
                                         <div class="alert alert-danger alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             <p> <strong>Ops!</strong> Você deve selecionar um funcionário para poder editá-lo. <a href="CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcionários</a></p>
                                         </div>
                                     </c:when>
+                                    <c:when test="${(param.status == 'error')}">
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p> <strong>Ops!</strong> Ocorreu um erro ao <strong>editar</strong> um funcionário. Um ou mais dados são inválidos. <a href="CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcionários</a></p>
+                                        </div>
+                                    </c:when>
                                 </c:choose>
                                 <!-- corpo da página -->
                                 <div class="col-md-12 corpo">
                                     <fieldset>
-                                        <form action="${pageContext.request.contextPath}/FuncionarioServlet?action=register" method="POST" class="cadastro">
+                                        <form action="${pageContext.request.contextPath}/FuncionarioServlet?action=edit" method="POST" class="cadastro">
                                             <div class="row">
                                                 <legend>Geral</legend>
                                                 <div class="form-group col-md-4">
@@ -149,6 +143,7 @@
                                                 <div class="form-group col-md-4">
                                                     <label for="cidade">Cidade</label>
                                                     <input type="text" class="form-control" id="cidade" name="cidade" value="${func.endereco.cidade.nome}"/>
+                                                    <input type="hidden" name="idFunc" value="${func.id}"/>
                                                 </div>
                                                 <div class="form-group col-md-1">
                                                     <label for="uf">UF</label>
@@ -168,7 +163,7 @@
                                                 </div>
                                             </div>
                                             <div class="text-right">
-                                                <a href="FuncionarioServlet?action=delete&idDepto=${func.id}" class="btn btn-danger">Excluir Funcionário</a>  
+                                                <a href="FuncionarioServlet?action=delete&idFunc=${func.id}" class="btn btn-danger">Excluir Funcionário</a>  
                                                 <input type="submit" class="btn btn-primary form-group" value="Salvar Alterações" />
                                             </div>
                                         </form>

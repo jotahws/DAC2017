@@ -41,7 +41,7 @@
                                     <c:when test="${(param.status == 'success')}">
                                         <div class="alert alert-success alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <p> <strong>Successo!</strong> O novo departamento foi cadastrado.</p>
+                                            <p> <strong>Successo!</strong> O novo funcionário foi cadastrado. <a href="CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcionários</a></p>
                                         </div>
                                     </c:when>
                                     <c:when test="${(param.status == 'error')}">

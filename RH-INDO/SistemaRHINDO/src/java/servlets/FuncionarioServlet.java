@@ -47,14 +47,15 @@ public class FuncionarioServlet extends HttpServlet {
         String action = request.getParameter("action");
         Facade facade = new Facade();
         String status = "success";
+        String idFunc = "1";
 
-        if ("register".equals(action)) {
+        if (("register".equals(action)) || ("edit".equals(action))) {
             try {
-                //Cadastrar
+                //Cadastrar OU Editar
                 String nome = request.getParameter("nome");
                 String cpf = request.getParameter("cpf");
                 String rg = request.getParameter("rg");
-                String senha = request.getParameter("senha");                
+                String senha = request.getParameter("senha");
                 String celular = request.getParameter("celular");
                 String email = request.getParameter("email");
                 String depto = request.getParameter("depto");
@@ -82,14 +83,33 @@ public class FuncionarioServlet extends HttpServlet {
                 Departamento departamento = facade.buscaDeptoPorID(Integer.parseInt(depto));
                 //criando funcionario
                 Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, objCargo, departamento, perfilFunc, senha);
-                facade.insereFuncionario(funcionario);
-
-            } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException ex) {                                
+                if ("register".equals(action)) {
+                    facade.insereFuncionario(funcionario);
+                } else {
+                    idFunc = request.getParameter("idFunc");
+                    funcionario.setId(Integer.parseInt(idFunc));
+                    facade.editarFuncionario(funcionario);
+                    status = "successEdit";
+                    action = "listaFuncionarios";
+                }
+            } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException ex) {
                 status = "error";
             }
+            if ("register".equals(action)) {
+                response.sendRedirect("CarregaListaFuncServlet?action=" + action + "&status=" + status);
+            } else {
+                response.sendRedirect("CarregaListaFuncServlet?action=" + action + "&status=" + status + "&id=" + idFunc);
+            }
 
-            response.sendRedirect("CarregaListaFuncServlet?action=register&status="+status);
-
+        } else if ("delete".equals(action)) {
+            try {
+                idFunc = request.getParameter("idFunc");
+                facade.excluirFuncionario(Integer.parseInt(idFunc));
+                status = "successDelete";
+            } catch (SQLException | ClassNotFoundException ex) {
+                status = "error";
+            }
+            response.sendRedirect("CarregaListaFuncServlet?action=listaFuncionarios&status=" + status);
         }
 
     }

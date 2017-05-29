@@ -128,7 +128,6 @@ public class CargoDAO {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }
         }
-
     }
 
     public void excluirCargo(int cargo) throws ClassNotFoundException, SQLException {

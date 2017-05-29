@@ -150,6 +150,81 @@ END$$
 DELIMITER ;
 
 
+-- TRIGGERS PARA ENVIAR UM ERRO QUANDO ELE TENTA DAR UPDATE COM STRING SEM NADA 
+-- tb DEPARTAMENTO
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_update$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_update` BEFORE UPDATE ON `Departamento` 
+FOR EACH ROW
+BEGIN
+	if (new.localizacao = "") OR (new.nome = "") then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb CARGO
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_cargo_update$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_cargo_update` BEFORE UPDATE ON `Cargo` 
+FOR EACH ROW
+BEGIN
+	if (new.nome = '') OR (new.requisitos = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb Cidade
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_cidade_update$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_cidade_update` BEFORE UPDATE ON `Cidade` 
+FOR EACH ROW
+BEGIN
+	if (new.nome = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb Endereco
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_endereco_update$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_endereco_update` BEFORE UPDATE ON `Endereco` 
+FOR EACH ROW
+BEGIN
+	if (new.rua = '') OR (new.cep = '') OR (new.bairro = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb Estado
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_estado_update$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_estado_update` BEFORE UPDATE ON `Estado` 
+FOR EACH ROW
+BEGIN
+	if (new.uf = '') OR (new.nome = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+-- tb Funcionario
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_rhindo.str_empty_funcionario_update$$
+USE `sistema_rhindo`$$
+CREATE TRIGGER `sistema_rhindo`.`str_empty_funcionario_update` BEFORE UPDATE ON `Funcionario` 
+FOR EACH ROW
+BEGIN
+	if (new.nome = '') OR (new.cpf = '') OR (new.rg = '') OR (new.celular = '') OR (new.email = '') OR (new.perfil = '') OR (new.senha = '') then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
+
+
 
  -- ALGUNS INSERTS
 insert into funcionario(idCargo,idDepartamento,idEndereco,nome,cpf,rg,email,

@@ -31,7 +31,9 @@ public class FuncionarioDAO {
     private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id;";
     private final String verificaLogin = "SELECT email, perfil, nome FROM funcionario WHERE email=? AND senha=?";
     private final String selectFuncID = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id AND f.id=?";
-
+    private final String updateFunc = "UPDATE Funcionario SET idCargo=?, idDepartamento=?, idEndereco=?, nome=?, cpf=?, rg=?, email=?, celular=?, perfil=?, senha=? WHERE id=?;";
+    private final String deleteFunc = "DELETE FROM Funcionario WHERE id=?";
+    
     private Connection con = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -213,5 +215,49 @@ public class FuncionarioDAO {
             }
         }
         return null;
+    }
+
+    public void editarFunc(Funcionario funcionario) throws ClassNotFoundException, SQLException, NullPointerException {
+        try {
+            EnderecoDAO endDAO = new EnderecoDAO();
+            funcionario.setEndereco(endDAO.inserirEndereco(funcionario.getEndereco()));
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(updateFunc, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, funcionario.getCargo().getId());
+            stmt.setInt(2, funcionario.getDepartamento().getId());
+            stmt.setInt(3, funcionario.getEndereco().getId());
+            stmt.setString(4, funcionario.getNome());
+            stmt.setString(5, funcionario.getCpf());
+            stmt.setString(6, funcionario.getRg());
+            stmt.setString(7, funcionario.getEmail());
+            stmt.setString(8, funcionario.getCelular());
+            stmt.setString(9, funcionario.getPerfil());
+            stmt.setString(10, funcionario.getSenha());
+            stmt.setInt(11, funcionario.getId());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void excluirFuncionario(int idFunc) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(deleteFunc, Statement.RETURN_GENERATED_KEYS);
+            stmt.setInt(1, idFunc);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
     }
 }
