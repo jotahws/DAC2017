@@ -9,8 +9,12 @@ import beans.Funcionario;
 import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import static java.lang.System.out;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,16 +47,14 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String action = request.getParameter("action");
-        out.println("<h1>affe2</h1>");
         if ("login".equals(action)) {
 
-            out.println("<h1>affe1</h1>");
             String login = request.getParameter("login");
             String senha = request.getParameter("senha");
             try {
                 Funcionario f = new Funcionario();
                 f.setEmail(login);
-                f.setSenha(senha);
+                f.setSenha(f.criptografa(senha));
                 Client client = ClientBuilder.newClient();
 
                 Funcionario retorno = client.target("http://localhost:8084/SistemaRHINDO/webresources/login")
@@ -75,6 +77,10 @@ public class LoginServlet extends HttpServlet {
                 try (PrintWriter out = response.getWriter()) {
                     out.println("<h1>DADOS INVÁLIDOS</h1>");
                 }
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         } else if ("logout".equals(action)) {

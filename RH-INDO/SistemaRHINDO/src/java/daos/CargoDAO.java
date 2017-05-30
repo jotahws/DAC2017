@@ -22,7 +22,7 @@ import java.util.List;
 public class CargoDAO {
 
     private final String insertCargo = "INSERT INTO cargo (nome, salario, requisitos, horasminimas, descontoimposto) VALUES (?,?,?,?,?)";
-    private final String listCargos = "SELECT * FROM cargo";
+    private final String listCargos = "SELECT * FROM cargo ORDER BY nome";
     private final String selectCargoID = "SELECT * FROM cargo WHERE id=?";
     private final String updateCargo = "UPDATE Cargo SET nome=?, salario=?, requisitos=?, horasMinimas=?, descontoImposto=? WHERE id=?;";
     private final String deleteCargo = "DELETE FROM cargo WHERE id=?;";

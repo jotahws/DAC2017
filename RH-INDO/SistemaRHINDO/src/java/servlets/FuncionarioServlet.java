@@ -14,6 +14,7 @@ import beans.Funcionario;
 import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,18 +82,20 @@ public class FuncionarioServlet extends HttpServlet {
                 //criando cargo e departamento
                 Cargo objCargo = facade.buscaCargoPorID(Integer.parseInt(cargo));
                 Departamento departamento = facade.buscaDeptoPorID(Integer.parseInt(depto));
-                //criando funcionario
+                //criando funcionario                
                 Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, objCargo, departamento, perfilFunc, senha);
+                funcionario.setSenha(funcionario.criptografa(senha));
                 if ("register".equals(action)) {
-                    facade.insereFuncionario(funcionario);
+                    facade.insereFuncionario(funcionario);                    
                 } else {
                     idFunc = request.getParameter("idFunc");
                     funcionario.setId(Integer.parseInt(idFunc));
                     facade.editarFuncionario(funcionario);
                     status = "successEdit";
-                    action = "listaFuncionarios";
+                    action = "listaFuncionarios";                    
                 }
-            } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException ex) {
+            } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException | NoSuchAlgorithmException ex) {
+                
                 status = "error";
             }
             if ("register".equals(action)) {

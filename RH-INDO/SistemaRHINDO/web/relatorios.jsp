@@ -35,11 +35,76 @@
                                     <h1 class="col-md-10">Relatórios</h1>
                                 </div>
                             </div>
-                            <!-- Row do cadastro: -->
+                            <!-- Row do relatório: -->
                             <div class="row row-lista-corpo">
                                 <!-- corpo da página -->
-                                <div class="col-md-12 corpo">
-                                    <legend>Lista de Relatórios</legend>
+                                <div class="col-md-12 corpo corpo-relatorio">
+                                    <!-- Primeiro relatório -->
+                                    <div class="corpo-relatorio">
+                                        <legend>Lista de todos os Funcionários da empresa</legend>
+                                        <div class="form-group col-md-2">
+                                            <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-user"></span> Gerar Relatório</a>
+                                        </div>                                    </div >
+                                    <!-- Segundo relatório -->
+                                    <div class="corpo-relatorio">
+                                        <legend>Relatório de horas trabalhadas</legend>  
+                                        <form>
+                                            <div class="form-group col-md-4">
+                                                <label for="depto">Departamento</label>
+                                                <select class="form-control" id="depto" name="depto">
+                                                    <jsp:useBean id="depto" class="beans.Departamento"/>
+                                                    <c:set var="lista" value="${deptos}"/>
+                                                    <c:forEach var="item" items="${lista}">
+                                                        <option value="${item.id}" <c:if test="${func.departamento.nome == item.nome}">selected</c:if> >
+                                                            <c:out value="${item.nome}"/>
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="depto">Mês</label>
+                                                <select class="form-control" id="depto" name="depto">
+                                                    <option>
+                                                        Janeiro
+                                                    </option>
+                                                    <option>
+                                                        Fevereiro
+                                                    </option>
+                                                    <option>
+                                                        Março
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <label>&nbsp;</label>
+                                                <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-calendar"></span> Gerar Relatório</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- Terceiro relatório -->
+                                    <div class="corpo-relatorio">
+                                        <legend>Funcionários com horário atrasado</legend>
+                                        <form>
+                                            <div class="form-group col-md-4">
+                                                <label for="depto">Mês</label>
+                                                <select class="form-control" id="depto" name="depto">
+                                                    <option>
+                                                        Janeiro
+                                                    </option>
+                                                    <option>
+                                                        Fevereiro
+                                                    </option>
+                                                    <option>
+                                                        Março
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <label>&nbsp;</label>
+                                                <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-time"></span> Gerar Relatório</a>
+                                            </div>                                        
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -9,6 +9,7 @@ import beans.Funcionario;
 import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -49,6 +50,8 @@ public class LoginServlet extends HttpServlet {
             String senha = request.getParameter("senha");
 
             try {
+                Funcionario funcionario = new Funcionario();
+                senha = funcionario.criptografa(senha);
                 Funcionario func = facade.verificaLogin(login, senha);
 
                 HttpSession session = request.getSession();
@@ -73,6 +76,10 @@ public class LoginServlet extends HttpServlet {
             } catch (NullPointerException ex) {
                 try (PrintWriter out = response.getWriter()) {
                     out.println("<h1>DADOS INVÁLIDOS</h1>");
+                }
+            } catch (NoSuchAlgorithmException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println("<h1>No such algorithm");
                 }
             }
         } else if ("logout".equals(action)) {

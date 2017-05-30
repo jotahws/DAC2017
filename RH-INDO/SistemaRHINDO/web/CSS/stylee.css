@@ -48,6 +48,10 @@ and open the template in the editor.
     background-color: #f8f8f8;
 }
 
+.corpo-relatorio{
+    padding: 20px;
+}
+
 .corpo legend h2 {
     padding-top: 10px;
 }
@@ -70,7 +74,7 @@ textarea {
 
 .gi-5x{
     font-size: 4em;
-    
+
 }
 
 .unselectable {

@@ -66,8 +66,12 @@ ALTER TABLE `sistema_rhindo`.`Cargo`
 CHANGE COLUMN `horasMinimas` `horasMinimas` INT NULL DEFAULT NULL ,
 CHANGE COLUMN `descontoImposto` `descontoImposto` DOUBLE NULL DEFAULT NULL ,
 CHANGE COLUMN `requisitos` `requisitos` VARCHAR(1000) NULL DEFAULT NULL;
+
 ALTER TABLE `sistema_rhindo`.`Funcionario`
 ADD COLUMN `perfil` VARCHAR(45) NULL AFTER `celular`;
+
+ALTER TABLE `sistema_rhindo`.`Funcionario` 
+CHANGE COLUMN `senha` `senha` VARCHAR(100) NULL DEFAULT NULL ;
 
 ALTER TABLE `sistema_rhindo`.`Endereco` 
 CHANGE COLUMN `numero` `numero` INT NULL DEFAULT NULL ;

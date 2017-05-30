@@ -28,10 +28,10 @@ import java.util.List;
 public class FuncionarioDAO {
 
     private final String insertFunc = "insert into Funcionario (idCargo, idDepartamento, idEndereco, nome, cpf, rg, email, celular, perfil, senha) values(?,?,?,?,?,?,?,?,?,?)";
-    private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id;";
+    private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id ORDER BY f.nome;";
     private final String verificaLogin = "SELECT email, perfil, nome FROM funcionario WHERE email=? AND senha=?";
     private final String selectFuncID = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id AND f.id=?";
-    private final String updateFunc = "UPDATE Funcionario SET idCargo=?, idDepartamento=?, idEndereco=?, nome=?, cpf=?, rg=?, email=?, celular=?, perfil=?, senha=? WHERE id=?;";
+    private final String updateFunc = "UPDATE Funcionario SET idCargo=?, idDepartamento=?, idEndereco=?, nome=?, cpf=?, rg=?, email=?, celular=?, perfil=? WHERE id=?;";
     private final String deleteFunc = "DELETE FROM Funcionario WHERE id=?";
     
     private Connection con = null;
@@ -83,6 +83,7 @@ public class FuncionarioDAO {
                 String celular = rs.getString("f.celular");
                 String perfil = rs.getString("f.perfil");
                 String senha = rs.getString("f.senha");
+                //senha = Funcionario.descriptografa(senha);
                 //Endereco
                 int idEnd = rs.getInt("e.id");
                 String rua = rs.getString("e.rua");
@@ -232,8 +233,8 @@ public class FuncionarioDAO {
             stmt.setString(7, funcionario.getEmail());
             stmt.setString(8, funcionario.getCelular());
             stmt.setString(9, funcionario.getPerfil());
-            stmt.setString(10, funcionario.getSenha());
-            stmt.setInt(11, funcionario.getId());
+            //stmt.setString(10, funcionario.getSenha());
+            stmt.setInt(10, funcionario.getId());
             stmt.executeUpdate();
         } finally {
             try {

@@ -61,18 +61,18 @@
                                                     <label for="nome">Nome:</label>
                                                     <input type="text" class="form-control" id="nome" name="nome" value="${func.nome}">
                                                 </div>
-                                                <div class="form-group col-md-2">
+                                                <div class="form-group col-md-4">
                                                     <label for="cpf">CPF:</label>
                                                     <input type="text" class="form-control" id="cpf" name="cpf" value="${func.cpf}">
                                                 </div>
-                                                <div class="form-group col-md-3">
+                                                <div class="form-group col-md-4">
                                                     <label for="rg">RG:</label>
                                                     <input type="text" class="form-control" id="rg" name="rg" value="${func.rg}">
                                                 </div>
-                                                <div class="form-group col-md-3">
-                                                    <label for="senha">Senha:</label>
-                                                    <input type="password" class="form-control" id="senha" name="senha" value="${func.senha}">
-                                                </div>
+                                               <!-- <div class="form-group col-md-3"> 
+                                                    <label for="senha">Senha:</label> -->
+                                                    <input type="hidden" class="form-control" id="senha" name="senha" value="${func.senha}">
+                                               <!-- </div> -->
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-2">

@@ -22,7 +22,7 @@ import java.util.List;
 public class DepartamentoDAO {
 
     private final String insertDepto = "INSERT INTO Departamento (nome, localizacao) VALUES (?,?)";
-    private final String listDeptos = "SELECT * FROM Departamento";
+    private final String listDeptos = "SELECT * FROM Departamento ORDER BY nome";
     private final String selectDeptoID = "SELECT * FROM Departamento WHERE id=?";
     private final String updateDepto = "UPDATE Departamento SET nome=?, localizacao=? WHERE id=?;";
     private final String deleteDepto = "DELETE FROM DEPARTAMENTO WHERE id=?;";
