@@ -34,13 +34,14 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="${pageContext.request.contextPath}/atividades/indexG.jsp">Atividades</a></li>
                                 <li><a href="${pageContext.request.contextPath}/relatorios.jsp">Relatórios</a></li>                        
-                                <li><a href="${pageContext.request.contextPath}/atividades/aprovarCorrecao.jsp">Correção Pendente</a></li>
+                                <li><a href="${pageContext.request.contextPath}/atividades/aprovarCorrecao.jsp">Aprovar Correção</a></li>
                             </ul>
                         </c:when>
                         <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO') || (funcionarioLogado.perfil == 'GERENTE')}">
                             <ul class="nav navbar-nav">
+                                <li><a href="${pageContext.request.contextPath}/atividades/listaAtividades.jsp">Home</a></li>
+                                <li><a href="${pageContext.request.contextPath}/atividades/historicoAtividades.jsp">Lista de Atividades</a></li>
                                 <li><a href="${pageContext.request.contextPath}/atividades/atividadesPendentes.jsp">Atividades pendentes</a></li>
-                                <li><a href="${pageContext.request.contextPath}/atividades/listaAtividades.jsp">Lista de Atividades</a></li>
                             </ul>
                         </c:when>
                     </c:choose>

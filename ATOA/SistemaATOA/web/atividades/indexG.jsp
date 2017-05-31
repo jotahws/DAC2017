@@ -61,16 +61,14 @@
                                     <fieldset>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active" id="">
-                                                <h1 class="text-center cor-disabled">Selecione uma atividade</h1>
+                                                <h1 class="unselectable text-center cor-disabled">Selecione uma atividade</h1>
                                                 <h1 class="text-center"><span class="glyphicon glyphicon-hand-left cor-disabled gi-5x"></span></h1>
                                             </div>
                                             <c:forEach var="item" items="${lista}">
                                                 <div role="tabpanel" class="tab-pane fade" id="${item.id}">
                                                     <legend><h2>${item.nome}</h2></legend>
-                                                    <p class="col-md-6">Tipo: ${item.tio}</p>                                                    
+                                                    <p class="col-md-6">Tipo: ${item.tipo}</p>                                                    
                                                     <p class="col-md-6">Departamento: ${item.departamento}</p>
-
-
                                                 </div>
                                             </c:forEach>
                                             <div class="panel panel-default">
@@ -86,16 +84,16 @@
                                                         <th class=""></th>
                                                     </tr>
                                                     <tr>
-                                                        <td class="tg-031e">Mauricio</td>
-                                                        <td class="tg-031e">hj, 12;00</td>
+                                                        <td class="tg-031e">Mauricio Araujo da Silva Pinto</td>
+                                                        <td class="tg-031e">Hoje, 12:17</td>
                                                         <td class="tg-031e">Desenvolvedor</td>
-                                                        <td class="tg-031e">Botão "Fechar Atividade"</td>
+                                                        <td class="tg-031e"><a class="btn btn-primary">Fechar atividade</a></td>
                                                     </tr>                                                    
                                                 </table>
                                             </div>
                                             <div class="text">         
                                                 <a class="btn btn-primary">Encerrar Atividades</a>
-                                                <a class="btn btn-success">Editar Tipo</a>
+                                                <a href="editar.jsp" class="btn btn-success">Editar Tipo</a>
                                                 <a class="btn btn-danger">Excluir Tipo</a>
                                             </div>
                                         </div>

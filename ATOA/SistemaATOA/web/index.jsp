@@ -25,10 +25,10 @@
             <c:otherwise>
                 <c:choose>
                     <c:when test="${(funcionarioLogado.perfil == 'GERENTE') || (funcionarioLogado.perfil == 'FUNCIONARIO')}">
-                        <c:redirect url="/relatoriosF.jsp"/>
+                        <c:redirect url="atividades/listaAtividades.jsp"/>
                     </c:when>
                     <c:when test="${(funcionarioLogado.perfil == 'GERENTE-RH')}">
-                        <c:redirect url="CarregaListaFuncServlet?action=listaFuncionarios"/>
+                        <c:redirect url="atividades/indexG.jsp"/>
                     </c:when>
                     <c:otherwise> 
                         <div class="jumbotron">

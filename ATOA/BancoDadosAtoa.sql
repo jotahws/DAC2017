@@ -32,7 +32,7 @@ create table FuncionarioAtividade(
 create table TipoAtividade(
 	id int not null auto_increment,
     idDepartamento int,
-    tipoAtividade varchar(50),
+    nome varchar(50),
     primary key(id),
     foreign key(idDepartamento) references Departamento(id)
 );
