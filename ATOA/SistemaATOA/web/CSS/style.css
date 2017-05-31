@@ -87,3 +87,8 @@ textarea {
     -moz-user-select: none;
     -ms-user-select: none;
 }
+
+.relatorio-dep{
+    border-left: 1px solid #ddd;
+}
+

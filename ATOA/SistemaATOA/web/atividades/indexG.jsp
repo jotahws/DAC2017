@@ -37,7 +37,7 @@
                                 <div class="col-md-8 titulo">
                                     <h1 class="col-md-10">Atividade</h1>
                                     <div class="text-right">
-                                        <a href="cadastrar.jsp" class="btn btn-info col-md-2">
+                                        <a href="${pageContext.request.contextPath}/ListaDepartamentosServlet?action=register" class="btn btn-info col-md-2">
                                             Novo Tipo
                                         </a>
                                     </div>

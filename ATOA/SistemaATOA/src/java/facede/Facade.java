@@ -5,10 +5,19 @@
  */
 package facede;
 
+import beans.TipoAtividade;
+import daos.TipoAtividadeDAO;
+import java.sql.SQLException;
+
 /**
  *
  * @author MauMau
  */
 public class Facade {
+
+    public void insereTipo(TipoAtividade tipoAtv) throws ClassNotFoundException, SQLException {
+        TipoAtividadeDAO dao = new TipoAtividadeDAO();
+        dao.inserirTipo(tipoAtv);
+    }
     
 }

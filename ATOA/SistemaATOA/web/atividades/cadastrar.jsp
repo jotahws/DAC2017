@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-md-12 corpo">
                                 <fieldset>
-                                    <form method="POST" action="${pageContext.request.contextPath}/" class="cadastro">
+                                    <form method="POST" action="${pageContext.request.contextPath}/TipoAtividadeServlet?action=register" class="cadastro">
                                         <div class="row">
                                             <legend>Dados do Tipo</legend>
                                             <div class="form-group col-md-8">
@@ -43,15 +43,15 @@
                                             <div class="form-group col-md-4">
                                                 <label for="departamento">Departamento:</label>
                                                 <select class="form-control" id="departamento" name="departamento" >
-                                                    <option>
-                                                        Desenvolvimento
-                                                    </option>
+                                                    <jsp:useBean id="depto" class="beans.Departamento"/>
+                                                    <c:set var="lista" value="${deptos}"/>
+                                                    <c:forEach var="item" items="${lista}">
+                                                        <option value="${item.id}">
+                                                            <c:out value="${item.nome}"/>
+                                                        </option>
+                                                    </c:forEach>
                                                 </select>
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label for="descricao">Descrição:</label>
-                                                <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
-                                            </div>                                            
+                                            </div>                                        
                                         </div>
                                         <div class="text-right">
                                             <button type="submit" id="botao" class="btn btn-primary">Cadastrar</button>  

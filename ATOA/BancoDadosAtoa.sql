@@ -25,7 +25,6 @@ create table FuncionarioAtividade(
     inicio date,
     fim date,
     primary key(id),
-    foreign key(idFuncionario) references Funcionario(id),
     foreign key(idAtividade) references TipoAtividade(id)
 );
 
@@ -33,11 +32,20 @@ create table TipoAtividade(
 	id int not null auto_increment,
     idDepartamento int,
     nome varchar(50),
-    primary key(id),
-    foreign key(idDepartamento) references Departamento(id)
+    primary key(id)
 );
 
 create table Departamento(
 	id int not null auto_increment,
     primary key(id)
 );
+
+-- drop table FuncionarioAtividade;
+-- drop table Funcionario;
+-- drop table departamento;
+-- drop table tipoatividade;
+-- drop table EdicaoAtividade;
+
+
+select * from TipoAtividade;
+INSERT INTO TipoAtividade (nome, idDepartamento) VALUES ("nome",1);

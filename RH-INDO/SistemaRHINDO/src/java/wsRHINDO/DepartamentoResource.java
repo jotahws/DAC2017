@@ -5,59 +5,57 @@
  */
 package wsRHINDO;
 
-import beans.Funcionario;
+import beans.Departamento;
 import facade.Facade;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
-import static javax.ws.rs.HttpMethod.POST;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * REST Web Service
  *
- * @author MauMau
+ * @author JotaWind
  */
-@Path("login")
-public class LoginResource {
+@Path("departamento")
+public class DepartamentoResource {
 
     @Context
     private UriInfo context;
 
     /**
-     * Creates a new instance of LoginResource
+     * Creates a new instance of DepartamentoResource
      */
-    public LoginResource() {
+    public DepartamentoResource() {
     }
 
     /**
-     * Retrieves representation of an instance of wsRHINDO.LoginResource
-     *
-     * @param f
+     * Retrieves representation of an instance of wsRHINDO.DepartamentoResource
      * @return an instance of java.lang.String
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.sql.SQLException
      */
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Funcionario loginVerifica(Funcionario f) throws ClassNotFoundException, SQLException {
+    public Response getDepto() throws ClassNotFoundException, SQLException {
         Facade facade = new Facade();
-        f = facade.verificaLogin(f.getEmail(), f.getSenha());
-        return f;
+        List<Departamento> deptos = facade.carregaListaDeptos();
+        GenericEntity<List<Departamento>> lista = new GenericEntity<List<Departamento>>(deptos) {
+        };
+        return Response
+                .ok()
+                .entity(lista)
+                .build();
     }
 
     /**
-     * PUT method for updating or creating an instance of LoginResource
-     *
+     * PUT method for updating or creating an instance of DepartamentoResource
      * @param content representation for the resource
      */
     @PUT
