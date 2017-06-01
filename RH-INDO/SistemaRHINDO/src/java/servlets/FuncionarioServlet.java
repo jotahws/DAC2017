@@ -55,14 +55,22 @@ public class FuncionarioServlet extends HttpServlet {
                 //Cadastrar OU Editar
                 String nome = request.getParameter("nome");
                 String cpf = request.getParameter("cpf");
+                cpf = cpf.replace("-", "");
+                cpf = cpf.replace(".", "");
                 String rg = request.getParameter("rg");
+                rg = rg.replace("-", "");
+                rg = rg.replace(".", "");
                 String senha = request.getParameter("senha");
                 String celular = request.getParameter("celular");
+                celular = celular.replace("(", "");
+                celular = celular.replace(")", "");
+                celular = celular.replace("-", "");
                 String email = request.getParameter("email");
                 String depto = request.getParameter("depto");
                 String cargo = request.getParameter("cargo");
                 String perfilFunc = request.getParameter("perfil");
                 String cep = request.getParameter("cep");
+                cep = cep.replace("-", "");
                 String rua = request.getParameter("rua");
                 String numero = request.getParameter("numero");
                 String bairro = request.getParameter("bairro");
@@ -86,16 +94,18 @@ public class FuncionarioServlet extends HttpServlet {
                 Funcionario funcionario = new Funcionario(nome, rg, cpf, celular, email, endereco, objCargo, departamento, perfilFunc, senha);
                 funcionario.setSenha(funcionario.criptografa(senha));
                 if ("register".equals(action)) {
-                    facade.insereFuncionario(funcionario);                    
+                    facade.insereFuncionario(funcionario);
                 } else {
                     idFunc = request.getParameter("idFunc");
                     funcionario.setId(Integer.parseInt(idFunc));
                     facade.editarFuncionario(funcionario);
                     status = "successEdit";
-                    action = "listaFuncionarios";                    
+                    action = "listaFuncionarios";
                 }
             } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException | NoSuchAlgorithmException ex) {
-                
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(ex.getMessage());
+                }
                 status = "error";
             }
             if ("register".equals(action)) {
@@ -157,3 +167,5 @@ public class FuncionarioServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+
+//         try (PrintWriter out = response.getWriter()) {

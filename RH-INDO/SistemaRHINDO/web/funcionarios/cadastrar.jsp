@@ -59,29 +59,29 @@
                                                 <legend>Geral</legend>
                                                 <div class="form-group col-md-4">
                                                     <label for="nome">Nome:</label>
-                                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Maria dos Santos">
+                                                    <input type="text" required class="form-control" id="nome" name="nome" placeholder="Maria dos Santos">
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <label for="cpf">CPF:</label>
-                                                    <input type="text" class="form-control" id="cpf" name="cpf">
+                                                    <input type="text" required class="form-control" id="cpf" name="cpf">
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label for="rg">RG:</label>
-                                                    <input type="text" class="form-control" id="rg" name="rg">
+                                                    <input type="text" required class="form-control" id="rg" name="rg">
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label for="senha">Senha:</label>
-                                                    <input type="password" class="form-control" id="senha" name="senha">
+                                                    <input type="password" required class="form-control" id="senha" name="senha">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-md-2">
                                                     <label for="celular">Celular</label>
-                                                    <input type="text" class="form-control" id="celular" name="celular">
+                                                    <input type="text" required class="form-control" id="celular" name="celular">
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label for="email">Email</label>
-                                                    <input type="email" class="form-control" id="email" name="email" placeholder="joe@exemplo.com">
+                                                    <input type="email" required class="form-control" id="email" name="email" placeholder="joe@exemplo.com">
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <label for="depto">Departamento</label>
@@ -150,13 +150,9 @@
                                                         </c:forEach>
                                                     </select>
                                                 </div>
-                                                <div class="form-group col-md-3">
-                                                    <label for="estado">Estado</label>
-                                                    <input type="text" class="form-control" disabled id="estado" name="estado" value=""/>
-                                                </div>
                                             </div>
                                             <div class="text-right">
-                                                <button type="submit" class="btn btn-primary form-group">Cadastrar</button>  
+                                                <button type="submit" id="btnSubmitFunc" class="btn btn-primary form-group">Cadastrar</button>  
                                             </div>
                                         </form>
                                     </fieldset>
