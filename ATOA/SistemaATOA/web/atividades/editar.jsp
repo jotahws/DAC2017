@@ -27,21 +27,30 @@
                     </c:when>
                     <c:otherwise> 
                         <jsp:useBean id="tipoAtv" class="beans.TipoAtividade"/>
-                        
+
                         <div class="container">
                             <div class="row row-busca-titulo">
                                 <div class="col-md-8 titulo">
                                     <h1 class="col-md-10">Editar Tipo de Atividade</h1>
                                 </div>
                             </div>
+                            <c:choose>
+                                <c:when test="${(param.status == 'error')}">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <p> <strong>Ops!</strong> Ocorreu um erro ao cadastrar o Tipo. Tente novamente.</p>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                             <div class="col-md-12 corpo">
                                 <fieldset>
-                                    <form method="POST" action="${pageContext.request.contextPath}/" class="cadastro">
+                                    <form method="POST" action="${pageContext.request.contextPath}/TipoAtividadeServlet?action=edit" class="cadastro">
                                         <div class="row">
                                             <legend>Dados do Tipo</legend>
                                             <div class="form-group col-md-8">
                                                 <label for="nome">Nome do tipo de atividade:</label>
                                                 <input type="text" class="form-control" id="nome" name="nome" value="${tipo.nome}">
+                                                <input type="hidden" name="id" value="${tipo.id}"/>
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="departamento">Departamento:</label>
@@ -57,7 +66,8 @@
                                             </div>                                        
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" id="botao" class="btn btn-primary">Cadastrar</button>  
+                                            <a href="${pageContext.request.contextPath}/TipoAtividadeServlet?action=delete&id=${tipo.id}" class="btn btn-danger">Excluir Tipo</a>
+                                            <button type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
                                         </div>
                                     </form>
                                 </fieldset>

@@ -31,6 +31,20 @@
                                     <h1 class="col-md-10">Cadastrar Tipo de Atividade</h1>
                                 </div>
                             </div>
+                            <c:choose>
+                                <c:when test="${(param.status == 'success')}">
+                                    <div class="alert alert-success alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <p> <strong>Successo!</strong> O novo tipo de atividade foi cadastrado. <a href="ListaAtividadeServlet?action=ListaAtividades">Lista de Atividades</a></p>
+                                    </div>
+                                </c:when>
+                                <c:when test="${(param.status == 'error')}">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <p> <strong>Ops!</strong> Ocorreu um erro ao cadastrar o Tipo. Tente novamente.</p>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                             <div class="col-md-12 corpo">
                                 <fieldset>
                                     <form method="POST" action="${pageContext.request.contextPath}/TipoAtividadeServlet?action=register" class="cadastro">

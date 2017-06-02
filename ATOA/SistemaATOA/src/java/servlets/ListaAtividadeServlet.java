@@ -42,31 +42,33 @@ public class ListaAtividadeServlet extends HttpServlet {
 
         String action = request.getParameter("action");
         Facade facade = new Facade();
-        String status = "success";
+        String status = "";
 
         if ("ListaAtividades".equals(action)) {
+            String statusEdit = "";
             try {
                 List<TipoAtividade> tipos = facade.listaAtividades();
                 request.setAttribute("tipos", tipos);
-
+                statusEdit = request.getParameter("status");
             } catch (Exception ex) {
                 status = "error";
             }
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/indexG.jsp?status=" + status);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/indexG.jsp?status=" + statusEdit);
             rd.forward(request, response);
 
         } else if ("edit".equals(action)) {
+            String statusEdit = "";
             String idTipo = request.getParameter("id");
             try {
                 TipoAtividade tipo = facade.getTipoPorID(Integer.parseInt(idTipo));
                 request.setAttribute("tipo", tipo);
-                
+                statusEdit = request.getParameter("status");
                 List<Departamento> deptos = facade.listaDeptos();
                 request.setAttribute("deptos", deptos);
             } catch (Exception ex) {
                 status = "error";
             }
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/editar.jsp?status=" + status);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/editar.jsp?status=" + statusEdit);
             rd.forward(request, response);
         }
 

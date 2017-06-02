@@ -36,7 +36,7 @@
                                 <div class="col-md-4"></div>
 
                                 <div class="col-md-8 titulo">
-                                    <h1 class="col-md-10">Atividade</h1>
+                                    <h1 class="col-md-10">Atividades</h1>
                                     <div class="text-right">
                                         <a href="${pageContext.request.contextPath}/ListaDepartamentosServlet?action=register" class="btn btn-info col-md-2">
                                             Novo Tipo
@@ -60,6 +60,22 @@
                                     </div>
                                 </div>
                                 <!-- corpo da página -->
+                                <div class="col-md-8">
+                                    <c:choose>
+                                        <c:when test="${(param.status == 'successEdit')}">
+                                            <div class="alert alert-success alert-dismissable">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <p> <strong>Successo!</strong> O novo tipo de atividade foi Editado.</p>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${(param.status == 'successDelete')}">
+                                            <div class="alert alert-warning alert-dismissable">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <p> <span class="glyphicon glyphicon-trash"></span> O tipo de atividade foi <strong>excluído</strong> com sucesso.</p>
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
+                                </div>
                                 <div class="corpo col-md-8 corpo">
                                     <fieldset>
                                         <div class="tab-content">
@@ -86,14 +102,13 @@
                                                                 <td class="tg-031e">Mauricio Araujo da Silva Pinto</td>
                                                                 <td class="tg-031e">Hoje, 12:17</td>
                                                                 <td class="tg-031e">Desenvolvedor</td>
-                                                                <td class="tg-031e"><a class="btn btn-primary">Fechar atividade</a></td>
+                                                                <td class="tg-031e"><a class="btn btn-primary">Encerrar atividade</a></td>
                                                             </tr>                                                    
                                                         </table>
                                                     </div>
-                                                    <div class="text">         
-                                                        <a class="btn btn-primary">Encerrar Atividades</a>
+                                                    <div class="text-right">         
+                                                        <a class="btn btn-primary">Encerrar tudo</a>
                                                         <a href="${pageContext.request.contextPath}/ListaAtividadeServlet?action=edit&id=${item.id}" class="btn btn-success">Editar Tipo</a>
-                                                        <a class="btn btn-danger">Excluir Tipo</a>
                                                     </div>
                                                 </div>
                                             </c:forEach>

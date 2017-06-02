@@ -44,7 +44,7 @@ public class Facade {
 
     public Departamento getDeptoPorID(int idDepto) {
         Client client = ClientBuilder.newClient();
-        Departamento retorno = client.target("http://localhost:8084/SistemaRHINDO/webresources/departamento/"+idDepto)
+        Departamento retorno = client.target("http://localhost:8084/SistemaRHINDO/webresources/departamento/" + idDepto)
                 .request(MediaType.APPLICATION_JSON)
                 .get(Departamento.class);
         return retorno;
@@ -53,6 +53,16 @@ public class Facade {
     public TipoAtividade getTipoPorID(int idTipo) throws ClassNotFoundException, SQLException {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
         return dao.buscaTipoPorID(idTipo);
+    }
+
+    public void alteraTipo(TipoAtividade tipoAtv) throws ClassNotFoundException, SQLException {
+        TipoAtividadeDAO dao = new TipoAtividadeDAO();
+        dao.alterarTipo(tipoAtv);
+    }
+
+    public void deletaTipo(int id) throws ClassNotFoundException, SQLException {
+        TipoAtividadeDAO dao = new TipoAtividadeDAO();
+        dao.deletarTipo(id);
     }
 
 }

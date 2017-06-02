@@ -25,6 +25,8 @@ import java.util.List;
 public class TipoAtividadeDAO {
 
     private final String insertTipo = "INSERT INTO TipoAtividade (nome, idDepartamento) VALUES (?,?)";
+    private final String updateTipo = "UPDATE TipoAtividade SET nome=?, idDepartamento=? WHERE id=?;";
+    private final String deleteTipo = "DELETE FROM TipoAtividade WHERE id=?;";
     private final String listaTipos = "SELECT * FROM TipoAtividade ORDER BY nome";
     private final String buscaTipoID = "SELECT * FROM TipoAtividade WHERE id=?";
 
@@ -108,5 +110,39 @@ public class TipoAtividadeDAO {
             }
         }
         return null;
+    }
+
+    public void alterarTipo(TipoAtividade tipo) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(updateTipo);
+            stmt.setString(1, tipo.getNome());
+            stmt.setInt(2, tipo.getDepartamento().getId());
+            stmt.setInt(3, tipo.getId());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void deletarTipo(int id) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(deleteTipo);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
     }
 }

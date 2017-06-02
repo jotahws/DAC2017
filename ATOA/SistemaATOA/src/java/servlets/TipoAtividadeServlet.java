@@ -38,29 +38,54 @@ public class TipoAtividadeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        
+        String status = "";
+
         if ("register".equals(action)) {
             try {
                 String nome = request.getParameter("nome");
                 String idDepto = request.getParameter("departamento");
-                
+
                 Departamento departamento = new Departamento();
                 departamento.setId(Integer.parseInt(idDepto));
-                
+
                 TipoAtividade tipoAtv = new TipoAtividade(nome, departamento);
                 Facade facade = new Facade();
                 facade.insereTipo(tipoAtv);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(TipoAtividadeServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(TipoAtividadeServlet.class.getName()).log(Level.SEVERE, null, ex);
+                status = "success";
+            } catch (Exception ex) {
+                status = "error";
             }
-            response.sendRedirect("ListaDepartamentosServlet?action=register");
-            
+            response.sendRedirect("ListaDepartamentosServlet?action=register&status=" + status);
         } else if ("edit".equals(action)) {
-            
+            String id = request.getParameter("id");
+            try {
+                String nome = request.getParameter("nome");
+                String idDepto = request.getParameter("departamento");
+                Departamento departamento = new Departamento();
+                departamento.setId(Integer.parseInt(idDepto));
+                TipoAtividade tipoAtv = new TipoAtividade(nome, departamento);
+                tipoAtv.setId(Integer.parseInt(id));
+                Facade facade = new Facade();
+                facade.alteraTipo(tipoAtv);
+                status = "successEdit";
+                response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades&status=" + status);
+            } catch (Exception ex) {
+                status = "error";
+                response.sendRedirect("ListaAtividadeServlet?action=edit&id=" + id + "&status=" + status);
+            }
+        } else if ("delete".equals(action)) {
+            String id = request.getParameter("id");
+            try {
+                Facade facade = new Facade();
+                facade.deletaTipo(Integer.parseInt(id));
+                status = "successDelete";
+                response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades&status=" + status);
+            } catch (Exception ex) {
+                status = "error";
+                response.sendRedirect("TipoAtividadeServlet?action=delete&id=" + id + "&status=" + status);
+            }
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -28,7 +28,7 @@
                         <c:redirect url="atividades/listaAtividades.jsp"/>
                     </c:when>
                     <c:when test="${(funcionarioLogado.perfil == 'GERENTE-RH')}">
-                        <c:redirect url="atividades/indexG.jsp"/>
+                        <c:redirect url="ListaAtividadeServlet?action=ListaAtividades"/>
                     </c:when>
                     <c:otherwise> 
                         <div class="jumbotron">
