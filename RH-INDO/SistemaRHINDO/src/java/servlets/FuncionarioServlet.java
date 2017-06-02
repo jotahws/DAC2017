@@ -64,6 +64,7 @@ public class FuncionarioServlet extends HttpServlet {
                 String celular = request.getParameter("celular");
                 celular = celular.replace("(", "");
                 celular = celular.replace(")", "");
+                celular = celular.replace(" ", "");
                 celular = celular.replace("-", "");
                 String email = request.getParameter("email");
                 String depto = request.getParameter("depto");
@@ -103,9 +104,6 @@ public class FuncionarioServlet extends HttpServlet {
                     action = "listaFuncionarios";
                 }
             } catch (ClassNotFoundException | NumberFormatException | SQLException | NullPointerException | NoSuchAlgorithmException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(ex.getMessage());
-                }
                 status = "error";
             }
             if ("register".equals(action)) {
