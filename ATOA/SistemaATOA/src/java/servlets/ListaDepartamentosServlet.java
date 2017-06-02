@@ -6,6 +6,7 @@
 package servlets;
 
 import beans.Departamento;
+import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -42,20 +43,18 @@ public class ListaDepartamentosServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-
+        Facade facade = new Facade();
+        
         if ("register".equals(action)) {
 
-            Client client = ClientBuilder.newClient();
-            Response res = client.target("http://localhost:8084/SistemaRHINDO/webresources/departamento")
-                    .request(MediaType.APPLICATION_JSON).get();
-
-            List<Departamento> deptos = res.readEntity(new GenericType<List<Departamento>>() {
-            });
+            List<Departamento> deptos = facade.listaDeptos();
 
             request.setAttribute("deptos", deptos);
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/cadastrar.jsp");
             rd.forward(request, response);
 
+        } else if ("listaAtividades".equals(action)) {
+            
         }
     }
 

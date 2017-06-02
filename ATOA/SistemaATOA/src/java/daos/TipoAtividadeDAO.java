@@ -5,13 +5,18 @@
  */
 package daos;
 
+import beans.Departamento;
+import beans.TipoAtividade;
 import beans.TipoAtividade;
 import conecao.ConnectionFactory;
+import facede.Facade;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -20,6 +25,8 @@ import java.sql.Statement;
 public class TipoAtividadeDAO {
 
     private final String insertTipo = "INSERT INTO TipoAtividade (nome, idDepartamento) VALUES (?,?)";
+    private final String listaTipos = "SELECT * FROM TipoAtividade ORDER BY nome";
+    private final String buscaTipoID = "SELECT * FROM TipoAtividade WHERE id=?";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -40,5 +47,66 @@ public class TipoAtividadeDAO {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }
         }
+    }
+
+    public List<TipoAtividade> listaTipos() throws ClassNotFoundException, SQLException {
+
+        try {
+            List<TipoAtividade> lista = new ArrayList();
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(listaTipos);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                int idDepto = rs.getInt("idDepartamento");
+                Facade facade = new Facade();
+                Departamento depto = facade.getDeptoPorID(idDepto);
+                TipoAtividade tipo = new TipoAtividade();
+                tipo.setId(id);
+                tipo.setNome(nome);
+                tipo.setDepartamento(depto);
+                lista.add(tipo);
+            }
+            return lista;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public TipoAtividade buscaTipoPorID(int idTipo) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(buscaTipoID);
+            stmt.setInt(1, idTipo);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                int idDepto = rs.getInt("idDepartamento");
+                Facade facade = new Facade();
+                Departamento depto = facade.getDeptoPorID(idDepto);
+                TipoAtividade tipo = new TipoAtividade();
+                tipo.setNome(nome);
+                tipo.setId(id);
+                tipo.setDepartamento(depto);
+                return tipo;
+            }
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+        return null;
     }
 }

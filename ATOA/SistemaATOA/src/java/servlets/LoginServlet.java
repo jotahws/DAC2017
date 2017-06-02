@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("funcionarioLogado", retorno);
 
                 if ("GERENTE-RH".equals(retorno.getPerfil())) {
-                    response.sendRedirect("atividades/indexG.jsp");
+                    response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
                 } else if (("GERENTE".equals(retorno.getPerfil())) || ("FUNCIONARIO".equals(retorno.getPerfil()))) {
                     response.sendRedirect("atividades/listaAtividades.jsp");
                 } else {

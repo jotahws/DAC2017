@@ -26,6 +26,8 @@
                         </div>
                     </c:when>
                     <c:otherwise> 
+                        <jsp:useBean id="tipoAtv" class="beans.TipoAtividade"/>
+                        
                         <div class="container">
                             <div class="row row-busca-titulo">
                                 <div class="col-md-8 titulo">
@@ -39,14 +41,18 @@
                                             <legend>Dados do Tipo</legend>
                                             <div class="form-group col-md-8">
                                                 <label for="nome">Nome do tipo de atividade:</label>
-                                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex. Atividade em back-end">
+                                                <input type="text" class="form-control" id="nome" name="nome" value="${tipo.nome}">
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="departamento">Departamento:</label>
                                                 <select class="form-control" id="departamento" name="departamento" >
-                                                    <option>
-                                                        Desenvolvimento
-                                                    </option>
+                                                    <jsp:useBean id="depto" class="beans.Departamento"/>
+                                                    <c:set var="lista" value="${deptos}"/>
+                                                    <c:forEach var="item" items="${lista}">
+                                                        <option value="${item.id}" <c:if test="${tipo.departamento.id == item.id}">selected</c:if>>
+                                                            <c:out value="${item.nome}"/>
+                                                        </option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>                                        
                                         </div>

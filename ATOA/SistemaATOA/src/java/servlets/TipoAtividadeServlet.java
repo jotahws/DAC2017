@@ -55,8 +55,9 @@ public class TipoAtividadeServlet extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(TipoAtividadeServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
             response.sendRedirect("ListaDepartamentosServlet?action=register");
+            
+        } else if ("edit".equals(action)) {
             
         }
         

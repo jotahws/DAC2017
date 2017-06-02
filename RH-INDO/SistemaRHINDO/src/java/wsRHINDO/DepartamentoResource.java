@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -53,13 +54,12 @@ public class DepartamentoResource {
                 .entity(lista)
                 .build();
     }
-
-    /**
-     * PUT method for updating or creating an instance of DepartamentoResource
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{idDepto}")
+    public Departamento getDeptoPorID(@PathParam("idDepto") int idDepto) throws ClassNotFoundException, SQLException {
+        Facade facade = new Facade();
+        return facade.buscaDeptoPorID(idDepto);
+    }    
 }
