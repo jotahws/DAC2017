@@ -156,7 +156,7 @@
                                                 </div>
                                             </div>
                                             <div class="text-right">
-                                                <button type="submit" class="btn btn-primary form-group">Cadastrar</button>  
+                                                <button id="btnSubmit" type="submit" class="btn btn-primary form-group">Cadastrar</button>  
                                             </div>
                                         </form>
                                     </fieldset>
@@ -168,7 +168,4 @@
             </c:otherwise>
         </c:choose>
     </body>
-    <script src="${pageContext.request.contextPath}/javascript/scripts.js"></script>
-    <script src="${pageContext.request.contextPath}/javascript/jquery.maskedinput.js"></script>
-
 </html>
