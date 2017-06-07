@@ -36,11 +36,6 @@
 
                                 <div class="col-md-8 titulo">
                                     <h1 class="col-md-10">Aprovar uma correção</h1>
-                                    <div class="text-right">
-                                        <a href="cadastrar.jsp" class="btn btn-info col-md-2">
-                                            Novo Tipo
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                             <!-- Row da lista de departamentos e atividades de capa departamento e corpo da pagina: -->

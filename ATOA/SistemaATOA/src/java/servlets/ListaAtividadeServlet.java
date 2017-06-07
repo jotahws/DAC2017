@@ -5,8 +5,16 @@
  */
 package servlets;
 
+import beans.Departamento;
+import beans.TipoAtividade;
+import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,8 +39,39 @@ public class ListaAtividadeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
+
+        String action = request.getParameter("action");
+        Facade facade = new Facade();
+        String status = "";
+
+        if ("ListaAtividades".equals(action)) {
+            String statusEdit = "";
+            try {
+                List<TipoAtividade> tipos = facade.listaAtividades();
+                request.setAttribute("tipos", tipos);
+                statusEdit = request.getParameter("status");
+            } catch (Exception ex) {
+                status = "error";
+            }
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/indexG.jsp?status=" + statusEdit);
+            rd.forward(request, response);
+
+        } else if ("edit".equals(action)) {
+            String statusEdit = "";
+            String idTipo = request.getParameter("id");
+            try {
+                TipoAtividade tipo = facade.getTipoPorID(Integer.parseInt(idTipo));
+                request.setAttribute("tipo", tipo);
+                statusEdit = request.getParameter("status");
+                List<Departamento> deptos = facade.listaDeptos();
+                request.setAttribute("deptos", deptos);
+            } catch (Exception ex) {
+                status = "error";
+            }
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/editar.jsp?status=" + statusEdit);
+            rd.forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

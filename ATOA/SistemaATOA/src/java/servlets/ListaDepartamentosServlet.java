@@ -5,20 +5,30 @@
  */
 package servlets;
 
+import beans.Departamento;
+import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
- * @author MauMau
+ * @author JotaWind
  */
-@WebServlet(name = "ExcluirAtividadeServlet", urlPatterns = {"/ExcluirAtividadeServlet"})
-public class ExcluirAtividadeServlet extends HttpServlet {
+@WebServlet(name = "ListaDepartamentosServlet", urlPatterns = {"/ListaDepartamentosServlet"})
+public class ListaDepartamentosServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,8 +41,21 @@ public class ExcluirAtividadeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+
+        String action = request.getParameter("action");
+        Facade facade = new Facade();
         
+        if ("register".equals(action)) {
+
+            List<Departamento> deptos = facade.listaDeptos();
+
+            request.setAttribute("deptos", deptos);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/cadastrar.jsp");
+            rd.forward(request, response);
+
+        } else if ("listaAtividades".equals(action)) {
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,3 +98,5 @@ public class ExcluirAtividadeServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+
+//        try (PrintWriter out = response.getWriter()) {

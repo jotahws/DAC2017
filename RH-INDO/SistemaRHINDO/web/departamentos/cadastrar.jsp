@@ -68,7 +68,7 @@
                                                 </div>                                
                                             </div>
                                             <div class="text-right">
-                                                <button type="submit" id="botao" class="btn btn-primary">Cadastrar</button>  
+                                                <button type="submit" id="btnSubmitDepto" class="btn btn-primary">Cadastrar</button>  
                                             </div>
                                         </form>
                                     </fieldset>

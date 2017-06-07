@@ -52,7 +52,6 @@ public class LoginResource {
     public Funcionario loginVerifica(Funcionario f) throws ClassNotFoundException, SQLException {
         Facade facade = new Facade();
         f = facade.verificaLogin(f.getEmail(), f.getSenha());
-
         return f;
     }
 

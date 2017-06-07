@@ -48,22 +48,24 @@
                                             <th>Departamento</th>
                                             <th>Status</th>
                                             <th></th>
+                                            <th></th>
                                         </tr>
                                         <tr>
                                             <td class="tg-031e">Relatórios</td>
                                             <td class="tg-031e">Recursos Humanos</td>
                                             <td class="tg-031e">Em andamento</td>
-                                            <td class="tg-031e"><a class="btn btn-default">Encerrar</a></td>
+                                            <td class="tg-031e"><a class="col-md-12 btn btn-default">Encerrar</a></td>
+                                            <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning">Corrigir Atividade</a></td>
                                         </tr>      
                                         <tr>
                                             <td class="tg-031e">Cobrança</td>
                                             <td class="tg-031e">Marketing</td>
                                             <td class="tg-031e">Encerrada</td>
-                                            <td class="tg-031e"><a class="btn btn-primary">Iniciar</a></td>
+                                            <td class="tg-031e"><a class="col-md-12 btn btn-primary">Iniciar</a></td>
+                                            <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning">Corrigir Atividade</a></td>
                                         </tr> 
                                     </table>
                                 </div>
-                                <a href="corrigir.jsp" class="btn btn-warning">Corrigir Atividade</a>
                             </div>
                             <div class="col-md-2"><h1>&nbsp;</h1></div>
                         </div>

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,9 +36,9 @@
                                 <div class="col-md-4"></div>
 
                                 <div class="col-md-8 titulo">
-                                    <h1 class="col-md-10">Atividade</h1>
+                                    <h1 class="col-md-10">Atividades</h1>
                                     <div class="text-right">
-                                        <a href="cadastrar.jsp" class="btn btn-info col-md-2">
+                                        <a href="${pageContext.request.contextPath}/ListaDepartamentosServlet?action=register" class="btn btn-info col-md-2">
                                             Novo Tipo
                                         </a>
                                     </div>
@@ -48,15 +49,33 @@
                                 <!-- lista de departamentos e atividades -->
                                 <div class="col-md-4 lista-lat">
                                     <div class="list-group">
-                                        <a class="list-group-item">Depto 1</a>
-                                        <a class="list-group-item">Depto 2</a>
-                                        <a class="list-group-item">Depto 3</a>
-                                        <a class="list-group-item">Depto 4</a>
-                                        <a class="list-group-item">Depto 5</a>
-                                        <a class="list-group-item">Depto 6</a>       
+                                        <jsp:useBean id="tipo" class="beans.TipoAtividade"/>
+                                        <jsp:useBean id="depto" class="beans.Departamento"/>
+                                        <c:set var="lista" value="${tipos}"/>
+                                        <c:forEach var="item" items="${lista}">
+                                            <a href="#${item.id}" role="tab" data-toggle="tab" class="list-group-item">
+                                                <c:out value="${item.nome}"/>
+                                            </a>
+                                        </c:forEach>
                                     </div>
                                 </div>
                                 <!-- corpo da página -->
+                                <div class="col-md-8">
+                                    <c:choose>
+                                        <c:when test="${(param.status == 'successEdit')}">
+                                            <div class="alert alert-success alert-dismissable">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <p> <strong>Successo!</strong> O novo tipo de atividade foi Editado.</p>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${(param.status == 'successDelete')}">
+                                            <div class="alert alert-warning alert-dismissable">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <p> <span class="glyphicon glyphicon-trash"></span> O tipo de atividade foi <strong>excluído</strong> com sucesso.</p>
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
+                                </div>
                                 <div class="corpo col-md-8 corpo">
                                     <fieldset>
                                         <div class="tab-content">
@@ -67,35 +86,33 @@
                                             <c:forEach var="item" items="${lista}">
                                                 <div role="tabpanel" class="tab-pane fade" id="${item.id}">
                                                     <legend><h2>${item.nome}</h2></legend>
-                                                    <p class="col-md-6">Tipo: ${item.tipo}</p>                                                    
-                                                    <p class="col-md-6">Departamento: ${item.departamento}</p>
+                                                    <h4 class="celula-corpo-tipo">Departamento: ${item.departamento.nome}</h4>
+                                                    <div class="panel panel-primary">
+                                                        <!-- Default panel contents -->
+                                                        <div class="panel-heading">Funcionários</div>
+                                                        <!-- Tabela -->
+                                                        <table class="table">
+                                                            <tr>
+                                                                <th class="">Nome</th>
+                                                                <th class="">Inicío</th>
+                                                                <th class="">Cargo</th>
+                                                                <th class=""></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tg-031e">Mauricio Araujo da Silva Pinto</td>
+                                                                <td class="tg-031e">Hoje, 12:17</td>
+                                                                <td class="tg-031e">Desenvolvedor</td>
+                                                                <td class="tg-031e"><a class="btn btn-primary">Encerrar atividade</a></td>
+                                                            </tr>                                                    
+                                                        </table>
+                                                    </div>
+                                                    <div class="text-right">         
+                                                        <a class="btn btn-primary">Encerrar tudo</a>
+                                                        <a href="${pageContext.request.contextPath}/ListaAtividadeServlet?action=edit&id=${item.id}" class="btn btn-success">Editar Tipo</a>
+                                                    </div>
                                                 </div>
                                             </c:forEach>
-                                            <div class="panel panel-default">
-                                                <!-- Default panel contents -->
-                                                <div class="panel-heading">Funcionários</div>
 
-                                                <!-- Tabela -->
-                                                <table class="table">
-                                                    <tr>
-                                                        <th class="">Nome</th>
-                                                        <th class="">Inicío</th>
-                                                        <th class="">Cargo</th>
-                                                        <th class=""></th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="tg-031e">Mauricio Araujo da Silva Pinto</td>
-                                                        <td class="tg-031e">Hoje, 12:17</td>
-                                                        <td class="tg-031e">Desenvolvedor</td>
-                                                        <td class="tg-031e"><a class="btn btn-primary">Fechar atividade</a></td>
-                                                    </tr>                                                    
-                                                </table>
-                                            </div>
-                                            <div class="text">         
-                                                <a class="btn btn-primary">Encerrar Atividades</a>
-                                                <a href="editar.jsp" class="btn btn-success">Editar Tipo</a>
-                                                <a class="btn btn-danger">Excluir Tipo</a>
-                                            </div>
                                         </div>
                                     </fieldset>
                                 </div>                                
