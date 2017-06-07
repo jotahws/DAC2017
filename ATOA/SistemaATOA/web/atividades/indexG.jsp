@@ -4,7 +4,7 @@
     Author     : MauMau
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>Voc√™ n√£o pode acessar a essa p√°gina</h2>
+                            <h2>VocÍ n„o pode acessar a essa p·gina</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
@@ -59,7 +59,7 @@
                                         </c:forEach>
                                     </div>
                                 </div>
-                                <!-- corpo da p√°gina -->
+                                <!-- corpo da p·gina -->
                                 <div class="col-md-8">
                                     <c:choose>
                                         <c:when test="${(param.status == 'successEdit')}">
@@ -71,7 +71,7 @@
                                         <c:when test="${(param.status == 'successDelete')}">
                                             <div class="alert alert-warning alert-dismissable">
                                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                                <p> <span class="glyphicon glyphicon-trash"></span> O tipo de atividade foi <strong>exclu√≠do</strong> com sucesso.</p>
+                                                <p> <span class="glyphicon glyphicon-trash"></span> O tipo de atividade foi <strong>excluÌdo</strong> com sucesso.</p>
                                             </div>
                                         </c:when>
                                     </c:choose>
@@ -89,12 +89,12 @@
                                                     <h4 class="celula-corpo-tipo">Departamento: ${item.departamento.nome}</h4>
                                                     <div class="panel panel-primary">
                                                         <!-- Default panel contents -->
-                                                        <div class="panel-heading">Funcion√°rios</div>
+                                                        <div class="panel-heading">Funcion·rios</div>
                                                         <!-- Tabela -->
                                                         <table class="table">
                                                             <tr>
                                                                 <th class="">Nome</th>
-                                                                <th class="">Inic√≠o</th>
+                                                                <th class="">InicÌo</th>
                                                                 <th class="">Cargo</th>
                                                                 <th class=""></th>
                                                             </tr>

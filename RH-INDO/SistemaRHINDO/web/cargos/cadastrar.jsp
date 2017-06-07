@@ -4,7 +4,7 @@
     Author     : JotaWind
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
                 <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                     <div class="container">
                         <h1>Acesso Negado.</h1>
-                        <h2>VocÃª nÃ£o pode acessar a essa pÃ¡gina</h2>
+                        <h2>Você não pode acessar a essa página</h2>
                     </div>
                 </c:when>
                 <c:otherwise> 
@@ -51,7 +51,7 @@
                                         </div>
                                     </c:when>
                                 </c:choose>
-                            <!-- corpo da pÃ¡gina -->
+                            <!-- corpo da página -->
                             <div class="col-md-12 corpo">
                                 <fieldset>
                                     <form method="POST" action="${pageContext.request.contextPath}/CargoServlet?action=register" class="cadastro">
@@ -62,12 +62,12 @@
                                                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex. Marketing">
                                             </div>
                                             <div class="form-group col-md-2">
-                                                <label for="salario">SalÃ¡rio:</label>
+                                                <label for="salario">Salário:</label>
                                                 <input type="number" class="form-control" id="salario" name="salario" placeholder="R$:">
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="carga">Carga de Trabalho (Horas/MÃªs):</label>
-                                                <input type="number" class="form-control" id="carga" name="carga" placeholder="Horas/MÃªs" value="">
+                                                <label for="carga">Carga de Trabalho (Horas/Mês):</label>
+                                                <input type="number" class="form-control" id="carga" name="carga" placeholder="Horas/Mês" value="">
                                             </div>
                                             <div class="form-group col-md-8">
                                                 <label for="requisitos">Requisitos:</label>

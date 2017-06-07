@@ -4,7 +4,7 @@
     Author     : JotaWind
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>VocÃª nÃ£o pode acessar a essa pÃ¡gina</h2>
+                            <h2>Você não pode acessar a essa página</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
@@ -37,7 +37,7 @@
                             </div>
                             <!-- Row do cadastro: -->
                             <div class="row row-lista-corpo">
-                                <!-- corpo da pÃ¡gina -->
+                                <!-- corpo da página -->
                                 <div class="col-md-12 corpo">
                                     <legend>Fechar folha de Pagamento</legend>
                                 </div>

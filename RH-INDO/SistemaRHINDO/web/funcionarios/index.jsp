@@ -3,14 +3,14 @@
     Created on : May 3, 2017, 5:03:55 PM
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-        <title>Funcion√°rios</title>
+        <title>Funcion·rios</title>
     </head>
     <body>
         <%@include file="../pre-fabricado/cabecalho.jsp" %>
@@ -24,7 +24,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>Voc√™ n√£o pode acessar a essa p√°gina</h2>
+                            <h2>VocÍ n„o pode acessar a essa p·gina</h2>
                         </div>
                     </c:when>
                     <c:otherwise>                    
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-8 titulo">
-                                    <h1 class="col-md-10">Funcion√°rios</h1>
+                                    <h1 class="col-md-10">Funcion·rios</h1>
                                     <div class="text-right">
                                         <a href="${pageContext.request.contextPath}/CarregaListaFuncServlet?action=register" class="btn btn-info col-md-2">Novo</a>
                                     </div>
@@ -60,18 +60,18 @@
                                         </c:forEach>
                                     </div>
                                 </div>
-                                <!-- corpo da p√°gina -->
+                                <!-- corpo da p·gina -->
                                 <c:choose>
                                     <c:when test="${(param.status == 'successDelete')}">
                                         <div class="col-md-8 alert alert-warning alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <p> <span class="glyphicon glyphicon-trash"></span> O funcion√°rio foi <strong>exclu√≠do</strong> com sucesso.</p>
+                                            <p> <span class="glyphicon glyphicon-trash"></span> O funcion·rio foi <strong>excluÌdo</strong> com sucesso.</p>
                                         </div>
                                     </c:when>
                                     <c:when test="${(param.status == 'successEdit')}">
                                         <div class="col-md-8 alert alert-success alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <p> <span class="glyphicon glyphicon-edit"></span> <strong>Successo!</strong> O funcion√°rio foi editado.</p>
+                                            <p> <span class="glyphicon glyphicon-edit"></span> <strong>Successo!</strong> O funcion·rio foi editado.</p>
                                         </div>
                                     </c:when>
                                     <c:when test="${(param.status == 'error')}">
@@ -85,7 +85,7 @@
                                     <fieldset>
                                         <div class="tab-content">
                                             <div role="tabpanel" class="tab-pane active" id="">
-                                                <h1 class="unselectable text-center cor-disabled">Selecione um funcion√°rio</h1>
+                                                <h1 class="unselectable text-center cor-disabled">Selecione um funcion·rio</h1>
                                                 <h1 class="text-center"><span class="glyphicon glyphicon-hand-left cor-disabled gi-5x"></span></h1>
                                             </div>
                                             <c:forEach var="item" items="${lista}">
@@ -95,13 +95,13 @@
                                                     <p class="col-md-6">RG: ${item.rg}</p>
                                                     <p class="col-md-6">Celular: ${item.celular}</p>
                                                     <p class="col-md-6">Email: ${item.email}</p>
-                                                    <p class="col-md-6">Perfil do Funcion√°rio: ${item.perfil}</p>
+                                                    <p class="col-md-6">Perfil do Funcion·rio: ${item.perfil}</p>
                                                     <p class="col-md-6">Departamento: ${item.departamento.nome}</p>
                                                     <p class="col-md-6">Cargo: ${item.cargo.nome}</p>
-                                                    <legend>Endere√ßo</legend>
+                                                    <legend>EndereÁo</legend>
                                                     <p class="col-md-6">CEP: ${item.endereco.cep}</p>
                                                     <p class="col-md-6">Rua: ${item.endereco.rua}</p>
-                                                    <p class="col-md-6">N√∫mero: ${item.endereco.numero}</p>
+                                                    <p class="col-md-6">N˙mero: ${item.endereco.numero}</p>
                                                     <p class="col-md-6">Bairro: ${item.endereco.bairro}</p>
                                                     <p class="col-md-6">Cidade: ${item.endereco.cidade.nome}</p>
                                                     <p class="col-md-6">Estado: ${item.endereco.cidade.estado.nome}</p>

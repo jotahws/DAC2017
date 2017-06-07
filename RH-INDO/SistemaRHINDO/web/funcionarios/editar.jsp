@@ -4,14 +4,14 @@
     Author     : JotaWind
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
-        <title>Editar Funcion√°rio - Sistema RHINDO</title>
+        <title>Editar Funcion·rio - Sistema RHINDO</title>
     </head>
     <body>
         <%@include file="../pre-fabricado/cabecalho.jsp" %>
@@ -24,7 +24,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>Voc√™ n√£o pode acessar a essa p√°gina</h2>
+                            <h2>VocÍ n„o pode acessar a essa p·gina</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
@@ -41,17 +41,17 @@
                                     <c:when test="${(param.status == 'errorID')}">
                                         <div class="alert alert-danger alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <p> <strong>Ops!</strong> Voc√™ deve selecionar um funcion√°rio para poder edit√°-lo. <a href="CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcion√°rios</a></p>
+                                            <p> <strong>Ops!</strong> VocÍ deve selecionar um funcion·rio para poder edit·-lo. <a href="CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcion·rios</a></p>
                                         </div>
                                     </c:when>
                                     <c:when test="${(param.status == 'error')}">
                                         <div class="alert alert-danger alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <p> <strong>Ops!</strong> Ocorreu um erro ao <strong>editar</strong> um funcion√°rio. Um ou mais dados s√£o inv√°lidos. <a href="CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcion√°rios</a></p>
+                                            <p> <strong>Ops!</strong> Ocorreu um erro ao <strong>editar</strong> um funcion·rio. Um ou mais dados s„o inv·lidos. <a href="CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcion·rios</a></p>
                                         </div>
                                     </c:when>
                                 </c:choose>
-                                <!-- corpo da p√°gina -->
+                                <!-- corpo da p·gina -->
                                 <div class="col-md-12 corpo">
                                     <fieldset>
                                         <form action="${pageContext.request.contextPath}/FuncionarioServlet?action=edit" method="POST" class="cadastro">
@@ -108,10 +108,10 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-2">
-                                                    <label for="perfil">Perfil do Funcion√°rio</label>
+                                                    <label for="perfil">Perfil do Funcion·rio</label>
                                                     <select class="form-control" id="perfil" name="perfil">
                                                         <option value="FUNCIONARIO" <c:if test="${func.perfil == 'FUNCIONARIO'}">selected</c:if>>
-                                                                Funcion√°rio Comum
+                                                                Funcion·rio Comum
                                                             </option>
                                                             <option value="GERENTE" <c:if test="${func.perfil == 'GERENTE'}">selected</c:if>>
                                                                 Gerente
@@ -123,7 +123,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <legend>Endere√ßo</legend>
+                                                    <legend>EndereÁo</legend>
                                                     <div class="form-group col-md-4">
                                                         <label for="cep">CEP</label>
                                                         <input type="text" class="form-control" id="cep" name="cep" value="${func.endereco.cep}"/>
@@ -133,7 +133,7 @@
                                                     <input type="text" class="form-control" id="rua" name="rua" value="${func.endereco.rua}"/>
                                                 </div>
                                                 <div class="form-group col-md-2">
-                                                    <label for="numero">N√∫mero</label>
+                                                    <label for="numero">N˙mero</label>
                                                     <input type="number" class="form-control" id="numero" name="numero" value="${func.endereco.numero}"/>
                                                 </div>
                                                 <div class="form-group col-md-4">
@@ -163,8 +163,8 @@
                                                 </div>
                                             </div>
                                             <div class="text-right">
-                                                <a href="FuncionarioServlet?action=delete&idFunc=${func.id}" class="btn btn-danger">Excluir Funcion√°rio</a>  
-                                                <input type="submit" class="btn btn-primary form-group" value="Salvar Altera√ß√µes" />
+                                                <a href="FuncionarioServlet?action=delete&idFunc=${func.id}" class="btn btn-danger">Excluir Funcion·rio</a>  
+                                                <input type="submit" class="btn btn-primary form-group" value="Salvar AlteraÁıes" />
                                             </div>
                                         </form>
                                     </fieldset>

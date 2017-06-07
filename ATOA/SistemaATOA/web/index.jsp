@@ -4,7 +4,7 @@
     Author     : MauMau
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
                     <c:otherwise> 
                         <div class="jumbotron">
                             <div class="container">
-                                <h2>Voc√™ n√£o possui nenhum perfil de funcion√°rio v√°lido.</h2>
+                                <h2>VocÍ n„o possui nenhum perfil de funcion·rio v·lido.</h2>
                                 <h4>Verifique sua conta com um Gerente de RH e tente novamente.</h4>
                             </div>
                         </div>

@@ -5,7 +5,7 @@
 --%>
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,7 +26,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE' && funcionarioLogado.perfil != 'FUNCIONARIO' )}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>Voc√™ n√£o pode acessar a essa p√°gina</h2>
+                            <h2>VocÍ n„o pode acessar a essa p·gina</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
@@ -49,33 +49,33 @@
                                             <select class="form-control">
                                                 <option>Janeiro</option>
                                                 <option>Fevereiro</option>
-                                                <option>Mar√ßo</option>
+                                                <option>MarÁo</option>
                                             </select>
                                         </form>
                                     </div>
                                 </div>
-                                <!-- corpo da p√°gina -->
+                                <!-- corpo da p·gina -->
                                 <div class="col-md-7">
                                     <div class=" panel panel-primary">
-                                        <div class="panel-heading">Hist√≥rico de Atividades:</div>
+                                        <div class="panel-heading">HistÛrico de Atividades:</div>
                                         <table class="table">
                                             <tr>
-                                                <th>In√≠cio</th>
+                                                <th>InÌcio</th>
                                                 <th>Fim</th>
                                                 <th>Atividade</th>
-                                                <th>Descri√ß√£o</th>
+                                                <th>DescriÁ„o</th>
                                             </tr>
                                             <tr>
                                                 <td class="tg-031e">8:09</td>
                                                 <td class="tg-031e">12:30</td>
-                                                <td class="tg-031e">Relat√≥rio</td>
-                                                <td class="tg-031e">Desenvolver um relat√≥rio sobre tal coisa asim assim assado como descrito na reuni√£o</td>
+                                                <td class="tg-031e">RelatÛrio</td>
+                                                <td class="tg-031e">Desenvolver um relatÛrio sobre tal coisa asim assim assado como descrito na reuni„o</td>
                                             </tr>      
                                             <tr>
                                                 <td class="tg-031e">12:34</td>
                                                 <td class="tg-031e">18:02</td>
-                                                <td class="tg-031e">Cobran√ßa</td>
-                                                <td class="tg-031e">Fazer a cobran√ßa dos relat√≥rios como pedido pelo chef√£o</td>
+                                                <td class="tg-031e">CobranÁa</td>
+                                                <td class="tg-031e">Fazer a cobranÁa dos relatÛrios como pedido pelo chef„o</td>
                                             </tr> 
                                         </table>
                                     </div>

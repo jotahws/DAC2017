@@ -4,7 +4,7 @@
     Author     : JotaWind
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>VocÃª nÃ£o pode acessar a essa pÃ¡gina</h2>
+                            <h2>Você não pode acessar a essa página</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
@@ -33,7 +33,7 @@
                             <div class="row row-busca-titulo">
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Nome, SalÃ¡rio...">
+                                        <input type="text" class="form-control" placeholder="Nome, Salário...">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="button">Pesquisar</button>
                                         </span>
@@ -60,12 +60,12 @@
                                         </c:forEach>  
                                     </div>
                                 </div>
-                                <!-- corpo da pÃ¡gina -->
+                                <!-- corpo da página -->
                                 <c:choose>
                                     <c:when test="${(param.status == 'successDelete')}">
                                         <div class="col-md-8 alert alert-warning alert-dismissable">
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                            <p> <span class="glyphicon glyphicon-trash"></span> O cargo foi <strong>excluÃ­do</strong> com sucesso.</p>
+                                            <p> <span class="glyphicon glyphicon-trash"></span> O cargo foi <strong>excluído</strong> com sucesso.</p>
                                         </div>
                                     </c:when>
                                     <c:when test="${(param.status == 'successEdit')}">
@@ -98,7 +98,7 @@
                                                                 <input type="text" class="form-control" name="nome" id="nome" value="${item.nome}">
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label for="salario">SalÃ¡rio:</label>
+                                                                <label for="salario">Salário:</label>
                                                                 <input type="number" class="form-control" name="salario" id="salario" value="${item.salario}">
                                                             </div>
                                                             <div class="form-group col-md-12">
@@ -106,7 +106,7 @@
                                                                 <textarea class="form-control" name="requisitos" id="requisitos" rows="3">${item.requisitos}</textarea>
                                                             </div>
                                                             <div class="form-group col-md-4">
-                                                                <label for="carga">Carga de Trabalho (Horas/MÃªs):</label>
+                                                                <label for="carga">Carga de Trabalho (Horas/Mês):</label>
                                                                 <input type="number" class="form-control" name="carga" id="carga" value="${item.cargaMinima}">
                                                             </div>
                                                             <div class="form-group col-md-4">
@@ -115,7 +115,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="text-right">
-                                                            <button type="submit" id="botao" class="btn btn-primary">Salvar AlteraÃ§Ãµes</button>  
+                                                            <button type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
                                                             <a href="CargoServlet?action=delete&idCargo=${item.id}" class="btn btn-danger">Excluir</a>  
                                                         </div>
                                                     </form>

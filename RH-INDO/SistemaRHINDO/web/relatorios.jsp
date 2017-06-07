@@ -4,14 +4,14 @@
     Author     : JotaWind
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
-        <title>RelatÃ³rios - Sistema RHINDO</title>
+        <title>Relatórios - Sistema RHINDO</title>
     </head>
     <body>
         <%@include file="/pre-fabricado/cabecalho.jsp" %>
@@ -24,7 +24,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>VocÃª nÃ£o pode acessar a essa pÃ¡gina</h2>
+                            <h2>Você não pode acessar a essa página</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
@@ -32,22 +32,22 @@
                             <!-- Row do input pesquisar: -->
                             <div class="row row-busca-titulo">
                                 <div class="col-md-8 titulo">
-                                    <h1 class="col-md-10">RelatÃ³rios</h1>
+                                    <h1 class="col-md-10">Relatórios</h1>
                                 </div>
                             </div>
-                            <!-- Row do relatÃ³rio: -->
+                            <!-- Row do relatório: -->
                             <div class="row row-lista-corpo">
-                                <!-- corpo da pÃ¡gina -->
+                                <!-- corpo da página -->
                                 <div class="col-md-12 corpo corpo-relatorio">
-                                    <!-- Primeiro relatÃ³rio -->
+                                    <!-- Primeiro relatório -->
                                     <div class="corpo-relatorio">
-                                        <legend>Lista de todos os FuncionÃ¡rios da empresa</legend>
+                                        <legend>Lista de todos os Funcionários da empresa</legend>
                                         <div class="form-group col-md-2">
-                                            <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-user"></span> Gerar RelatÃ³rio</a>
+                                            <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-user"></span> Gerar Relatório</a>
                                         </div>                                    </div >
-                                    <!-- Segundo relatÃ³rio -->
+                                    <!-- Segundo relatório -->
                                     <div class="corpo-relatorio">
-                                        <legend>RelatÃ³rio de horas trabalhadas</legend>  
+                                        <legend>Relatório de horas trabalhadas</legend>  
                                         <form>
                                             <div class="form-group col-md-4">
                                                 <label for="depto">Departamento</label>
@@ -62,7 +62,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <label for="depto">MÃªs</label>
+                                                <label for="depto">Mês</label>
                                                 <select class="form-control" id="depto" name="depto">
                                                     <option>
                                                         Janeiro
@@ -71,22 +71,22 @@
                                                         Fevereiro
                                                     </option>
                                                     <option>
-                                                        MarÃ§o
+                                                        Março
                                                     </option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label>&nbsp;</label>
-                                                <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-calendar"></span> Gerar RelatÃ³rio</a>
+                                                <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-calendar"></span> Gerar Relatório</a>
                                             </div>
                                         </form>
                                     </div>
-                                    <!-- Terceiro relatÃ³rio -->
+                                    <!-- Terceiro relatório -->
                                     <div class="corpo-relatorio">
-                                        <legend>FuncionÃ¡rios com horÃ¡rio atrasado</legend>
+                                        <legend>Funcionários com horário atrasado</legend>
                                         <form>
                                             <div class="form-group col-md-4">
-                                                <label for="depto">MÃªs</label>
+                                                <label for="depto">Mês</label>
                                                 <select class="form-control" id="depto" name="depto">
                                                     <option>
                                                         Janeiro
@@ -95,13 +95,13 @@
                                                         Fevereiro
                                                     </option>
                                                     <option>
-                                                        MarÃ§o
+                                                        Março
                                                     </option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label>&nbsp;</label>
-                                                <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-time"></span> Gerar RelatÃ³rio</a>
+                                                <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-time"></span> Gerar Relatório</a>
                                             </div>                                        
                                         </form>
                                     </div>

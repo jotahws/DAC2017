@@ -4,13 +4,13 @@
     Author     : MauMau
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Relat√≥rios - Sistema ATOA</title>
+        <title>RelatÛrios - Sistema ATOA</title>
     </head>
     <body>
         <%@include file="/pre-fabricado/cabecalho.jsp" %>
@@ -23,27 +23,27 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>Voc√™ n√£o pode acessar a essa p√°gina</h2>
+                            <h2>VocÍ n„o pode acessar a essa p·gina</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
                         <div class="container">
                             <div class="row row-busca-titulo">
                                 <div class="col-md-8 titulo">
-                                    <h1 class="col-md-10">Relat√≥rios
+                                    <h1 class="col-md-10">RelatÛrios
                                 </div>
                             </div>
                             <div class="col-md-12 corpo">
                                 <div class="col-md-6">
-                                    <h3 class="text-center ">Por Funcion√°rio</h3>
+                                    <h3 class="text-center ">Por Funcion·rio</h3>
                                     <div class=" panel panel-primary">
                                         <table class="table">
                                             <tr>
-                                                <th>Funcion√°rio</th>
+                                                <th>Funcion·rio</th>
                                                 <th>CPF</th>
                                             </tr>
                                             <tr>
-                                                <td class="tg-031e">Jo√£o Alberto</td>
+                                                <td class="tg-031e">Jo„o Alberto</td>
                                                 <td class="tg-031e">0452291829</td>
                                             </tr>      
                                             <tr>
@@ -52,7 +52,7 @@
                                             </tr> 
                                         </table>
                                     </div> 
-                                    <input type="submit" class="btn btn-primary" value="Gerar relat√≥rio"/>
+                                    <input type="submit" class="btn btn-primary" value="Gerar relatÛrio"/>
 
                                 </div>
                                 <div  class="col-md-6 relatorio-dep">
@@ -61,7 +61,7 @@
                                         <table class="table">
                                             <tr>
                                                 <th>Departamento</th>
-                                                <th>Localiza√ß√£o</th>
+                                                <th>LocalizaÁ„o</th>
                                             </tr>
                                             <tr>
                                                 <td class="tg-031e">Recursos Humanos</td>
@@ -83,7 +83,7 @@
                                             <div class="col-md-7">
                                                 <p >(dd/mm/aaaa)</p><br>
                                             </div>
-                                            <input type="submit" class="btn btn-primary" value="Gerar relat√≥rio"/>
+                                            <input type="submit" class="btn btn-primary" value="Gerar relatÛrio"/>
                                         </div>
                                     </form>
                                 </div>

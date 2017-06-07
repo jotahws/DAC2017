@@ -2,7 +2,7 @@
     Document   : cabecalho
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean scope="session" id="funcionarioLogado" class="beans.Funcionario"/>
 
@@ -32,13 +32,13 @@
                     <c:choose>
                         <c:when test="${funcionarioLogado.perfil == 'GERENTE-RH'}">
                             <ul class="nav navbar-nav">
-                                <li><a href="${pageContext.request.contextPath}/relatorios.jsp">RelatÃ³rios</a></li>
+                                <li><a href="${pageContext.request.contextPath}/relatorios.jsp">Relatórios</a></li>
                                 <li><a href="${pageContext.request.contextPath}/fecharFolha.jsp">Folha de Pagamento</a></li>
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">FuncionÃ¡rios<span class="caret"></span></a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Funcionários<span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="${pageContext.request.contextPath}/CarregaListaFuncServlet?action=listaFuncionarios">Lista de FuncionÃ¡rios</a></li>
-                                        <li><a href="${pageContext.request.contextPath}/CarregaListaFuncServlet?action=register">Novo FuncionÃ¡rio</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/CarregaListaFuncServlet?action=listaFuncionarios">Lista de Funcionários</a></li>
+                                        <li><a href="${pageContext.request.contextPath}/CarregaListaFuncServlet?action=register">Novo Funcionário</a></li>
                                     </ul>
                                 </li>       
                                 <li class="dropdown">
@@ -59,7 +59,7 @@
                         </c:when>
                         <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO') || (funcionarioLogado.perfil == 'GERENTE')}">
                             <ul class="nav navbar-nav">
-                                <li><a href="${pageContext.request.contextPath}/relatoriosF.jsp">RelatÃ³rios</a></li>
+                                <li><a href="${pageContext.request.contextPath}/relatoriosF.jsp">Relatórios</a></li>
                                 <li><a href="${pageContext.request.contextPath}/contraCheque.jsp">Folha de Pagamento</a></li>   
                             </ul>
                         </c:when>

@@ -4,7 +4,7 @@
     Author     : MauMau
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,7 +21,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>VocÃª nÃ£o pode acessar a essa pÃ¡gina</h2>
+                            <h2>Você não pode acessar a essa página</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 

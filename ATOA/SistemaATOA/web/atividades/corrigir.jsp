@@ -4,7 +4,7 @@
     Author     : MauMau
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE' && funcionarioLogado.perfil != 'FUNCIONARIO' )}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>VocÃª nÃ£o pode acessar a essa pÃ¡gina</h2>
+                            <h2>Você não pode acessar a essa página</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
@@ -51,7 +51,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label for="descricao">DescriÃ§Ã£o:</label>
+                                                <label for="descricao">Descrição:</label>
                                                 <textarea class="form-control" id="descricao" name="descricao" rows="3"></textarea>
                                             </div>                                            
                                         </div>

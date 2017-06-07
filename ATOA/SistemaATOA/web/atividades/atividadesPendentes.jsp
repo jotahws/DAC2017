@@ -5,7 +5,7 @@
 --%>
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -24,7 +24,7 @@
                     <c:when test="${(funcionarioLogado.perfil != 'GERENTE' && funcionarioLogado.perfil != 'FUNCIONARIO' )}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
-                            <h2>Voc√™ n√£o pode acessar a essa p√°gina</h2>
+                            <h2>VocÍ n„o pode acessar a essa p·gina</h2>
                         </div>
                     </c:when>
                     <c:otherwise> 
@@ -33,12 +33,12 @@
                             <div class="col-md-2"><h1>&nbsp;</h1></div>
                             <div class="row col-md-8">
                                 <div class="col-md-12 text-center titulo">
-                                    <h1>Corre√ß√µes Pendentes</h1>
+                                    <h1>CorreÁıes Pendentes</h1>
                                 </div>
                             </div>
                             <div class="col-md-2"><h1>&nbsp;</h1></div>
                             <div class="col-md-2"><h1>&nbsp;</h1></div>
-                            <!-- corpo da p√°gina -->
+                            <!-- corpo da p·gina -->
                             <div class=" col-md-8 " style=" margin-top: 30px;">
                                 <!-- TABELA -->
                                 <div class=" panel panel-primary">
@@ -46,23 +46,23 @@
                                     <table class="table">
                                         <tr>
                                             <th>Atividade</th>
-                                            <th>Descri√ß√£o</th>
+                                            <th>DescriÁ„o</th>
                                             <th>Status</th>
                                         </tr>
                                         <tr>
-                                            <td class="tg-031e">Relat√≥rios</td>
-                                            <td class="tg-031e">Desenvolver um relat√≥rio sobre tal coisa asim assim assado como descrito na reuni√£o</td>
-                                            <td class="tg-031e"><p class="text-warning">N√£o corrigida</p></td>
+                                            <td class="tg-031e">RelatÛrios</td>
+                                            <td class="tg-031e">Desenvolver um relatÛrio sobre tal coisa asim assim assado como descrito na reuni„o</td>
+                                            <td class="tg-031e"><p class="text-warning">N„o corrigida</p></td>
                                         </tr>      
                                         <tr>
-                                            <td class="tg-031e">Cobran√ßa</td>
-                                            <td class="tg-031e">Fazer a cobran√ßa dos relat√≥rios como pedido pelo chef√£o</td>
-                                            <td class="tg-031e"><p class="text-success">Corre√ß√£o aceita</p></td>
+                                            <td class="tg-031e">CobranÁa</td>
+                                            <td class="tg-031e">Fazer a cobranÁa dos relatÛrios como pedido pelo chef„o</td>
+                                            <td class="tg-031e"><p class="text-success">CorreÁ„o aceita</p></td>
                                         </tr> 
                                         <tr>
                                             <td class="tg-031e">Back-end</td>
-                                            <td class="tg-031e">Desenvolver um relat√≥rio sobre tal coisa asim assim assado como descrito na reuni√£o dos chefes bosses</td>
-                                            <td class="tg-031e"><p class="text-danger">Corre√ß√£o negada</p></td>
+                                            <td class="tg-031e">Desenvolver um relatÛrio sobre tal coisa asim assim assado como descrito na reuni„o dos chefes bosses</td>
+                                            <td class="tg-031e"><p class="text-danger">CorreÁ„o negada</p></td>
                                         </tr> 
                                     </table>
                                 </div>
