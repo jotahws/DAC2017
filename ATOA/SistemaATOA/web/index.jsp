@@ -25,7 +25,7 @@
             <c:otherwise>
                 <c:choose>
                     <c:when test="${(funcionarioLogado.perfil == 'GERENTE') || (funcionarioLogado.perfil == 'FUNCIONARIO')}">
-                        <c:redirect url="atividades/listaAtividades.jsp"/>
+                        <c:redirect url="ListaAtividadeServlet?action=QuadroAtividade"/>
                     </c:when>
                     <c:when test="${(funcionarioLogado.perfil == 'GERENTE-RH')}">
                         <c:redirect url="ListaAtividadeServlet?action=ListaAtividades"/>

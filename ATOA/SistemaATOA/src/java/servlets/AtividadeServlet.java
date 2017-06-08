@@ -48,6 +48,7 @@ public class AtividadeServlet extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
                 facade.iniciaAtividade(Integer.parseInt(idTipo), funcionario);
+                response.sendRedirect("ListaAtividadeServlet?action=QuadroAtividade");
             } catch (ClassNotFoundException | SQLException ex) {
                 status = "error";
             }

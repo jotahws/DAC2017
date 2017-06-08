@@ -79,7 +79,6 @@ public class ListaAtividadeServlet extends HttpServlet {
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/listaAtividades.jsp");
             rd.forward(request, response);
-
         }
 
     }

@@ -132,7 +132,5 @@ ADD CONSTRAINT `funcionarioatividade_ibfk_2`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
-
-
 alter table funcionarioatividade CHANGE inicio inicio TIMESTAMP ;
 alter table funcionarioatividade CHANGE fim fim TIMESTAMP ;

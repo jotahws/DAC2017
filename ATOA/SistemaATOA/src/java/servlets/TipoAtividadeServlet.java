@@ -86,18 +86,7 @@ public class TipoAtividadeServlet extends HttpServlet {
                 status = "error";
                 response.sendRedirect("TipoAtividadeServlet?action=delete&id=" + id + "&status=" + status);
             }
-        } else if ("ListaTipoAtividades".equals(action)) {
-
-            try {
-                Facade facade = new Facade();
-                List<TipoAtividade> tipos = facade.listaAtividades();
-                request.setAttribute("listaTipos", tipos);
-            } catch (Exception ex) {
-                status = "error";
-            }
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/listaAtividades.jsp");
-            rd.forward(request, response);
-        }
+        } 
 
     }
 

@@ -39,7 +39,6 @@
                         </c:when>
                         <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO') || (funcionarioLogado.perfil == 'GERENTE')}">
                             <ul class="nav navbar-nav">
-
                                 <li><a href="${pageContext.request.contextPath}/ListaAtividadeServlet?action=QuadroAtividade">Home</a></li>
                                 <li><a href="${pageContext.request.contextPath}/atividades/historicoAtividades.jsp">Lista de Atividades</a></li>
                                 <li><a href="${pageContext.request.contextPath}/atividades/atividadesPendentes.jsp">Atividades pendentes</a></li>
