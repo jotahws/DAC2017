@@ -46,7 +46,7 @@ public class Facade {
      
         Client client = ClientBuilder.newClient();
             Response resp = client
-                    .target("http://localhost:8084/WS/webresources/funcionarios")
+                    .target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios")
                     .request(MediaType.APPLICATION_JSON).get();
             List<Funcionario> listaFunc = resp.readEntity(new GenericType<List<Funcionario>>() {
             });
@@ -56,7 +56,7 @@ public class Facade {
     //Busca funcionario por Id
     public Funcionario listaFuncId(int id) {
         Client client = ClientBuilder.newClient();
-        Funcionario func = client.target("http://localhost:8084/WS/webresources/funcionarios/" + id)
+        Funcionario func = client.target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios/" + id)
                 .request(MediaType.APPLICATION_JSON).get(Funcionario.class);
         return func;
     }

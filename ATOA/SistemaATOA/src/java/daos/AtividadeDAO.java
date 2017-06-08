@@ -146,7 +146,7 @@ public class AtividadeDAO {
                 if (timestampfim != null) {
                     inicio = new java.util.Date(timestampfim.getTime());
                 }
-                //FALTA PEGAR FUNCIONARIO
+                Funcionario funcionario = facade.listaFuncId(rs.getInt("idFuncionario"));
                 TipoAtividade tipo = facade.getTipoPorID(idTipo);
                 Atividade atv = new Atividade();
                 atv.setId(idAtiv);
