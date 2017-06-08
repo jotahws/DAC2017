@@ -42,18 +42,32 @@
                                 <div class=" panel panel-success">
                                     <div class="panel-heading">Atividade em andamento</div>
                                     <table class="table">
-                                        <tr>
-                                            <th>Atividade</th>
-                                            <th>Departamento</th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-031e"><c:out value="Back-end${atividade.nome}"/></td>
-                                            <td class="tg-031e"><c:out value="Desenvolvimento${atividade.departamento.nome}"/></td>
-                                            <td class="tg-031e"><a class="col-md-12 btn btn-primary">Pausar</a></td>
-                                            <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning col-md-12">Corrigir</a></td>
-                                        </tr>
+
+                                        <c:choose>
+                                            <c:when test="${atividadeiniciada != null}">
+                                                <tr>
+                                                    <th>Atividade</th>
+                                                    <th>Início</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tg-031e"><c:out value="${atividadeiniciada.tipo.nome}"/></td>
+                                                    <td class="tg-031e">hoje, 10:29:10</td>
+                                                    <td class="tg-031e"><a class="col-md-12 btn btn-primary">Pausar</a></td>
+                                                    <td class="tg-031e"><a href="AtividadeServlet?action=Encerrar" class="col-md-12 btn btn-danger">Encerrar</a></td>
+                                                    <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning col-md-12">Corrigir</a></td>   
+                                                </tr>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <h1 class="text-center unselectable cor-disabled">
+                                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                                    Vamos trabalhar?
+                                                    <span class="glyphicon glyphicon-arrow-down"></span>
+                                                </h1>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </table>
                                 </div>
 

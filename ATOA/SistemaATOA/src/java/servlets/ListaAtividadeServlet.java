@@ -5,7 +5,9 @@
  */
 package servlets;
 
+import beans.Atividade;
 import beans.Departamento;
+import beans.Funcionario;
 import beans.TipoAtividade;
 import facede.Facade;
 import java.io.IOException;
@@ -20,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -72,9 +75,13 @@ public class ListaAtividadeServlet extends HttpServlet {
             rd.forward(request, response);
         } else if ("QuadroAtividade".equals(action)) {
             try {
+                HttpSession session = request.getSession(true);
+                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Atividade atividade = facade.listaAtividadeIniciada(funcionario);
+                request.setAttribute("atividadeiniciada", atividade);
                 List<TipoAtividade> tipos = facade.listaAtividades();
                 request.setAttribute("tipos", tipos);
-            } catch (Exception ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 status = "error";
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/listaAtividades.jsp");

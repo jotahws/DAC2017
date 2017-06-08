@@ -5,6 +5,7 @@
  */
 package facede;
 
+import beans.Atividade;
 import beans.Departamento;
 import beans.Funcionario;
 import beans.TipoAtividade;
@@ -70,6 +71,16 @@ public class Facade {
     public void iniciaAtividade(int idTipo, Funcionario funcionario) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
         dao.criaAtividade(idTipo, funcionario);
+    }
+
+    public void encerraAtividade(Funcionario funcionario) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        dao.encerraAtividade(funcionario);
+    }
+
+    public Atividade listaAtividadeIniciada(Funcionario func) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        return dao.getAtividadeIniciada(func);
     }
 
 }
