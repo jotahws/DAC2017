@@ -133,6 +133,7 @@ public class AtividadeDAO {
             rs = stmt.executeQuery();
             Facade facade = new Facade();
             while (rs.next()) {
+                
                 int idAtiv = rs.getInt("id");
                 String descricao = rs.getString("descricao");
                 int statusAtividade = rs.getInt("statusAtividade");
@@ -146,15 +147,10 @@ public class AtividadeDAO {
                 if (timestampfim != null) {
                     inicio = new java.util.Date(timestampfim.getTime());
                 }
-                Funcionario funcionario = facade.listaFuncId(rs.getInt("idFuncionario"));
+                //FALTA PEGAR FUNCIONARIO
                 TipoAtividade tipo = facade.getTipoPorID(idTipo);
                 Atividade atv = new Atividade();
-                atv.setId(idAtiv);
-                atv.setTipo(tipo);
-                atv.setStatusAtividade(statusAtividade);
-                atv.setDescricao(descricao);
-                atv.setInicio(inicio);
-                atv.setFim(fim);
+                
                 lista.add(atv);
             }
             return lista;
