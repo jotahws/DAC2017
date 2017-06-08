@@ -6,6 +6,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,7 @@ public class TipoAtividade implements Serializable {
     private String nome;
     private int id;
     private Departamento departamento;
+    List<Atividade> atividades;
 
     public TipoAtividade() {
     }
@@ -23,6 +25,14 @@ public class TipoAtividade implements Serializable {
     public TipoAtividade(String nome, Departamento departamento) {
         this.nome = nome;
         this.departamento = departamento;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
     }
 
     public String getNome() {

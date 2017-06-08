@@ -44,6 +44,11 @@ public class Facade {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
         return dao.listaTipos();
     }
+    
+    public List<Atividade> listaAtividadesPorTipo(int idTipo) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        return dao.listaAtividades(int idTipo);
+    }
 
     public Departamento getDeptoPorID(int idDepto) {
         Client client = ClientBuilder.newClient();

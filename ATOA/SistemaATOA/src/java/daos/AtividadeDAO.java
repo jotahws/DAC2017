@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -27,7 +29,7 @@ public class AtividadeDAO {
     private final String iniciaAtividade = "INSERT INTO FuncionarioAtividade (idFuncionario, idAtividade, statusAtividade, inicio) VALUES (?,?,?,CURRENT_TIMESTAMP)";
     private final String buscaAtividadeIniciada = "select * from TipoAtividade t, funcionarioatividade a where a.idAtividade = t.id AND idFuncionario=? AND statusAtividade=1;";
     private final String EncerraAtividade = "UPDATE FuncionarioAtividade SET statusAtividade=2, fim=CURRENT_TIMESTAMP WHERE idFuncionario=? AND statusAtividade=1;";
-    
+
     private Connection con = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -64,7 +66,15 @@ public class AtividadeDAO {
                 String descricao = rs.getString("a.descricao");
                 int statusAtividade = rs.getInt("a.statusAtividade");
                 Date inicio = rs.getDate("a.inicio");
-                Date fim = rs.getDate("a.inicio");
+                Timestamp timestampinicio = rs.getTimestamp("a.inicio");
+                if (timestampinicio != null) {
+                    inicio = new java.util.Date(timestampinicio.getTime());
+                }
+                Date fim = rs.getDate("a.fim");
+                Timestamp timestampfim = rs.getTimestamp("a.fim");
+                if (timestampfim != null) {
+                    inicio = new java.util.Date(timestampfim.getTime());
+                }
                 //Dados do TIPO
                 int idTipo = rs.getInt("t.id");
                 int idDepto = rs.getInt("t.idDepartamento");
@@ -78,7 +88,7 @@ public class AtividadeDAO {
                 atividade.setStatusAtividade(statusAtividade);
                 atividade.setFuncionario(func);
                 atividade.setTipo(tipo);
-                //atividade.setInicio(inicio);
+                atividade.setInicio(inicio);
                 //atividade.setFim(fim);
                 return atividade;
             }

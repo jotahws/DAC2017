@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,9 +54,20 @@
                                                     <th></th>
                                                     <th></th>
                                                 </tr>
+                                                <jsp:useBean id="data" class="java.util.Date"/>
                                                 <tr>
                                                     <td class="tg-031e"><c:out value="${atividadeiniciada.tipo.nome}"/></td>
-                                                    <td class="tg-031e">hoje, 10:29:10</td>
+                                                    <td class="tg-031e">
+                                                        <c:choose>
+                                                            <c:when test="${data.date == atividadeiniciada.inicio.date && data.day == atividadeiniciada.inicio.day}">
+                                                                <c:out value="Hoje,"/>
+                                                                <fmt:formatDate value="${atividadeiniciada.inicio}" type="BOTH" pattern=" HH:mm"/>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <fmt:formatDate value="${atividadeiniciada.inicio}" type="BOTH" pattern="dd/MM/yyy HH:mm"/>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </td>
                                                     <td class="tg-031e"><a class="col-md-12 btn btn-primary">Pausar</a></td>
                                                     <td class="tg-031e"><a href="AtividadeServlet?action=Encerrar" class="col-md-12 btn btn-danger">Encerrar</a></td>
                                                     <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning col-md-12">Corrigir</a></td>   

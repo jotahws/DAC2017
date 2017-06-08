@@ -26,40 +26,37 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.commons-beanutils.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
+                    <file>${file.reference.joda-time-2.4.jar}</file>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-collections-3.2.2.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.commons-digester-2.1-javadoc.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.commons-digester-2.1-sources.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${file.reference.commons-digester-2.1.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.commons-logging-1.2.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.itext-2.1.7.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jasperreports-6.2.2.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
-                    <file>${file.reference.joda-time-2.4.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
+                    <file>${file.reference.commons-beanutils-1.2.zip}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.mysql-connector-java-5.1.42-bin.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-digester-2.1-javadoc.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-digester-2.1-sources.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-digester-2.1.jar}</file>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.commons-beanutils.jar}</file>
                 </library>
             </web-module-libraries>
             <web-module-additional-libraries/>
