@@ -42,29 +42,28 @@
                                 <!-- TABELA -->
                                 <div class=" panel panel-primary">
                                     <div class="panel-heading">Inicie ou encerre uma atividade:</div>
-                                    <table class="table">
-                                        <tr>
-                                            <th>Atividade</th>
-                                            <th>Departamento</th>
-                                            <th>Status</th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <td class="tg-031e">Relatórios</td>
-                                            <td class="tg-031e">Recursos Humanos</td>
-                                            <td class="tg-031e">Em andamento</td>
-                                            <td class="tg-031e"><a class="col-md-12 btn btn-default">Encerrar</a></td>
-                                            <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning">Corrigir Atividade</a></td>
-                                        </tr>      
-                                        <tr>
-                                            <td class="tg-031e">Cobrança</td>
-                                            <td class="tg-031e">Marketing</td>
-                                            <td class="tg-031e">Encerrada</td>
-                                            <td class="tg-031e"><a class="col-md-12 btn btn-primary">Iniciar</a></td>
-                                            <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning">Corrigir Atividade</a></td>
-                                        </tr> 
-                                    </table>
+                                    <c:if test="${listaTipos != null}" >
+                                        <table class="table">
+                                            <tr>
+                                                <th>Tipo Atividade</th>
+                                                <th>Departamento</th>
+                                                <th>Localização</th>
+
+                                                <th></th>
+                                            </tr>
+
+                                            <c:forEach var="item" items="${listaTipos}" >
+                                                <tr>
+                                                    <td><p>${item.nome}</p></td>
+                                                    <td><p>${item.departamento.nome}</p></td>
+                                                    <td><p>${item.departamento.localizacao}</p></td>
+                                                    <td class="tg-031e"><a class="col-md-12 btn btn-primary">Iniciar</a></td>
+                                                    <td class="tg-031e"><a href="atividades/corrigir.jsp" class="btn btn-warning">Corrigir Atividade</a></td>
+
+                                                </tr>
+                                            </c:forEach>         
+                                        </table>
+                                    </c:if>
                                 </div>
                             </div>
                             <div class="col-md-2"><h1>&nbsp;</h1></div>

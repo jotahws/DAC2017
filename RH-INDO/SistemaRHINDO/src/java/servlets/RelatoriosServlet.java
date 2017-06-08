@@ -73,14 +73,16 @@ public class RelatoriosServlet extends HttpServlet {
             } catch (ClassNotFoundException ex) {
                 System.out.println("Erro ao conectar banco: " + ex.getMessage());
             } finally {
-                try {con.close();} catch (SQLException e) {}
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
             }
 
         } else if ("relMes".equals(action)) {
 
         }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

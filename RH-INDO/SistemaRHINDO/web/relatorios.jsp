@@ -43,7 +43,7 @@
                                     <div class="corpo-relatorio">
                                         <legend>Lista de todos os Funcionários da empresa</legend>
                                         <div class="form-group col-md-2">
-                                            <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-user"></span> Gerar Relatório</a>
+                                            <a href="RelatoriosServlet" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-user"></span> Gerar Relatório</a>
                                         </div>                                    </div >
                                     <!-- Segundo relatório -->
                                     <div class="corpo-relatorio">

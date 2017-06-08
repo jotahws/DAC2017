@@ -29,7 +29,7 @@ public class FuncionarioDAO {
 
     private final String insertFunc = "insert into Funcionario (idCargo, idDepartamento, idEndereco, nome, cpf, rg, email, celular, perfil, senha) values(?,?,?,?,?,?,?,?,?,?)";
     private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id ORDER BY f.nome;";
-    private final String verificaLogin = "SELECT email, perfil, nome FROM funcionario WHERE email=? AND senha=?";
+    private final String verificaLogin = "SELECT email, perfil, nome, id FROM funcionario WHERE email=? AND senha=?";
     private final String selectFuncID = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id AND f.id=?";
     private final String updateFunc = "UPDATE Funcionario SET idCargo=?, idDepartamento=?, idEndereco=?, nome=?, cpf=?, rg=?, email=?, celular=?, perfil=? WHERE id=?;";
     private final String deleteFunc = "DELETE FROM Funcionario WHERE id=?";
@@ -132,7 +132,7 @@ public class FuncionarioDAO {
     public Funcionario fazLogin(String login, String senha) throws ClassNotFoundException, SQLException {
         try {
             con = new ConnectionFactory().getConnection();
-            stmt = con.prepareStatement(verificaLogin);
+            stmt = con.prepareStatement(verificaLogin,Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, login);
             stmt.setString(2, senha);
             rs = stmt.executeQuery();
@@ -140,10 +140,12 @@ public class FuncionarioDAO {
                 String nome = rs.getString("nome");
                 String email = rs.getString("email");
                 String perfil = rs.getString("perfil");
+                Integer id = rs.getInt("id");
                 Funcionario func = new Funcionario();
                 func.setNome(nome);
                 func.setEmail(email);
                 func.setPerfil(perfil);
+                func.setId((id));
                 return func;
             }
         } finally {

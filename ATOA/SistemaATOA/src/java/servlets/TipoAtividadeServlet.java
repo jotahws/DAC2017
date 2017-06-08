@@ -11,8 +11,10 @@ import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -84,6 +86,17 @@ public class TipoAtividadeServlet extends HttpServlet {
                 status = "error";
                 response.sendRedirect("TipoAtividadeServlet?action=delete&id=" + id + "&status=" + status);
             }
+        } else if ("ListaTipoAtividades".equals(action)) {
+
+            try {
+                Facade facade = new Facade();
+                List<TipoAtividade> tipos = facade.listaAtividades();
+                request.setAttribute("listaTipos", tipos);
+            } catch (Exception ex) {
+                status = "error";
+            }
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/listaAtividades.jsp");
+            rd.forward(request, response);
         }
 
     }
