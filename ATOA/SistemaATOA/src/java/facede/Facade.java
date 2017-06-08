@@ -6,7 +6,9 @@
 package facede;
 
 import beans.Departamento;
+import beans.Funcionario;
 import beans.TipoAtividade;
+import daos.AtividadeDAO;
 import daos.TipoAtividadeDAO;
 import java.sql.SQLException;
 import java.util.List;
@@ -63,6 +65,11 @@ public class Facade {
     public void deletaTipo(int id) throws ClassNotFoundException, SQLException {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
         dao.deletarTipo(id);
+    }
+
+    public void iniciaAtividade(int idTipo, Funcionario funcionario) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        dao.criaAtividade(idTipo, funcionario);
     }
 
 }

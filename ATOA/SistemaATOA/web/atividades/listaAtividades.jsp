@@ -39,31 +39,43 @@
                             <div class="col-md-2"><h1>&nbsp;</h1></div>
                             <!-- corpo da página -->
                             <div class=" col-md-8 " style=" margin-top: 30px;">
+                                <div class=" panel panel-success">
+                                    <div class="panel-heading">Atividade em andamento</div>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Atividade</th>
+                                            <th>Departamento</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="tg-031e"><c:out value="Back-end${atividade.nome}"/></td>
+                                            <td class="tg-031e"><c:out value="Desenvolvimento${atividade.departamento.nome}"/></td>
+                                            <td class="tg-031e"><a class="col-md-12 btn btn-primary">Pausar</a></td>
+                                            <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning col-md-12">Corrigir</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
                                 <!-- TABELA -->
                                 <div class=" panel panel-primary">
-                                    <div class="panel-heading">Inicie ou encerre uma atividade:</div>
-                                    <c:if test="${listaTipos != null}" >
-                                        <table class="table">
+                                    <div class="panel-heading">Inicie uma atividade:</div>
+                                    <table class="table">
+                                        <tr>
+                                            <th>Atividade</th>
+                                            <th>Departamento</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <c:set var="lista" value="${tipos}"/>
+                                        <c:forEach var="item" items="${lista}">
                                             <tr>
-                                                <th>Tipo Atividade</th>
-                                                <th>Departamento</th>
-                                                <th>Localização</th>
-
-                                                <th></th>
+                                                <td class="tg-031e"><c:out value="${item.nome}"/></td>
+                                                <td class="tg-031e"><c:out value="${item.departamento.nome}"/></td>
+                                                <td class="tg-031e"><a href="AtividadeServlet?action=IniciarAtv&id=${item.id}" class="col-md-12 btn btn-primary">Iniciar</a></td>
                                             </tr>
-
-                                            <c:forEach var="item" items="${listaTipos}" >
-                                                <tr>
-                                                    <td><p>${item.nome}</p></td>
-                                                    <td><p>${item.departamento.nome}</p></td>
-                                                    <td><p>${item.departamento.localizacao}</p></td>
-                                                    <td class="tg-031e"><a class="col-md-12 btn btn-primary">Iniciar</a></td>
-                                                    <td class="tg-031e"><a href="atividades/corrigir.jsp" class="btn btn-warning">Corrigir Atividade</a></td>
-
-                                                </tr>
-                                            </c:forEach>         
-                                        </table>
-                                    </c:if>
+                                        </c:forEach>
+                                    </table>
                                 </div>
                             </div>
                             <div class="col-md-2"><h1>&nbsp;</h1></div>

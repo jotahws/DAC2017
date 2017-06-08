@@ -9,9 +9,6 @@ import beans.Funcionario;
 import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import static java.lang.System.out;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,17 +18,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.client.Entity;
 
 /**
  *
- * @author MauMau
+ * @author JotaWind
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "AtividadeServlet", urlPatterns = {"/AtividadeServlet"})
+public class AtividadeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,52 +37,21 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
         String action = request.getParameter("action");
-        if ("login".equals(action)) {
+        Facade facade = new Facade();
+        String status = "";
 
-            String login = request.getParameter("login");
-            String senha = request.getParameter("senha");
+        if ("IniciarAtv".equals(action)) {
             try {
-                Funcionario f = new Funcionario();
-                f.setEmail(login);
-                f.setSenha(f.criptografa(senha));
-                Client client = ClientBuilder.newClient();
-
-                Funcionario retorno = client.target("http://localhost:8084/SistemaRHINDO/webresources/login")
-                        .request(MediaType.APPLICATION_JSON)
-                        .post(Entity.json(f), Funcionario.class);
-
-                HttpSession session = request.getSession();
-                session.setAttribute("funcionarioLogado", retorno);
-
-                if ("GERENTE-RH".equals(retorno.getPerfil())) {
-                    response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
-                } else if (("GERENTE".equals(retorno.getPerfil())) || ("FUNCIONARIO".equals(retorno.getPerfil()))) {
-                    response.sendRedirect("ListaAtividadeServlet?action=QuadroAtividade");
-                } else {
-                    response.sendRedirect("index.jsp");
-                }
-
-            } catch (NullPointerException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("<h1>DADOS INVÁLIDOS</h1>");
-                }
-            } catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                String idTipo = request.getParameter("id");
+                HttpSession session = request.getSession(true);
+                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                facade.iniciaAtividade(Integer.parseInt(idTipo), funcionario);
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
             }
-
-        } else if ("logout".equals(action)) {
-            HttpSession session = request.getSession(false);
-            if (session != null) {
-                session.invalidate();
-            }
-            response.sendRedirect("index.jsp");
         }
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -16,30 +16,6 @@ create table EdicaoAtividade(
     foreign key(idAtividade)references FuncionarioAtividade(id)
 );
 
-DELIMITER $$
-DROP TRIGGER IF EXISTS sistema_atoa.str_empty_edicao$$
-USE `sistema_atoa`$$
-CREATE TRIGGER `sistema_atoa`.`str_empty_edicao` BEFORE INSERT ON `EdicaoAtividade` 
-FOR EACH ROW
-BEGIN
-	if (new.descricao = "") OR (new.statusAprovacao = "") then
-     signal sqlstate '45000';
-    end if;
-END$$
-DELIMITER ;
-
-DELIMITER $$
-DROP TRIGGER IF EXISTS sistema_atoa.str_empty_edicao_up$$
-USE `sistema_atoa`$$
-CREATE TRIGGER `sistema_atoa`.`str_empty_up` BEFORE UPDATE ON `EdicaoAtividade` 
-FOR EACH ROW
-BEGIN
-	if (new.descricao = "") OR (new.statusAprovacao = "") then
-     signal sqlstate '45000';
-    end if;
-END$$
-DELIMITER ;
-
 create table FuncionarioAtividade(
 	id int not null auto_increment,
     idFuncionario int,
@@ -50,6 +26,13 @@ create table FuncionarioAtividade(
     fim date,
     primary key(id),
     foreign key(idAtividade) references TipoAtividade(id)
+);
+
+create table TipoAtividade(
+	id int not null auto_increment,
+    idDepartamento int,
+    nome varchar(50),
+    primary key(id)
 );
 
 DELIMITER $$
@@ -75,13 +58,6 @@ BEGIN
     end if;
 END$$
 DELIMITER ;
-
-create table TipoAtividade(
-	id int not null auto_increment,
-    idDepartamento int,
-    nome varchar(50),
-    primary key(id)
-);
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS sistema_atoa.str_empty_tipo$$
@@ -112,15 +88,48 @@ create table Departamento(
     primary key(id)
 );
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_atoa.str_empty_edicao$$
+USE `sistema_atoa`$$
+CREATE TRIGGER `sistema_atoa`.`str_empty_edicao` BEFORE INSERT ON `EdicaoAtividade` 
+FOR EACH ROW
+BEGIN
+	if (new.descricao = "") OR (new.statusAprovacao = "") then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS sistema_atoa.str_empty_edicao_up$$
+USE `sistema_atoa`$$
+CREATE TRIGGER `sistema_atoa`.`str_empty_up` BEFORE UPDATE ON `EdicaoAtividade` 
+FOR EACH ROW
+BEGIN
+	if (new.descricao = "") OR (new.statusAprovacao = "") then
+     signal sqlstate '45000';
+    end if;
+END$$
+DELIMITER ;
 
--- drop table FuncionarioAtividade;
--- drop table Funcionario;
--- drop table departamento;
--- drop table tipoatividade;
--- drop table EdicaoAtividade;
+create table statusAtividade(
+	id int not null auto_increment,
+    nome varchar(50),
+    primary key(id)
+);
 
-select * from TipoAtividade;
-INSERT INTO TipoAtividade (nome, idDepartamento) VALUES ("nome",1);
-UPDATE TipoAtividade SET nome='Administracao', idDepartamento=1 WHERE id='21';
+INSERT INTO statusAtividade (nome) VALUES ("INICIADO");
+INSERT INTO statusAtividade (nome) VALUES ("ENCERRADO");
+INSERT INTO statusAtividade (nome) VALUES ("PAUSADO");
+
+ALTER TABLE `sistema_atoa`.`FuncionarioAtividade` 
+CHANGE COLUMN `statusAtividade` `statusAtividade` INT NULL DEFAULT NULL ,
+ADD INDEX `funcionarioatividade_ibfk_2_idx` (`statusAtividade` ASC);
+ALTER TABLE `sistema_atoa`.`FuncionarioAtividade` 
+ADD CONSTRAINT `funcionarioatividade_ibfk_2`
+  FOREIGN KEY (`statusAtividade`)
+  REFERENCES `sistema_atoa`.`statusAtividade` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
 

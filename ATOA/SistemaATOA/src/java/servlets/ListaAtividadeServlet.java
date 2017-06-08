@@ -70,6 +70,16 @@ public class ListaAtividadeServlet extends HttpServlet {
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/editar.jsp?status=" + statusEdit);
             rd.forward(request, response);
+        } else if ("QuadroAtividade".equals(action)) {
+            try {
+                List<TipoAtividade> tipos = facade.listaAtividades();
+                request.setAttribute("tipos", tipos);
+            } catch (Exception ex) {
+                status = "error";
+            }
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/listaAtividades.jsp");
+            rd.forward(request, response);
+
         }
 
     }
