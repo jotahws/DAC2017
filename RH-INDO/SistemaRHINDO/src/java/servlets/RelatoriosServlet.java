@@ -5,8 +5,18 @@
  */
 package servlets;
 
+import conexao.ConnectionFactory;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,19 +42,45 @@ public class RelatoriosServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RelatoriosServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RelatoriosServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = request.getParameter("action");
+
+        Connection con = null;
+
+        if ("relFuncionarios".equals(action)) {
+
+            try {
+                con = new ConnectionFactory().getConnection();
+                String jasper = request.getContextPath()
+                        + "/RelatorioTodosFunc.jasper";
+                // Host onde o servlet esta executando
+                String host = "http://" + request.getServerName()
+                        + ":" + request.getServerPort();
+                // URL para acesso ao relatório
+                URL jasperURL = new URL(host + jasper);
+                // Parâmetros do relatório
+                HashMap params = new HashMap();
+                // Geração do relatório
+                byte[] bytes = JasperRunManager.runReportToPdf(
+                        jasperURL.openStream(), params, con);
+
+                if (bytes != null) {
+                    // A página será mostrada em PDF
+                    response.setContentType("application/pdf");
+                    // Envia o PDF para o Cliente
+                    OutputStream ops = response.getOutputStream();
+                    ops.write(bytes);
+                }
+            } catch (ClassNotFoundException ex) {
+                System.out.println("Erro ao conectar banco: " + ex.getMessage());
+            } finally {
+                try {con.close();} catch (SQLException e) {}
+            }
+
+        } else if ("relMes".equals(action)) {
+
         }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
