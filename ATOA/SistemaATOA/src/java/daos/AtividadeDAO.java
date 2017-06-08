@@ -17,8 +17,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -29,6 +31,7 @@ public class AtividadeDAO {
     private final String iniciaAtividade = "INSERT INTO FuncionarioAtividade (idFuncionario, idAtividade, statusAtividade, inicio) VALUES (?,?,?,CURRENT_TIMESTAMP)";
     private final String buscaAtividadeIniciada = "select * from TipoAtividade t, funcionarioatividade a where a.idAtividade = t.id AND idFuncionario=? AND statusAtividade=1;";
     private final String EncerraAtividade = "UPDATE FuncionarioAtividade SET statusAtividade=2, fim=CURRENT_TIMESTAMP WHERE idFuncionario=? AND statusAtividade=1;";
+    private final String listaAtvPorTipo = "SELECT * FROM FuncionarioAtividade WHERE idAtividade=? AND statusAtividade=1 ORDER BY inicio DESC;";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -114,6 +117,48 @@ public class AtividadeDAO {
             try {
                 stmt.close();
                 con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public List<Atividade> listaAtividades(int idTipo) throws ClassNotFoundException, SQLException {
+
+        try {
+            List<Atividade> lista = new ArrayList();
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(listaAtvPorTipo);
+            stmt.setInt(1, idTipo);
+            rs = stmt.executeQuery();
+            Facade facade = new Facade();
+            while (rs.next()) {
+                
+                int idAtiv = rs.getInt("id");
+                String descricao = rs.getString("descricao");
+                int statusAtividade = rs.getInt("statusAtividade");
+                Date inicio = rs.getDate("inicio");
+                Timestamp timestampinicio = rs.getTimestamp("inicio");
+                if (timestampinicio != null) {
+                    inicio = new java.util.Date(timestampinicio.getTime());
+                }
+                Date fim = rs.getDate("fim");
+                Timestamp timestampfim = rs.getTimestamp("fim");
+                if (timestampfim != null) {
+                    inicio = new java.util.Date(timestampfim.getTime());
+                }
+                //FALTA PEGAR FUNCIONARIO
+                TipoAtividade tipo = facade.getTipoPorID(idTipo);
+                Atividade atv = new Atividade();
+                
+                lista.add(atv);
+            }
+            return lista;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
+                rs.close();
             } catch (SQLException ex) {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }

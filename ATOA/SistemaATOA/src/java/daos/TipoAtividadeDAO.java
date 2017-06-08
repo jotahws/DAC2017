@@ -58,11 +58,12 @@ public class TipoAtividadeDAO {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(listaTipos);
             rs = stmt.executeQuery();
+            Facade facade = new Facade();
             while (rs.next()) {
                 int id = rs.getInt("id");
+                facade.listaAtividadesPorTipo(id);
                 String nome = rs.getString("nome");
                 int idDepto = rs.getInt("idDepartamento");
-                Facade facade = new Facade();
                 Departamento depto = facade.getDeptoPorID(idDepto);
                 TipoAtividade tipo = new TipoAtividade();
                 tipo.setId(id);

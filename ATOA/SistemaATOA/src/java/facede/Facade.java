@@ -47,7 +47,7 @@ public class Facade {
     
     public List<Atividade> listaAtividadesPorTipo(int idTipo) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
-        return dao.listaAtividades(int idTipo);
+        return dao.listaAtividades(idTipo);
     }
 
     public Departamento getDeptoPorID(int idDepto) {
