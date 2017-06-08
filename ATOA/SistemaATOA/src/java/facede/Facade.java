@@ -31,6 +31,7 @@ public class Facade {
         dao.inserirTipo(tipoAtv);
     }
 
+    //Busca lista de departamentos
     public List<Departamento> listaDeptos() {
         Client client = ClientBuilder.newClient();
         Response res = client.target("http://localhost:8084/SistemaRHINDO/webresources/departamento")
@@ -39,22 +40,32 @@ public class Facade {
         return res.readEntity(new GenericType<List<Departamento>>() {
         });
     }
-    public List<Funcionario> listaFuncionarios() {
-        Client client = ClientBuilder.newClient();
-        Response res = client.target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios")
-                .request(MediaType.APPLICATION_JSON).get();
 
-        return res.readEntity(new GenericType<List<Funcionario>>() {
-        });
+    //Busca todos os funcionarios
+    public List<Funcionario> listaFuncionarios() {
+     
+        Client client = ClientBuilder.newClient();
+            Response resp = client
+                    .target("http://localhost:8084/WS/webresources/funcionarios")
+                    .request(MediaType.APPLICATION_JSON).get();
+            List<Funcionario> listaFunc = resp.readEntity(new GenericType<List<Funcionario>>() {
+            });
+        return listaFunc;
     }
-    
-    
+
+    //Busca funcionario por Id
+    public Funcionario listaFuncId(int id) {
+        Client client = ClientBuilder.newClient();
+        Funcionario func = client.target("http://localhost:8084/WS/webresources/funcionarios/" + id)
+                .request(MediaType.APPLICATION_JSON).get(Funcionario.class);
+        return func;
+    }
 
     public List<TipoAtividade> listaAtividades() throws ClassNotFoundException, SQLException {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
         return dao.listaTipos();
     }
-    
+
     public List<Atividade> listaAtividadesPorTipo(int idTipo) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
         return dao.listaAtividades(idTipo);
