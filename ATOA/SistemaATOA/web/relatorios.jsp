@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-md-12 corpo">
                                 <div class="col-md-6">
-                                    <h3 class="text-center ">Funcionario Consolidado</h3>
+                                    <h3 class="text-center ">Por Funcionário</h3>
                                     <div class=" panel panel-primary">
                                         <table class="table">
                                             <tr>
