@@ -47,7 +47,7 @@ public class AtividadeServlet extends HttpServlet {
             try {
                 String idTipo = request.getParameter("id");
                 HttpSession session = request.getSession(true);
-                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
                 facade.encerraAtividade(funcionario);
                 facade.iniciaAtividade(Integer.parseInt(idTipo), funcionario);
                 response.sendRedirect("ListaAtividadeServlet?action=QuadroAtividade");
@@ -57,7 +57,7 @@ public class AtividadeServlet extends HttpServlet {
         } else if ("Encerrar".equals(action)) {
             try {
                 HttpSession session = request.getSession(true);
-                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
                 facade.encerraAtividade(funcionario);
                 response.sendRedirect("ListaAtividadeServlet?action=QuadroAtividade");
             } catch (ClassNotFoundException | SQLException ex) {
@@ -83,16 +83,18 @@ public class AtividadeServlet extends HttpServlet {
         } else if ("corrigir".equals(action)) {
             try {
                 HttpSession session = request.getSession(true);
-                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
                 Atividade atividade = facade.listaAtividadeIniciada(funcionario);
                 String descricao = request.getParameter("descricao");
                 atividade.setDescricao(descricao);
                 facade.solicitaCorrecao(atividade);
-                response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
+                status = "pendente";
             } catch (ClassNotFoundException | SQLException ex) {
                 status = "error";
             }
-        } 
+            response.sendRedirect("ListaAtividadeServlet?action=QuadroAtividade&status=" + status);
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

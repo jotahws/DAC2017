@@ -7,6 +7,7 @@ package facede;
 
 import beans.Atividade;
 import beans.Departamento;
+import beans.EdicaoAtividade;
 import beans.Funcionario;
 import beans.TipoAtividade;
 import daos.AtividadeDAO;
@@ -40,7 +41,7 @@ public class Facade {
         return res.readEntity(new GenericType<List<Departamento>>() {
         });
     }
-    
+
     public List<Funcionario> listaFuncionarios() {
         Client client = ClientBuilder.newClient();
         Response res = client.target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios")
@@ -49,8 +50,6 @@ public class Facade {
         return res.readEntity(new GenericType<List<Funcionario>>() {
         });
     }
-    
-    
 
     public List<TipoAtividade> listaAtividades() throws ClassNotFoundException, SQLException {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
@@ -60,6 +59,11 @@ public class Facade {
     public List<Atividade> listaAtividadesPorTipo(int idTipo) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
         return dao.listaAtividades(idTipo);
+    }
+
+    public Atividade listaAtividadePorID(int idAtividade) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        return dao.listaAtividadesID(idAtividade);
     }
 
     public Departamento getDeptoPorID(int idDepto) {
@@ -116,4 +120,31 @@ public class Facade {
         EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
         dao.insereCorrecao(atividade);
     }
+
+    public List<EdicaoAtividade> listaEdicaoAtividade() throws ClassNotFoundException, SQLException {
+        EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
+        return dao.listaEdicoes();
+    }
+
+    public EdicaoAtividade getEdicaoPorID(int idEdicao) throws ClassNotFoundException, SQLException {
+        EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
+        return dao.EdicaoPorID(idEdicao);
+    }
+
+    public void aprovarEdicao(EdicaoAtividade edicao) throws ClassNotFoundException, SQLException {
+        EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
+        dao.aprovarEdicao(edicao);
+        setDescricaoAtividade(edicao);
+    }
+
+    public void recusarEdicao(EdicaoAtividade edicao) throws ClassNotFoundException, SQLException {
+        EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
+        dao.recusarEdicao(edicao);
+    }
+
+    private void setDescricaoAtividade(EdicaoAtividade edicao) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        dao.setDescricao(edicao);
+    }
+
 }

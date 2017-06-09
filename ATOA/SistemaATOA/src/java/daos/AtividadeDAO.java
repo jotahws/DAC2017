@@ -7,6 +7,7 @@ package daos;
 
 import beans.Atividade;
 import beans.Departamento;
+import beans.EdicaoAtividade;
 import beans.Funcionario;
 import beans.TipoAtividade;
 import conecao.ConnectionFactory;
@@ -33,6 +34,8 @@ public class AtividadeDAO {
     private final String EncerraAtividade = "UPDATE FuncionarioAtividade SET statusAtividade=2, fim=CURRENT_TIMESTAMP WHERE idFuncionario=? AND statusAtividade=1;";
     private final String EncerraTudo = "UPDATE FuncionarioAtividade SET statusAtividade=2, fim=CURRENT_TIMESTAMP WHERE idAtividade=? AND statusAtividade=1;";
     private final String listaAtvPorTipo = "SELECT * FROM FuncionarioAtividade WHERE idAtividade=? AND statusAtividade=1 ORDER BY inicio DESC;";
+    private final String listaAtvPorID = "select * from TipoAtividade t, funcionarioatividade a where a.idAtividade = t.id AND a.id=?;";
+    private final String updateDescricao = "UPDATE FuncionarioAtividade SET descricao=? WHERE id=?;";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -134,7 +137,7 @@ public class AtividadeDAO {
             rs = stmt.executeQuery();
             Facade facade = new Facade();
             while (rs.next()) {
-                
+
                 int idAtiv = rs.getInt("id");
                 String descricao = rs.getString("descricao");
                 int statusAtividade = rs.getInt("statusAtividade");
@@ -177,6 +180,77 @@ public class AtividadeDAO {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(EncerraTudo);
             stmt.setInt(1, idTipo);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public Atividade listaAtividadesID(int idAtividade) throws ClassNotFoundException, SQLException {
+        try {
+            Facade facade = new Facade();
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(listaAtvPorID);
+            stmt.setInt(1, idAtividade);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                //Dados da Atividade
+                int idAtiv = rs.getInt("a.id");
+                String descricao = rs.getString("a.descricao");
+                int statusAtividade = rs.getInt("a.statusAtividade");
+                Date inicio = rs.getDate("a.inicio");
+                Timestamp timestampinicio = rs.getTimestamp("a.inicio");
+                if (timestampinicio != null) {
+                    inicio = new java.util.Date(timestampinicio.getTime());
+                }
+                Date fim = rs.getDate("a.fim");
+                Timestamp timestampfim = rs.getTimestamp("a.fim");
+                if (timestampfim != null) {
+                    inicio = new java.util.Date(timestampfim.getTime());
+                }
+                int idFunc = rs.getInt("a.idFuncionario");
+                //Dados do TIPO
+                int idTipo = rs.getInt("t.id");
+                int idDepto = rs.getInt("t.idDepartamento");
+                String nome = rs.getString("t.nome");
+                //Criando objetos Tipo
+                TipoAtividade tipo = facade.getTipoPorID(idTipo);
+                //Criando atividade
+                Atividade atividade = new Atividade();
+                atividade.setId(idAtiv);
+                atividade.setDescricao(descricao);
+                atividade.setStatusAtividade(statusAtividade);
+                atividade.setFuncionario(facade.getfuncionarioID(idFunc));
+                atividade.setTipo(tipo);
+                atividade.setInicio(inicio);
+                //atividade.setFim(fim);
+                return atividade;
+            }
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+        return null;
+
+    }
+
+    public void setDescricao(EdicaoAtividade edicao) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            Facade facade = new Facade();
+            stmt = con.prepareStatement(updateDescricao);
+            stmt.setString(1, edicao.getDescricao());
+            stmt.setInt(2, edicao.getAtividade().getId());
             stmt.executeUpdate();
         } finally {
             try {
