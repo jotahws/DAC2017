@@ -86,6 +86,17 @@ public class ListaAtividadeServlet extends HttpServlet {
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/listaAtividades.jsp");
             rd.forward(request, response);
+        } else if ("Corrigir".equals(action)) {
+            try {
+                HttpSession session = request.getSession(true);
+                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Atividade atividade = facade.listaAtividadeIniciada(funcionario);
+                request.setAttribute("atividade", atividade);
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
+            }
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/corrigir.jsp");
+            rd.forward(request, response);
         }
 
     }

@@ -110,4 +110,9 @@ public class Facade {
         AtividadeDAO dao = new AtividadeDAO();
         dao.encerraTudo(idTipo);
     }
+
+    public void solicitaCorrecao(Atividade atividade) throws ClassNotFoundException, SQLException {
+        EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
+        dao.insereCorrecao(atividade);
+    }
 }

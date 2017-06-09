@@ -70,7 +70,7 @@
                                                         </c:choose>
                                                     </td>
                                                     <td class="tg-031e"><a href="AtividadeServlet?action=Encerrar" class="col-md-12 btn btn-danger">Encerrar</a></td>
-                                                    <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning col-md-12">Adicionar Descrição</a></td>   
+                                                    <td class="tg-031e"><a href="ListaAtividadeServlet?action=Corrigir" class="btn btn-warning col-md-12">Adicionar Descrição</a></td>   
                                                 </tr>
                                             </c:when>
                                             <c:otherwise>

@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import beans.Atividade;
 import beans.Funcionario;
 import facede.Facade;
 import java.io.IOException;
@@ -75,6 +76,18 @@ public class AtividadeServlet extends HttpServlet {
             try {
                 String idFunc = request.getParameter("idTipo");
                 facade.encerraTudoPorTipo(Integer.parseInt(idFunc));
+                response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
+            }
+        } else if ("corrigir".equals(action)) {
+            try {
+                HttpSession session = request.getSession(true);
+                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Atividade atividade = facade.listaAtividadeIniciada(funcionario);
+                String descricao = request.getParameter("descricao");
+                atividade.setDescricao(descricao);
+                facade.solicitaCorrecao(atividade);
                 response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
             } catch (ClassNotFoundException | SQLException ex) {
                 status = "error";
