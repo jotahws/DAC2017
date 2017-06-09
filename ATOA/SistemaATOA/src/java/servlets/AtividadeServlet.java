@@ -62,6 +62,15 @@ public class AtividadeServlet extends HttpServlet {
             } catch (ClassNotFoundException | SQLException ex) {
                 status = "error";
             }
+        } else if ("EncerrarID".equals(action)) {
+            try {
+                String idFunc = request.getParameter("idFunc");
+                Funcionario funcionario = new Funcionario(); //FAZER FACADE.GETFUNCIONARIOPORID()
+                facade.encerraAtividade(funcionario);
+                response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
+            }
         }
     }
 

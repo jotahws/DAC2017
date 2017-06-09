@@ -54,10 +54,10 @@
                                                     <th></th>
                                                     <th></th>
                                                 </tr>
-                                                <jsp:useBean id="data" class="java.util.Date"/>
                                                 <tr>
                                                     <td class="tg-031e"><c:out value="${atividadeiniciada.tipo.nome}"/></td>
                                                     <td class="tg-031e">
+                                                        <jsp:useBean id="data" class="java.util.Date"/>
                                                         <c:choose>
                                                             <c:when test="${data.date == atividadeiniciada.inicio.date && data.day == atividadeiniciada.inicio.day}">
                                                                 <c:out value="Hoje,"/>

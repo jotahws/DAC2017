@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -94,16 +96,29 @@
                                                         <table class="table">
                                                             <tr>
                                                                 <th class="">Nome</th>
-                                                                <th class="">Inicío</th>
+                                                                <th class="">Início</th>
                                                                 <th class="">Cargo</th>
                                                                 <th class=""></th>
                                                             </tr>
-                                                            <tr>
-                                                                <td class="tg-031e">Mauricio Araujo da Silva Pinto</td>
-                                                                <td class="tg-031e">Hoje, 12:17</td>
-                                                                <td class="tg-031e">Desenvolvedor</td>
-                                                                <td class="tg-031e"><a class="btn btn-primary">Encerrar atividade</a></td>
-                                                            </tr>                                                    
+                                                            <c:forEach var="itemAtv" items="${item.atividades}">
+                                                                <tr>
+                                                                    <td class="tg-031e">${itemAtv.id}</td>
+                                                                    <td class="tg-031e">
+                                                                        <jsp:useBean id="data" class="java.util.Date"/>
+                                                                        <c:choose>
+                                                                            <c:when test="${data.date == itemAtv.inicio.date && data.day == itemAtv.inicio.day}">
+                                                                                <c:out value="Hoje,"/>
+                                                                                <fmt:formatDate value="${itemAtv.inicio}" type="BOTH" pattern=" HH:mm"/>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <fmt:formatDate value="${itemAtv.inicio}" type="BOTH" pattern="dd/MM/yyy HH:mm"/>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </td>
+                                                                    <td class="tg-031e">${itemAtv.tipo.nome}</td>
+                                                                 <!-- INVIAR O ID DO FUNCIONARIOAQUI -->   <td class="tg-031e"><a href="AtividadeServlet?action=EncerrarID&idFunc=" class="btn btn-primary">Encerrar atividade</a></td>
+                                                                </tr>  
+                                                            </c:forEach>
                                                         </table>
                                                     </div>
                                                     <div class="text-right">         

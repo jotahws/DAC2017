@@ -147,10 +147,16 @@ public class AtividadeDAO {
                 if (timestampfim != null) {
                     inicio = new java.util.Date(timestampfim.getTime());
                 }
-                //FALTA PEGAR FUNCIONARIO
+                //FALTA PEGAR FUNCIONARIO -- Funcionario funcionario = facade.getfuncionarioID(rs.getString("idFuncionario"));
                 TipoAtividade tipo = facade.getTipoPorID(idTipo);
                 Atividade atv = new Atividade();
-                
+                atv.setId(idAtiv);
+                atv.setDescricao(descricao);
+                atv.setStatusAtividade(statusAtividade);
+                atv.setInicio(inicio);
+                atv.setFim(fim);
+                atv.setTipo(tipo);
+                // FALTA SETAR FUNCIONARIO -- atv.setFuncionario(funcionario);
                 lista.add(atv);
             }
             return lista;

@@ -5,6 +5,7 @@
  */
 package daos;
 
+import beans.Atividade;
 import beans.Departamento;
 import beans.TipoAtividade;
 import beans.TipoAtividade;
@@ -61,13 +62,14 @@ public class TipoAtividadeDAO {
             Facade facade = new Facade();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                facade.listaAtividadesPorTipo(id);
+                List<Atividade> atividades = facade.listaAtividadesPorTipo(id);
                 String nome = rs.getString("nome");
                 int idDepto = rs.getInt("idDepartamento");
                 Departamento depto = facade.getDeptoPorID(idDepto);
                 TipoAtividade tipo = new TipoAtividade();
                 tipo.setId(id);
                 tipo.setNome(nome);
+                tipo.setAtividades(atividades);
                 tipo.setDepartamento(depto);
                 lista.add(tipo);
             }
