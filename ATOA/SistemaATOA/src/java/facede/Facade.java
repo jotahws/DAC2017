@@ -10,6 +10,7 @@ import beans.Departamento;
 import beans.Funcionario;
 import beans.TipoAtividade;
 import daos.AtividadeDAO;
+import daos.EdicaoAtividadeDAO;
 import daos.TipoAtividadeDAO;
 import java.sql.SQLException;
 import java.util.List;
@@ -55,7 +56,7 @@ public class Facade {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
         return dao.listaTipos();
     }
-    
+
     public List<Atividade> listaAtividadesPorTipo(int idTipo) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
         return dao.listaAtividades(idTipo);
@@ -99,4 +100,20 @@ public class Facade {
         return dao.getAtividadeIniciada(func);
     }
 
+    public Funcionario getfuncionarioID(int idFunc) throws ClassNotFoundException, SQLException {
+        Client client = ClientBuilder.newClient();
+        Funcionario func = client.target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios/" + idFunc)
+                .request(MediaType.APPLICATION_JSON).get(Funcionario.class);
+        return func;
+    }
+
+    public void encerraTudoPorTipo(int idTipo) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        dao.encerraTudo(idTipo);
+    }
+
+    public void solicitaCorrecao(Atividade atividade) throws ClassNotFoundException, SQLException {
+        EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
+        dao.insereCorrecao(atividade);
+    }
 }

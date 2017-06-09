@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import beans.Atividade;
 import beans.Funcionario;
 import facede.Facade;
 import java.io.IOException;
@@ -65,13 +66,33 @@ public class AtividadeServlet extends HttpServlet {
         } else if ("EncerrarID".equals(action)) {
             try {
                 String idFunc = request.getParameter("idFunc");
-                Funcionario funcionario = new Funcionario(); //FAZER FACADE.GETFUNCIONARIOPORID()
+                Funcionario funcionario = facade.getfuncionarioID(Integer.parseInt(idFunc));
                 facade.encerraAtividade(funcionario);
                 response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
             } catch (ClassNotFoundException | SQLException ex) {
                 status = "error";
             }
-        }
+        } else if ("EncerrarTudo".equals(action)) {
+            try {
+                String idFunc = request.getParameter("idTipo");
+                facade.encerraTudoPorTipo(Integer.parseInt(idFunc));
+                response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
+            }
+        } else if ("corrigir".equals(action)) {
+            try {
+                HttpSession session = request.getSession(true);
+                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Atividade atividade = facade.listaAtividadeIniciada(funcionario);
+                String descricao = request.getParameter("descricao");
+                atividade.setDescricao(descricao);
+                facade.solicitaCorrecao(atividade);
+                response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
+            }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

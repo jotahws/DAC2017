@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author MauMau
+ * @author JotaWind
  */
 public class Cidade implements Serializable {
 

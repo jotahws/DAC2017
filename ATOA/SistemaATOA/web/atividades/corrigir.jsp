@@ -35,18 +35,18 @@
                             </div>
                             <div class="col-md-12 corpo">
                                 <fieldset>
-                                    <form method="POST" action="${pageContext.request.contextPath}/" class="cadastro">
+                                    <form method="POST" action="${pageContext.request.contextPath}/AtividadeServlet?action=corrigir" class="cadastro">
                                         <div class="row">
                                             <legend>Dados da Atividade</legend>
                                             <div class="form-group col-md-8">
                                                 <label for="nome">Nome do tipo de atividade:</label>
-                                                <input type="text" disabled class="form-control" id="nome" name="nome" placeholder="Ex. Atividade em back-end">
+                                                <input type="text" disabled class="form-control" id="nome" name="nome" value="${atividade.tipo.nome}">
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="departamento">Departamento:</label>
                                                 <select class="form-control" disabled id="departamento" name="departamento" >
                                                     <option>
-                                                        Desenvolvimento
+                                                        ${atividade.tipo.departamento.nome}
                                                     </option>
                                                 </select>
                                             </div>

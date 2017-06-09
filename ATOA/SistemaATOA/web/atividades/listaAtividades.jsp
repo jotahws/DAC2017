@@ -49,13 +49,14 @@
                                             <c:when test="${atividadeiniciada != null}">
                                                 <tr>
                                                     <th>Atividade</th>
+                                                    <th>Descrição</th>
                                                     <th>Início</th>
-                                                    <th></th>
                                                     <th></th>
                                                     <th></th>
                                                 </tr>
                                                 <tr>
                                                     <td class="tg-031e"><c:out value="${atividadeiniciada.tipo.nome}"/></td>
+                                                    <td class="tg-031e"><c:out value="${atividadeiniciada.descricao}"/></td>
                                                     <td class="tg-031e">
                                                         <jsp:useBean id="data" class="java.util.Date"/>
                                                         <c:choose>
@@ -68,9 +69,8 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </td>
-                                                    <td class="tg-031e"><a class="col-md-12 btn btn-primary">Pausar</a></td>
                                                     <td class="tg-031e"><a href="AtividadeServlet?action=Encerrar" class="col-md-12 btn btn-danger">Encerrar</a></td>
-                                                    <td class="tg-031e"><a href="corrigir.jsp" class="btn btn-warning col-md-12">Corrigir</a></td>   
+                                                    <td class="tg-031e"><a href="ListaAtividadeServlet?action=Corrigir" class="btn btn-warning col-md-12">Adicionar Descrição</a></td>   
                                                 </tr>
                                             </c:when>
                                             <c:otherwise>
