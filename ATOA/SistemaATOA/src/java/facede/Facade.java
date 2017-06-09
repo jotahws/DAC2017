@@ -44,7 +44,7 @@ public class Facade {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
         return dao.listaTipos();
     }
-    
+
     public List<Atividade> listaAtividadesPorTipo(int idTipo) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
         return dao.listaAtividades(idTipo);
@@ -88,4 +88,26 @@ public class Facade {
         return dao.getAtividadeIniciada(func);
     }
 
+    public Funcionario getfuncionarioID(int idFunc) throws ClassNotFoundException, SQLException {
+        Client client = ClientBuilder.newClient();
+        Funcionario func = client.target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios/" + idFunc)
+                .request(MediaType.APPLICATION_JSON).get(Funcionario.class);
+        return func;
+    }
+
+    public List<Funcionario> listaFuncionarios() throws ClassNotFoundException, SQLException, NullPointerException {
+
+        Client client = ClientBuilder.newClient();
+        Response resp = client
+                .target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios")
+                .request(MediaType.APPLICATION_JSON).get();
+        List<Funcionario> listaFunc = resp.readEntity(new GenericType<List<Funcionario>>() {
+        });
+        return listaFunc;
+    }
+
+    public void encerraTudoPorTipo(int idTipo) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        dao.encerraTudo(idTipo);
+    }
 }
