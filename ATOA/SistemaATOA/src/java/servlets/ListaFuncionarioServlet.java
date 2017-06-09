@@ -5,8 +5,14 @@
  */
 package servlets;
 
+import beans.Departamento;
+import beans.Funcionario;
+import beans.TipoAtividade;
+import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,17 +38,29 @@ public class ListaFuncionarioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ListaFuncionarioServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ListaFuncionarioServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = request.getParameter("action");
+        Facade facade = new Facade();
+
+        if ("ListaFuncionarios".equals(action)) {
+            try {
+                List<Funcionario> funcionarios = facade.listaFuncionarios();
+                request.setAttribute("listaFunc", funcionarios);
+                
+            } catch (Exception ex) {
+                
+            }
+            try {
+                List<Departamento> departamentos = facade.listaDeptos();
+                request.setAttribute("listaDepart", departamentos);
+                
+            } catch (Exception ex) {
+                
+            }
+            
+            
+            
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorios.jsp");
+            rd.forward(request, response);
         }
     }
 

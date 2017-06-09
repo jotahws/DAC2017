@@ -35,42 +35,44 @@
                             </div>
                             <div class="col-md-12 corpo">
                                 <div class="col-md-6">
-                                    <h3 class="text-center ">Por Funcionário</h3>
+                                    <h3 class="text-center ">Por Funcionários Consolidado</h3>
                                     <div class=" panel panel-primary">
                                         <table class="table">
                                             <tr>
-                                                <th>Funcionário</th>
-                                                <th>CPF</th>
+                                                <th>Funcionario</th>
+                                                <th>Email</th>
+                                                <th>Cpf</th>
+                                                <th>Cargo</th>
                                             </tr>
-                                            <tr>
-                                                <td class="tg-031e">João Alberto</td>
-                                                <td class="tg-031e">0452291829</td>
-                                            </tr>      
-                                            <tr>
-                                                <td class="tg-031e">Ricardo Vicentin</td>
-                                                <td class="tg-031e">9201992039</td>
-                                            </tr> 
+                                            <!--<c:set var="listaFunc" value="${listaFunc}"/>-->
+                                            <c:forEach var="item" items="${listaFunc}">
+                                                <tr>
+                                                    <td class="tg-031e"><c:out value="${item.nome}"/></td>
+                                                    <td class="tg-031e"><c:out value="${item.email}"/></td>
+                                                    <td class="tg-031e"><c:out value="${item.cpf}"/></td>
+                                                    <td class="tg-031e"><c:out value="${item.cargo.nome}"/></td>
+                                                    </tr>
+                                            </c:forEach>
                                         </table>
                                     </div> 
-                                    <input type="submit" class="btn btn-primary" value="Gerar relatório"/>
+                                            <a class="btn btn-md btn-primary" href="RelatorioServlet?action=relConsolidado"><span></span> Gerar Relatório</a>
 
                                 </div>
                                 <div  class="col-md-6 relatorio-dep">
-                                    <h3 class="text-center">Por departamento</h3>
+                                    <h3 class="text-center">Por Departamentos Consolidados</h3>
                                     <div class=" panel panel-primary">
                                         <table class="table">
                                             <tr>
                                                 <th>Departamento</th>
                                                 <th>Localização</th>
                                             </tr>
-                                            <tr>
-                                                <td class="tg-031e">Recursos Humanos</td>
-                                                <td class="tg-031e">Sala 10</td>
-                                            </tr>      
-                                            <tr>
-                                                <td class="tg-031e">Marketing</td>
-                                                <td class="tg-031e">Sala 2</td>
-                                            </tr>
+                                            <!--<c:set var="listaDepart" value="${listaDepart}"/>-->
+                                            <c:forEach var="item" items="${listaDepart}">
+                                                <tr>
+                                                    <td class="tg-031e"><c:out value="${item.nome}"/></td>
+                                                    <td class="tg-031e"><c:out value="${item.localizacao}"/></td>
+                                                    </tr>
+                                            </c:forEach>
                                         </table>
 
                                     </div>

@@ -39,6 +39,17 @@ public class Facade {
         return res.readEntity(new GenericType<List<Departamento>>() {
         });
     }
+    
+    public List<Funcionario> listaFuncionarios() {
+        Client client = ClientBuilder.newClient();
+        Response res = client.target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios")
+                .request(MediaType.APPLICATION_JSON).get();
+
+        return res.readEntity(new GenericType<List<Funcionario>>() {
+        });
+    }
+    
+    
 
     public List<TipoAtividade> listaAtividades() throws ClassNotFoundException, SQLException {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();

@@ -5,8 +5,10 @@
  */
 package servlets;
 
+import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +34,20 @@ public class RelatorioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RelatorioServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RelatorioServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = request.getParameter("action");
+        Facade facade = new Facade();
+        if ("relConsolidado".equals(action)) {
+            //Guardar em um bean: nome do funcionario, cpf, nomeAtividade, descrição atividade, 
+            //status, horas trabalhadas quando atividade.idfuncionario = funcionario.id and
+            //status = "ENCERRADO". Depois mandar esse bean pra dao e inserir os dados na tabela temporaria   
         }
+        if ("relDepartamento".equals(action)) {
+            //Pegar o dia data e gerar o relatorio de todos os departamentos por dia
+            //nome departamento, nome tipoatividade, descricao da atividade, funcionario que trabalhou 
+            //quando TipoAtividade.idDepartameneto = bean.departamento.id and status = "ENCERRADO"
+
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

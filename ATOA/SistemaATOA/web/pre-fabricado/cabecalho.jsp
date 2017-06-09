@@ -33,7 +33,7 @@
                         <c:when test="${funcionarioLogado.perfil == 'GERENTE-RH'}">
                             <ul class="nav navbar-nav">
                                 <li><a href="${pageContext.request.contextPath}/ListaAtividadeServlet?action=ListaAtividades">Atividades</a></li>
-                                <li><a href="${pageContext.request.contextPath}/relatorios.jsp">Relatórios</a></li>                        
+                                <li><a href="${pageContext.request.contextPath}/ListaFuncionarioServlet?action=ListaFuncionarios">Relatórios</a></li>                        
                                 <li><a href="${pageContext.request.contextPath}/atividades/aprovarCorrecao.jsp">Aprovar Correção</a></li>
                             </ul>
                         </c:when>
