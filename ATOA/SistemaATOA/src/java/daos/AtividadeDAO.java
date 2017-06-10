@@ -38,7 +38,7 @@ public class AtividadeDAO {
     private final String insereFuncionario = "insert INTO funcTemp (id,nome,email,cpf,cargo,departamento,salario) VALUES (?,?,?,?,?,?,?)";
     private final String listaAtvPorID = "select * from TipoAtividade t, funcionarioatividade a where a.idAtividade = t.id AND a.id=?;";
     private final String updateDescricao = "UPDATE FuncionarioAtividade SET descricao=? WHERE id=?;";
-
+    private final String deleteFuncTemp = "DELETE FROM funcTemp WHERE id=?;";
     
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -269,6 +269,24 @@ public class AtividadeDAO {
 
     }
 
+    public void setDescricao(EdicaoAtividade edicao) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            Facade facade = new Facade();
+            stmt = con.prepareStatement(updateDescricao);
+            stmt.setString(1, edicao.getDescricao());
+            stmt.setInt(2, edicao.getAtividade().getId());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
     public void insereFuncTemporario(Funcionario func) throws ClassNotFoundException, SQLException {
         try {
             con = new ConnectionFactory().getConnection();
@@ -292,13 +310,11 @@ public class AtividadeDAO {
 
     }
 
-    public void setDescricao(EdicaoAtividade edicao) throws ClassNotFoundException, SQLException {
+    public void removeFuncTemporario(Funcionario func) throws ClassNotFoundException, SQLException {
         try {
             con = new ConnectionFactory().getConnection();
-            Facade facade = new Facade();
-            stmt = con.prepareStatement(updateDescricao);
-            stmt.setString(1, edicao.getDescricao());
-            stmt.setInt(2, edicao.getAtividade().getId());
+            stmt = con.prepareStatement(deleteFuncTemp);
+            stmt.setInt(1, func.getId());
             stmt.executeUpdate();
         } finally {
             try {
