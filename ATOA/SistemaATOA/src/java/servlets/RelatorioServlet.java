@@ -81,7 +81,6 @@ public class RelatorioServlet extends HttpServlet {
                             OutputStream ops = response.getOutputStream();
                             ops.write(bytes);
                         }
-                        //facade.removeFuncTemp();
 
                     } catch (ClassNotFoundException ex) {
                         System.out.println("Erro ao conectar banco: " + ex.getMessage());
@@ -102,7 +101,13 @@ public class RelatorioServlet extends HttpServlet {
             } catch (SQLException ex) {
                 status = "Erro ao consultar o bando de dados";
             }
-
+            try {
+                facade.removeFuncTemp();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if ("relDepartamento".equals(action)) {
             int id = Integer.parseInt(request.getParameter("id"));
             try {
