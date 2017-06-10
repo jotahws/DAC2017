@@ -56,7 +56,7 @@
                                             </div>                                            
                                         </div>
                                         <div class="text-right">
-                                            <button type="submit" id="botao" class="btn btn-primary">Cadastrar</button>  
+                                            <button type="submit" id="botao" class="btn btn-primary">Salvar modificações</button>  
                                         </div>
                                     </form>
                                 </fieldset>

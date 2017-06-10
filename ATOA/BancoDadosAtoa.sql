@@ -125,7 +125,8 @@ email varchar(50),
 cpf varchar(12),
 cargo varchar(50),
 departamento varchar(50),
-salario double
+salario double,
+primary key(id)
 );
 /*Tira modo seguro para deletar*/
 SET SQL_SAFE_UPDATES = 0;
