@@ -63,16 +63,19 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="depto">Mês</label>
-                                                <select class="form-control" id="depto" name="depto">
-                                                    <option>
-                                                        Janeiro
-                                                    </option>
-                                                    <option>
-                                                        Fevereiro
-                                                    </option>
-                                                    <option>
-                                                        Março
-                                                    </option>
+                                                <select class="form-control" id="depto" name="mes">
+                                                    <option value="01">Janeiro</option>
+                                                    <option value="02">Fevereiro</option>
+                                                    <option value="03">Março</option>
+                                                    <option value="04">Abril</option>
+                                                    <option value="05">Maio</option>
+                                                    <option value="06">Junho</option>
+                                                    <option value="07">Julho</option>
+                                                    <option value="08">Agosto</option>
+                                                    <option value="09">Setembro</option>
+                                                    <option value="10">Outubro</option>
+                                                    <option value="11">Novembro</option>
+                                                    <option value="12">Dezembro</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-1">
@@ -87,16 +90,19 @@
                                         <form>
                                             <div class="form-group col-md-4">
                                                 <label for="depto">Mês</label>
-                                                <select class="form-control" id="depto" name="depto">
-                                                    <option>
-                                                        Janeiro
-                                                    </option>
-                                                    <option>
-                                                        Fevereiro
-                                                    </option>
-                                                    <option>
-                                                        Março
-                                                    </option>
+                                                <select class="form-control" id="depto" name="mes">
+                                                    <option value="01">Janeiro</option>
+                                                    <option value="02">Fevereiro</option>
+                                                    <option value="03">Março</option>
+                                                    <option value="04">Abril</option>
+                                                    <option value="05">Maio</option>
+                                                    <option value="06">Junho</option>
+                                                    <option value="07">Julho</option>
+                                                    <option value="08">Agosto</option>
+                                                    <option value="09">Setembro</option>
+                                                    <option value="10">Outubro</option>
+                                                    <option value="11">Novembro</option>
+                                                    <option value="12">Dezembro</option>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-1">

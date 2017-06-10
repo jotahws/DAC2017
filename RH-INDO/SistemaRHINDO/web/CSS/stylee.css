@@ -84,3 +84,7 @@ textarea {
     -moz-user-select: none;
     -ms-user-select: none;
 }
+
+.margin-topo{
+    margin: 20px 0px;
+}

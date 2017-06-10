@@ -32,14 +32,58 @@
                             <!-- Row do input pesquisar: -->
                             <div class="row row-busca-titulo">
                                 <div class="col-md-8 titulo">
-                                    <h1 class="col-md-10">Fechar Folha</h1>
+                                    <h1 class="col-md-10">Fechar Folha de Pagamento</h1>
                                 </div>
                             </div>
                             <!-- Row do cadastro: -->
                             <div class="row row-lista-corpo">
                                 <!-- corpo da página -->
                                 <div class="col-md-12 corpo">
-                                    <legend>Fechar folha de Pagamento</legend>
+                                    <legend>&nbsp;</legend>
+
+                                    <!-- lista de departamentos e atividades -->
+                                    <div class="col-md-1"><h1>&nbsp;</h1></div>
+                                    <div class="col-md-7 lista-lat">
+                                        <fmt:formatDate value="${atividadeiniciada.inicio}" type="DATE" pattern="MM"/>
+                                        <form method="POST" action="${pageContext.request.contextPath}/ListaAtividadeServlet?action=atvMesFunc" >
+                                            <div class="col-md-4">
+                                                <select name="mes" class="form-control">
+                                                    <option value="01" <c:if test="${param.mes == '01'}">selected</c:if>>Janeiro</option>
+                                                    <option value="02" <c:if test="${param.mes == '02'}">selected</c:if>>Fevereiro</option>
+                                                    <option value="03" <c:if test="${param.mes == '03'}">selected</c:if>>Março</option>
+                                                    <option value="04" <c:if test="${param.mes == '04'}">selected</c:if>>Abril</option>
+                                                    <option value="05" <c:if test="${param.mes == '05'}">selected</c:if>>Maio</option>
+                                                    <option value="06" <c:if test="${param.mes == '06'}">selected</c:if>>Junho</option>
+                                                    <option value="07" <c:if test="${param.mes == '07'}">selected</c:if>>Julho</option>
+                                                    <option value="08" <c:if test="${param.mes == '08'}">selected</c:if>>Agosto</option>
+                                                    <option value="09" <c:if test="${param.mes == '09'}">selected</c:if>>Setembro</option>
+                                                    <option value="10" <c:if test="${param.mes == '10'}">selected</c:if>>Outubro</option>
+                                                    <option value="11" <c:if test="${param.mes == '11'}">selected</c:if>>Novembro</option>
+                                                    <option value="12" <c:if test="${param.mes == '12'}">selected</c:if>>Dezembro</option>
+                                                    </select>
+                                                </div>
+                                                <input type="submit" class="btn btn-primary col-md-3" value="Fechar Folha"/>
+                                            </form>
+                                        </div>
+                                        <!-- corpo da página -->
+                                        <div class="col-md-10">
+                                            <div class=" panel panel-primary margin-topo">
+                                                <div class="panel-heading">Lista da folha de pagamento do mês:</div>
+                                            <c:choose>
+                                                <c:when test="${empty atividades}"><h2 class="text-center unselectable cor-disabled">Selecione um mês e clique em "Fechar Folha"</h2></c:when>
+                                                <c:otherwise>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <th>Tipo da Atividade</th>
+                                                            <th>Descrição</th>
+                                                            <th>Início</th>
+                                                            <th>Fim</th>
+                                                        </tr>
+                                                    </table>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </div>   
                                 </div>
                             </div>
                         </div>
