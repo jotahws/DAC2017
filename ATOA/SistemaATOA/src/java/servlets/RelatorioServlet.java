@@ -6,11 +6,16 @@
 package servlets;
 
 import beans.Funcionario;
+import conecao.ConnectionFactory;
 import facede.Facade;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -50,8 +55,39 @@ public class RelatorioServlet extends HttpServlet {
                 if (result) {
                     Funcionario func = facade.getfuncionarioID(id);
                     facade.insereFuncTemp(func);
-                    
-                    
+                    //gera relatorio
+                    try {
+                        Connection con = new ConnectionFactory().getConnection();
+                        String jasper = request.getContextPath()
+                                + "/RelatorioPorFunc.jasper";
+                        // Host onde o servlet esta executando
+                        String host = "http://" + request.getServerName()
+                                + ":" + request.getServerPort();
+                        // URL para acesso ao relatório
+                        URL jasperURL = new URL(host + jasper);
+                        // Parâmetros do relatório
+                        HashMap params = new HashMap();
+                        // Geração do relatório
+                        byte[] bytes = JasperRunManager.runReportToPdf(
+                                jasperURL.openStream(), params, con);
+
+                        if (bytes != null) {
+                            // A página será mostrada em PDF
+                            response.setContentType("application/pdf");
+                            // Envia o PDF para o Cliente
+                            OutputStream ops = response.getOutputStream();
+                            ops.write(bytes);
+                        }
+                    } catch (ClassNotFoundException ex) {
+                        System.out.println("Erro ao conectar banco: " + ex.getMessage());
+                    } catch (JRException ex) {
+                        Logger.getLogger(RelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    } finally {
+                        con.close();
+                        
+                        //facade.removeFuncTemp(func);
+                    }
+
                 } else {
                     status = "erro";
                     response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios&status=" + status);
@@ -62,12 +98,7 @@ public class RelatorioServlet extends HttpServlet {
             } catch (SQLException ex) {
                 status = "Erro ao consultar o bando de dados";
             }
-        
-        
-        
-        
-        
-        
+
         } else if ("relDepartamento".equals(action)) {
             //Pegar o dia data e gerar o relatorio de todos os departamentos por dia
             //nome departamento, nome tipoatividade, descricao da atividade, funcionario que trabalhou 

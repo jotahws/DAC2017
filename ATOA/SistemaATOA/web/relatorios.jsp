@@ -63,8 +63,7 @@
                                             </c:forEach>
                                         </table>
                                     </div> 
-                                    <a class="btn btn-md btn-primary" href="RelatorioServlet?action=relConsolidado"><span></span> Gerar Relatório</a>
-
+                                    
                                 </div>
                                 <div  class="col-md-6 relatorio-dep">
                                     <h3 class="text-center">Por Departamentos Consolidados</h3>

@@ -38,7 +38,7 @@ public class AtividadeDAO {
     private final String insereFuncionario = "insert INTO funcTemp (id,nome,email,cpf,cargo,departamento,salario) VALUES (?,?,?,?,?,?,?)";
     private final String listaAtvPorID = "select * from TipoAtividade t, funcionarioatividade a where a.idAtividade = t.id AND a.id=?;";
     private final String updateDescricao = "UPDATE FuncionarioAtividade SET descricao=? WHERE id=?;";
-    private final String deleteFuncTemp = "DELETE FROM funcTemp WHERE id=?;";
+    private final String deleteFuncTemp = "DELETE FROM funcTemp;";
     
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -310,11 +310,10 @@ public class AtividadeDAO {
 
     }
 
-    public void removeFuncTemporario(Funcionario func) throws ClassNotFoundException, SQLException {
+    public void removeFuncTemporario() throws ClassNotFoundException, SQLException {
         try {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(deleteFuncTemp);
-            stmt.setInt(1, func.getId());
             stmt.executeUpdate();
         } finally {
             try {

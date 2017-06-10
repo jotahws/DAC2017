@@ -152,9 +152,9 @@ public class Facade {
         dao.insereFuncTemporario(func);
     }
 
-    public void removeFuncTemp(Funcionario func) throws ClassNotFoundException, SQLException {
+    public void removeFuncTemp() throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
-        dao.removeFuncTemporario(func);
+        dao.removeFuncTemporario();
     }
     
     private void setDescricaoAtividade(EdicaoAtividade edicao) throws ClassNotFoundException, SQLException {
