@@ -34,7 +34,7 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="${pageContext.request.contextPath}/ListaAtividadeServlet?action=ListaAtividades">Atividades</a></li>
                                 <li><a href="${pageContext.request.contextPath}/ListaFuncionarioServlet?action=ListaFuncionarios">Relatórios</a></li>                        
-                                <li><a href="${pageContext.request.contextPath}/atividades/aprovarCorrecao.jsp">Aprovar Correção</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ListaEdicaoServlet?action=listaEdicao">Aprovar Correção</a></li>
                             </ul>
                         </c:when>
                         <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO') || (funcionarioLogado.perfil == 'GERENTE')}">
