@@ -33,7 +33,10 @@ public class AtividadeDAO {
     private final String EncerraAtividade = "UPDATE FuncionarioAtividade SET statusAtividade=2, fim=CURRENT_TIMESTAMP WHERE idFuncionario=? AND statusAtividade=1;";
     private final String EncerraTudo = "UPDATE FuncionarioAtividade SET statusAtividade=2, fim=CURRENT_TIMESTAMP WHERE idAtividade=? AND statusAtividade=1;";
     private final String listaAtvPorTipo = "SELECT * FROM FuncionarioAtividade WHERE idAtividade=? AND statusAtividade=1 ORDER BY inicio DESC;";
+    private final String verFuncionario = "select * FROM FuncionarioAtividade WHERE idFuncionario=?;";
+    private final String insereFuncionario = "insert INTO funcTemp (id,nome,email,cpf,cargo,departamento,salario) VALUES (?,?,?,?,?,?,?)";
 
+    
     private Connection con = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -134,7 +137,7 @@ public class AtividadeDAO {
             rs = stmt.executeQuery();
             Facade facade = new Facade();
             while (rs.next()) {
-                
+
                 int idAtiv = rs.getInt("id");
                 String descricao = rs.getString("descricao");
                 int statusAtividade = rs.getInt("statusAtividade");
@@ -177,6 +180,49 @@ public class AtividadeDAO {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(EncerraTudo);
             stmt.setInt(1, idTipo);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public boolean verificaFuncionario(int idTipo) throws SQLException, ClassNotFoundException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(verFuncionario);
+            stmt.setInt(1, idTipo);
+            rs = stmt.executeQuery();
+            if (rs.next()) {                
+                return true;
+            } else
+                return false;
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void insereFuncTemporario(Funcionario func) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(insereFuncionario);
+            stmt.setInt(1, func.getId());
+            stmt.setString(2, func.getNome());
+            stmt.setString(3, func.getEmail());
+            stmt.setString(4, func.getCpf());
+            stmt.setString(5, func.getCargo().getNome());
+            stmt.setString(6, func.getDepartamento().getNome());
+            stmt.setDouble(7, func.getCargo().getSalario());            
             stmt.executeUpdate();
         } finally {
             try {

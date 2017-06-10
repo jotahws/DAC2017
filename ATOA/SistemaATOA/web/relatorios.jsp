@@ -33,6 +33,14 @@
                                     <h1 class="col-md-10">Relatórios
                                 </div>
                             </div>
+                            <c:choose>
+                                <c:when test="${(param.status == 'erro')}">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <p> <strong>Ops!</strong> O funcionário não contém nenhuma atividade.</p>
+                                    </div>
+                                </c:when>
+                            </c:choose>
                             <div class="col-md-12 corpo">
                                 <div class="col-md-6">
                                     <h3 class="text-center ">Por Funcionários Consolidado</h3>
@@ -41,21 +49,21 @@
                                             <tr>
                                                 <th>Funcionario</th>
                                                 <th>Email</th>
-                                                <th>Cpf</th>
                                                 <th>Cargo</th>
+                                                <th></th>
                                             </tr>
                                             <!--<c:set var="listaFunc" value="${listaFunc}"/>-->
                                             <c:forEach var="item" items="${listaFunc}">
                                                 <tr>
                                                     <td class="tg-031e"><c:out value="${item.nome}"/></td>
                                                     <td class="tg-031e"><c:out value="${item.email}"/></td>
-                                                    <td class="tg-031e"><c:out value="${item.cpf}"/></td>
                                                     <td class="tg-031e"><c:out value="${item.cargo.nome}"/></td>
-                                                    </tr>
+                                                    <td class="tg-031e"><a href="RelatorioServlet?action=relConsolidado&id=${item.id}" class="col-md-12 btn btn-success">Relatório</a></td>                                                    
+                                                </tr>
                                             </c:forEach>
                                         </table>
                                     </div> 
-                                            <a class="btn btn-md btn-primary" href="RelatorioServlet?action=relConsolidado"><span></span> Gerar Relatório</a>
+                                    <a class="btn btn-md btn-primary" href="RelatorioServlet?action=relConsolidado"><span></span> Gerar Relatório</a>
 
                                 </div>
                                 <div  class="col-md-6 relatorio-dep">
@@ -71,7 +79,7 @@
                                                 <tr>
                                                     <td class="tg-031e"><c:out value="${item.nome}"/></td>
                                                     <td class="tg-031e"><c:out value="${item.localizacao}"/></td>
-                                                    </tr>
+                                                </tr>
                                             </c:forEach>
                                         </table>
 

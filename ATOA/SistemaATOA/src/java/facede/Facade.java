@@ -121,4 +121,13 @@ public class Facade {
         EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
         dao.listaEdicoes();
     }
+    public boolean verificaFunc(int idTipo) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+       return dao.verificaFuncionario(idTipo);
+    }
+
+    public void insereFuncTemp(Funcionario func) {
+        AtividadeDAO dao = new AtividadeDAO();
+        dao.insereFuncTemporario(func);
+        }
 }

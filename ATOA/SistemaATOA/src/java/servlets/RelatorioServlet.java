@@ -5,10 +5,14 @@
  */
 package servlets;
 
+import beans.Funcionario;
 import facede.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,12 +40,35 @@ public class RelatorioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         Facade facade = new Facade();
+        String status = "";
         if ("relConsolidado".equals(action)) {
-            //Guardar em um bean: nome do funcionario, cpf, nomeAtividade, descrição atividade, 
-            //status, horas trabalhadas quando atividade.idfuncionario = funcionario.id and
-            //status = "ENCERRADO". Depois mandar esse bean pra dao e inserir os dados na tabela temporaria   
-        }
-        if ("relDepartamento".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            //Aqui vai verificar se funcionario iniciou uma atividade
+            try {
+                boolean result = facade.verificaFunc(id);
+                //Aqui vai buscar funcionario por id no rhindo, inserindo tabela temporaria
+                if (result) {
+                    Funcionario func = facade.getfuncionarioID(id);
+                    facade.insereFuncTemp(func);
+                    
+                    
+                } else {
+                    status = "erro";
+                    response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios&status=" + status);
+                }
+
+            } catch (ClassNotFoundException ex) {
+                status = "Erro no classNotFound";
+            } catch (SQLException ex) {
+                status = "Erro ao consultar o bando de dados";
+            }
+        
+        
+        
+        
+        
+        
+        } else if ("relDepartamento".equals(action)) {
             //Pegar o dia data e gerar o relatorio de todos os departamentos por dia
             //nome departamento, nome tipoatividade, descricao da atividade, funcionario que trabalhou 
             //quando TipoAtividade.idDepartameneto = bean.departamento.id and status = "ENCERRADO"

@@ -118,6 +118,19 @@ create table statusAtividade(
     primary key(id)
 );
 
+create table funcTemp(
+id int,
+nome varchar(100),
+email varchar(50),
+cpf varchar(12),
+cargo varchar(50),
+departamento varchar(50),
+salario double
+);
+/*Tira modo seguro para deletar*/
+SET SQL_SAFE_UPDATES = 0;
+
+
 INSERT INTO statusAtividade (nome) VALUES ("INICIADO");
 INSERT INTO statusAtividade (nome) VALUES ("ENCERRADO");
 INSERT INTO statusAtividade (nome) VALUES ("PAUSADO");
