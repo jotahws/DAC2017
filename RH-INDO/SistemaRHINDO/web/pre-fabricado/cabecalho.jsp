@@ -32,7 +32,7 @@
                     <c:choose>
                         <c:when test="${funcionarioLogado.perfil == 'GERENTE-RH'}">
                             <ul class="nav navbar-nav">
-                                <li><a href="${pageContext.request.contextPath}/relatorios.jsp">Relatórios</a></li>
+                                <li><a href="${pageContext.request.contextPath}/RelatoriosServlet?action=RelatoriosGerente">Relatórios</a></li>
                                 <li><a href="${pageContext.request.contextPath}/fecharFolha.jsp">Folha de Pagamento</a></li>
                                 <li class="dropdown">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Funcionários<span class="caret"></span></a>

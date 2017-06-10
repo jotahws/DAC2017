@@ -33,10 +33,7 @@
                             <div class="row row-busca-titulo">
                                 <div class="col-md-4">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Nome, Localização...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">Pesquisar</button>
-                                        </span>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-8 titulo">

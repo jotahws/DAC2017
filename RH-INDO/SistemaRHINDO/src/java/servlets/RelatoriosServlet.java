@@ -5,7 +5,9 @@
  */
 package servlets;
 
+import beans.Departamento;
 import conexao.ConnectionFactory;
+import facade.Facade;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -15,8 +17,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -84,6 +88,18 @@ public class RelatoriosServlet extends HttpServlet {
             }
 
         } else if ("relMes".equals(action)) {
+
+        } else if ("RelatoriosGerente".equals(action)) {
+            try {
+                Facade facade = new Facade();
+                List<Departamento> deptos = facade.carregaListaDeptos();
+                request.setAttribute("deptos", deptos);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorios.jsp");
+                rd.forward(request, response);
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(RelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
     }

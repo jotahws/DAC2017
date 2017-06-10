@@ -32,12 +32,7 @@
                             <!-- Row do input pesquisar: -->
                             <div class="row row-busca-titulo">
                                 <div class="col-md-4">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Nome, Salário...">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">Pesquisar</button>
-                                        </span>
-                                    </div>
+                                    
                                 </div>
                                 <div class="col-md-8 titulo">
                                     <h1 class="col-md-10">Cargos</h1>
