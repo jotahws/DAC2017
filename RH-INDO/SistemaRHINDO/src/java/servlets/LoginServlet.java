@@ -74,9 +74,7 @@ public class LoginServlet extends HttpServlet {
                     out.println("ERRO NO SQL" + ex.getMessage());
                 }
             } catch (NullPointerException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("<h1>DADOS INVÁLIDOS</h1>");
-                }
+                response.sendRedirect("login.jsp?login=error");
             } catch (NoSuchAlgorithmException ex) {
                 try (PrintWriter out = response.getWriter()) {
                     out.println("<h1>No such algorithm");

@@ -73,9 +73,7 @@ public class LoginServlet extends HttpServlet {
                 }
 
             } catch (NullPointerException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("<h1>DADOS INVÁLIDOS</h1>");
-                }
+                response.sendRedirect("login.jsp?login=error");
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NoSuchAlgorithmException ex) {

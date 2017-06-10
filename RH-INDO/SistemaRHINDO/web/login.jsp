@@ -36,6 +36,9 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading"><h2 class="page-title">Sistema RH-INDO</h2></div>
                                 <div class="panel-body">
+                                    <c:if test="${param.login == 'error'}">
+                                        <div class="panel panel-danger"><div class="panel-heading">Login ou senha inválidos :-(</div></div>
+                                    </c:if>
                                     <form class="form-horizontal" role="form" action="LoginServlet?action=login" method="POST">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">

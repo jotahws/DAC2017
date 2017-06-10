@@ -23,6 +23,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperRunManager;
 
 /**
  *
@@ -82,7 +84,7 @@ public class RelatorioServlet extends HttpServlet {
                     } catch (ClassNotFoundException ex) {
                         System.out.println("Erro ao conectar banco: " + ex.getMessage());
                     } catch (JRException ex) {
-                        Logger.getLogger(RelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
                     } finally {
                         con.close();
 
