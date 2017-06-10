@@ -131,7 +131,7 @@ public class RelatorioServlet extends HttpServlet {
                         URL jasperURL = new URL(host + jasper);
                         // Parâmetros do relatório
                         HashMap params = new HashMap();
-                        params.put("data", data);
+                        params.put("datar", data);
                         // Geração do relatório
                         byte[] bytes = JasperRunManager.runReportToPdf(
                                 jasperURL.openStream(), params, con);
