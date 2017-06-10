@@ -35,6 +35,7 @@ public class AtividadeDAO {
     private final String EncerraTudo = "UPDATE FuncionarioAtividade SET statusAtividade=2, fim=CURRENT_TIMESTAMP WHERE idAtividade=? AND statusAtividade=1;";
     private final String listaAtvPorTipo = "SELECT * FROM FuncionarioAtividade WHERE idAtividade=? AND statusAtividade=1 ORDER BY inicio DESC;";
     private final String listaAtvPorFunc = "SELECT * FROM FuncionarioAtividade WHERE idFuncionario=? AND month(inicio)=? ORDER BY inicio DESC;";
+    private final String listaAtvPorFuncSemData = "SELECT * FROM FuncionarioAtividade WHERE idFuncionario=? ORDER BY inicio DESC;";
     private final String verFuncionario = "select * FROM FuncionarioAtividade WHERE idFuncionario=?;";
     private final String insereFuncionario = "insert INTO funcTemp (id,nome,email,cpf,cargo,departamento,salario) VALUES (?,?,?,?,?,?,?)";
     private final String listaAtvPorID = "select * from TipoAtividade t, funcionarioatividade a where a.idAtividade = t.id AND a.id=?;";
@@ -223,7 +224,7 @@ public class AtividadeDAO {
         try {
             Facade facade = new Facade();
             con = new ConnectionFactory().getConnection();
-            stmt = con.prepareStatement(listaAtvPorID);
+            stmt = con.prepareStatement(listaAtvPorFuncSemData);
             stmt.setInt(1, idAtividade);
             rs = stmt.executeQuery();
             if (rs.next()) {
@@ -381,6 +382,31 @@ public class AtividadeDAO {
             try {
                 stmt.close();
                 con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+    
+    public List<Atividade> getAtividadesPorFuncionarioSemData(Funcionario funcionario) throws ClassNotFoundException, SQLException {
+        try {
+            List<Atividade> lista = new ArrayList();
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(listaAtvPorFunc);
+            stmt.setInt(1, funcionario.getId());
+            rs = stmt.executeQuery();
+            Facade facade = new Facade();
+            while (rs.next()) {
+                int idAtiv = rs.getInt("id");
+                Atividade ativ = facade.listaAtividadePorID(idAtiv);
+                lista.add(ativ);
+            }
+            return lista;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
+                rs.close();
             } catch (SQLException ex) {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }
