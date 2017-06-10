@@ -146,6 +146,11 @@ public class Facade {
         AtividadeDAO dao = new AtividadeDAO();
         return dao.verificaFuncionario(idTipo);
     }
+    
+    public boolean verificaDepart(int idDepart) throws ClassNotFoundException, SQLException {
+        TipoAtividadeDAO dao = new TipoAtividadeDAO();
+        return dao.verificaDepartamento(idDepart);
+    }
 
     public void insereFuncTemp(Funcionario func) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();

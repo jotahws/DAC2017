@@ -30,6 +30,8 @@ public class TipoAtividadeDAO {
     private final String deleteTipo = "DELETE FROM TipoAtividade WHERE id=?;";
     private final String listaTipos = "SELECT * FROM TipoAtividade ORDER BY nome";
     private final String buscaTipoID = "SELECT * FROM TipoAtividade WHERE id=?";
+    private final String verDepartamento = "select *from TipoAtividade where idDepartamento =?;";
+    
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -143,6 +145,28 @@ public class TipoAtividadeDAO {
             try {
                 stmt.close();
                 con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public boolean verificaDepartamento(int idDepart) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(verDepartamento);
+            stmt.setInt(1, idDepart);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                rs.close();
             } catch (SQLException ex) {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }

@@ -40,6 +40,12 @@
                                         <p> <strong>Ops!</strong> O funcionário não contém nenhuma atividade.</p>
                                     </div>
                                 </c:when>
+                                <c:when test="${(param.status == 'erroDepart')}">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <p> <strong>Ops!</strong> O Departamento não contém nenhuma atividade.</p>
+                                    </div>
+                                </c:when>
                             </c:choose>
                             <div class="col-md-12 corpo">
                                 <div class="col-md-6">
@@ -63,38 +69,35 @@
                                             </c:forEach>
                                         </table>
                                     </div> 
-                                    
+
                                 </div>
                                 <div  class="col-md-6 relatorio-dep">
                                     <h3 class="text-center">Por Departamentos Consolidados</h3>
+                                    <h4 class="col-md-12">Selecione um Dia:</h4>
+                                    <div class="col-md-5">
+                                        <input class="form-control " value="" type="date"/>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <p >(dd/mm/aaaa)</p><br>
+                                    </div>
                                     <div class=" panel panel-primary">
                                         <table class="table">
                                             <tr>
                                                 <th>Departamento</th>
                                                 <th>Localização</th>
+                                                <th></th>
                                             </tr>
                                             <!--<c:set var="listaDepart" value="${listaDepart}"/>-->
                                             <c:forEach var="item" items="${listaDepart}">
                                                 <tr>
                                                     <td class="tg-031e"><c:out value="${item.nome}"/></td>
                                                     <td class="tg-031e"><c:out value="${item.localizacao}"/></td>
+                                                    <td class="tg-031e"><a href="RelatorioServlet?action=relDepartamento&id=${item.id}" class="col-md-12 btn btn-success">Relatório</a></td>
                                                 </tr>
                                             </c:forEach>
                                         </table>
 
                                     </div>
-                                    <form action="action">
-                                        <div class="form-group">
-                                            <h4 class="col-md-12">Dia:</h4>
-                                            <div class="col-md-5">
-                                                <input class="form-control " type="date"/>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <p >(dd/mm/aaaa)</p><br>
-                                            </div>
-                                            <input type="submit" class="btn btn-primary" value="Gerar relatório"/>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>

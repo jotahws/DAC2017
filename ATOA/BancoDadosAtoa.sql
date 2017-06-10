@@ -128,8 +128,13 @@ departamento varchar(50),
 salario double,
 primary key(id)
 );
-/*Tira modo seguro para deletar*/
-SET SQL_SAFE_UPDATES = 0;
+
+create table departTemp(
+id int,
+nome varchar(60),
+localizacao varchar(25),
+primary key(id)
+);
 
 
 INSERT INTO statusAtividade (nome) VALUES ("INICIADO");

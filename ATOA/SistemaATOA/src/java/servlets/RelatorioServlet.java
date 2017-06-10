@@ -43,6 +43,7 @@ public class RelatorioServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        Connection con = null;
         String action = request.getParameter("action");
         Facade facade = new Facade();
         String status = "";
@@ -57,7 +58,7 @@ public class RelatorioServlet extends HttpServlet {
                     facade.insereFuncTemp(func);
                     //gera relatorio
                     try {
-                        Connection con = new ConnectionFactory().getConnection();
+                        con = new ConnectionFactory().getConnection();
                         String jasper = request.getContextPath()
                                 + "/RelatorioPorFunc.jasper";
                         // Host onde o servlet esta executando
@@ -84,7 +85,7 @@ public class RelatorioServlet extends HttpServlet {
                         Logger.getLogger(RelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
                     } finally {
                         con.close();
-                        
+
                         //facade.removeFuncTemp(func);
                     }
 
@@ -100,9 +101,21 @@ public class RelatorioServlet extends HttpServlet {
             }
 
         } else if ("relDepartamento".equals(action)) {
-            //Pegar o dia data e gerar o relatorio de todos os departamentos por dia
-            //nome departamento, nome tipoatividade, descricao da atividade, funcionario que trabalhou 
-            //quando TipoAtividade.idDepartameneto = bean.departamento.id and status = "ENCERRADO"
+            int id = Integer.parseInt(request.getParameter("id"));
+            try {
+                boolean result = facade.verificaDepart(id);
+                if (result) {
+                    
+                } else {
+                    status = "erroDepart";
+                    response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios&status=" + status);
+                }
+
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         }
 
