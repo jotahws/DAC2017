@@ -104,6 +104,11 @@ public class Facade {
         return dao.getAtividadeIniciada(func);
     }
 
+    public List<Atividade> listaAtividadesPorFunc(Funcionario funcionario, String data) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        return dao.getAtividadesPorFuncionario(funcionario, data);
+    }
+
     public Funcionario getfuncionarioID(int idFunc) throws ClassNotFoundException, SQLException {
         Client client = ClientBuilder.newClient();
         Funcionario func = client.target("http://localhost:8084/SistemaRHINDO/webresources/funcionarios/" + idFunc)
@@ -146,7 +151,7 @@ public class Facade {
         AtividadeDAO dao = new AtividadeDAO();
         return dao.verificaFuncionario(idTipo);
     }
-    
+
     public boolean verificaDepart(int idDepart) throws ClassNotFoundException, SQLException {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
         return dao.verificaDepartamento(idDepart);
@@ -161,7 +166,7 @@ public class Facade {
         AtividadeDAO dao = new AtividadeDAO();
         dao.removeFuncTemporario();
     }
-    
+
     private void setDescricaoAtividade(EdicaoAtividade edicao) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
         dao.setDescricao(edicao);
@@ -171,5 +176,5 @@ public class Facade {
         EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
         return dao.listaEdicoesPorFunc(func);
     }
-    
+
 }

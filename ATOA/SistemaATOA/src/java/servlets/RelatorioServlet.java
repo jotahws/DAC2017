@@ -81,6 +81,8 @@ public class RelatorioServlet extends HttpServlet {
                             OutputStream ops = response.getOutputStream();
                             ops.write(bytes);
                         }
+                        //facade.removeFuncTemp();
+
                     } catch (ClassNotFoundException ex) {
                         System.out.println("Erro ao conectar banco: " + ex.getMessage());
                     } catch (JRException ex) {
@@ -88,7 +90,6 @@ public class RelatorioServlet extends HttpServlet {
                     } finally {
                         con.close();
 
-                        //facade.removeFuncTemp(func);
                     }
 
                 } else {
@@ -107,7 +108,7 @@ public class RelatorioServlet extends HttpServlet {
             try {
                 boolean result = facade.verificaDepart(id);
                 if (result) {
-                    
+
                 } else {
                     status = "erroDepart";
                     response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios&status=" + status);

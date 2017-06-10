@@ -76,7 +76,7 @@ public class ListaAtividadeServlet extends HttpServlet {
         } else if ("QuadroAtividade".equals(action)) {
             try {
                 HttpSession session = request.getSession(true);
-                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
                 Atividade atividade = facade.listaAtividadeIniciada(funcionario);
                 request.setAttribute("atividadeiniciada", atividade);
                 List<TipoAtividade> tipos = facade.listaAtividades();
@@ -89,13 +89,26 @@ public class ListaAtividadeServlet extends HttpServlet {
         } else if ("Corrigir".equals(action)) {
             try {
                 HttpSession session = request.getSession(true);
-                Funcionario funcionario = (Funcionario)session.getAttribute("funcionarioLogado");
+                Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
                 Atividade atividade = facade.listaAtividadeIniciada(funcionario);
                 request.setAttribute("atividade", atividade);
             } catch (ClassNotFoundException | SQLException ex) {
                 status = "error";
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/corrigir.jsp");
+            rd.forward(request, response);
+        } else if ("atvMesFunc".equals(action)) {
+            String data = request.getParameter("mes");
+            try {
+                HttpSession session = request.getSession(true);
+                Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
+                List<Atividade> atividades = facade.listaAtividadesPorFunc(funcionario, data);
+                request.setAttribute("atividades", atividades);
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
+            }
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/historicoAtividades.jsp?mes=" + data);
             rd.forward(request, response);
         }
 
