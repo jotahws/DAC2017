@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import beans.Departamento;
 import beans.Funcionario;
 import conecao.ConnectionFactory;
 import facede.Facade;
@@ -14,7 +15,9 @@ import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,28 +106,67 @@ public class RelatorioServlet extends HttpServlet {
             }
             try {
                 facade.removeFuncTemp();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if ("relDepartamento".equals(action)) {
+
             int id = Integer.parseInt(request.getParameter("id"));
+            String data = (request.getParameter("data"));
+
             try {
                 boolean result = facade.verificaDepart(id);
                 if (result) {
+                    Departamento depart = facade.getDeptoPorID(id);
+                    facade.insereDepartTemp(depart);
+                    //Gera Relatorio
+                    try {
+                        con = new ConnectionFactory().getConnection();
+                        String jasper = request.getContextPath()
+                                + "/RelatorioPorDepart.jasper";
+                        // Host onde o servlet esta executando
+                        String host = "http://" + request.getServerName()
+                                + ":" + request.getServerPort();
+                        // URL para acesso ao relatório
+                        URL jasperURL = new URL(host + jasper);
+                        // Parâmetros do relatório
+                        HashMap params = new HashMap();
+                        params.put("data", data);
+                        // Geração do relatório
+                        byte[] bytes = JasperRunManager.runReportToPdf(
+                                jasperURL.openStream(), params, con);
+
+                        if (bytes != null) {
+                            // A página será mostrada em PDF
+                            response.setContentType("application/pdf");
+                            // Envia o PDF para o Cliente
+                            OutputStream ops = response.getOutputStream();
+                            ops.write(bytes);
+                        }
+
+                    } catch (ClassNotFoundException ex) {
+                        System.out.println("Erro ao conectar banco: " + ex.getMessage());
+                    } catch (JRException ex) {
+                        Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    } finally {
+                        con.close();
+
+                    }
 
                 } else {
                     status = "erroDepart";
                     response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios&status=" + status);
                 }
 
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            //Removendo dados tabela temporaria
+            try {
+                facade.removeDepartTemp();
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

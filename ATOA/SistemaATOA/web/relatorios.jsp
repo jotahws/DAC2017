@@ -74,30 +74,35 @@
                                 <div  class="col-md-6 relatorio-dep">
                                     <h3 class="text-center">Por Departamentos Consolidados</h3>
                                     <h4 class="col-md-12">Selecione um Dia:</h4>
-                                    <div class="col-md-5">
-                                        <input class="form-control " value="" type="date"/>
-                                    </div>
-                                    <div class="col-md-7">
-                                        <p >(dd/mm/aaaa)</p><br>
-                                    </div>
-                                    <div class=" panel panel-primary">
-                                        <table class="table">
-                                            <tr>
-                                                <th>Departamento</th>
-                                                <th>Localização</th>
-                                                <th></th>
-                                            </tr>
-                                            <!--<c:set var="listaDepart" value="${listaDepart}"/>-->
-                                            <c:forEach var="item" items="${listaDepart}">
+                                    <form action="RelatorioServlet?action=relDepartamento" method="POST">
+                                        <div class="col-md-5">
+                                            <input class="form-control" id="data" name="data" type="date"/>
+                                            <input class="form-control"  value="" type="hidden"/>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p >(dd/mm/aaaa)</p><br>
+                                        </div>
+                                        <div class=" panel panel-primary">
+                                            <table class="table">
                                                 <tr>
-                                                    <td class="tg-031e"><c:out value="${item.nome}"/></td>
-                                                    <td class="tg-031e"><c:out value="${item.localizacao}"/></td>
-                                                    <td class="tg-031e"><a href="RelatorioServlet?action=relDepartamento&id=${item.id}" class="col-md-12 btn btn-success">Relatório</a></td>
+                                                    <th>Departamento</th>
+                                                    <th>Localização</th>
+                                                    <th></th>
                                                 </tr>
-                                            </c:forEach>
-                                        </table>
-
-                                    </div>
+                                                <!--<c:set var="listaDepart" value="${listaDepart}"/>-->
+                                                <c:forEach var="item" items="${listaDepart}">
+                                                    <tr>
+                                                        <td class="tg-031e"><c:out value="${item.nome}"/></td>
+                                                        <td class="tg-031e"><c:out value="${item.localizacao}"/></td>                                                    
+                                                        <td class="tg-031e">                                                        
+                                                            <input type="submit" class="form-control btn btn-success"  />
+                                                            <input type="hidden" class="form-control btn btn-success" value="${item.id}" name="id"/>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </table>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

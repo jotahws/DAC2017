@@ -40,7 +40,9 @@ public class AtividadeDAO {
     private final String listaAtvPorID = "select * from TipoAtividade t, funcionarioatividade a where a.idAtividade = t.id AND a.id=?;";
     private final String updateDescricao = "UPDATE FuncionarioAtividade SET descricao=? WHERE id=?;";
     private final String deleteFuncTemp = "DELETE FROM funcTemp;";
-    
+    private final String deleteDepartTemp = "DELETE FROM departTemp;";
+    private final String insereDepartamento = "insert INTO departTemp (id,nome,localizacao) VALUES (?,?,?)";
+
     private Connection con = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -346,6 +348,39 @@ public class AtividadeDAO {
                 con.close();
                 stmt.close();
                 rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void insereDepartTemporario(Departamento depart) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(insereDepartamento);
+            stmt.setInt(1, depart.getId());
+            stmt.setString(2, depart.getNome());
+            stmt.setString(3, depart.getLocalizacao());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void removeDepartTemporario() throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(deleteDepartTemp);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
             } catch (SQLException ex) {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }
