@@ -162,4 +162,9 @@ public class Facade {
         dao.setDescricao(edicao);
     }
 
+    public List<EdicaoAtividade> listaEdicoesPorFunc(Funcionario func) throws ClassNotFoundException, SQLException {
+        EdicaoAtividadeDAO dao = new EdicaoAtividadeDAO();
+        return dao.listaEdicoesPorFunc(func);
+    }
+    
 }

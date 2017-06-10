@@ -7,6 +7,8 @@
 
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,33 +39,45 @@
                                 </div>
                             </div>
                             <div class="col-md-2"><h1>&nbsp;</h1></div>
-                            <div class="col-md-2"><h1>&nbsp;</h1></div>
+                            <div class="col-md-1"><h1>&nbsp;</h1></div>
                             <!-- corpo da página -->
-                            <div class=" col-md-8 " style=" margin-top: 30px;">
+                            <div class=" col-md-10 " style=" margin-top: 30px;">
                                 <!-- TABELA -->
                                 <div class=" panel panel-primary">
-                                    <div class="panel-heading">Inicie ou encerre uma atividade:</div>
-                                    <table class="table">
+                                    <div class="panel-heading text-center">Este é o seu histórico de correções</div>
+                                    <table class="table table-striped">
                                         <tr>
                                             <th>Atividade</th>
                                             <th>Descrição</th>
+                                            <th>Data de Início</th>
                                             <th>Status</th>
                                         </tr>
-                                        <tr>
-                                            <td class="tg-031e">Relatórios</td>
-                                            <td class="tg-031e">Desenvolver um relatório sobre tal coisa asim assim assado como descrito na reunião</td>
-                                            <td class="tg-031e"><p class="text-warning">Não corrigida</p></td>
-                                        </tr>      
-                                        <tr>
-                                            <td class="tg-031e">Cobrança</td>
-                                            <td class="tg-031e">Fazer a cobrança dos relatórios como pedido pelo chefão</td>
-                                            <td class="tg-031e"><p class="text-success">Correção aceita</p></td>
-                                        </tr> 
-                                        <tr>
-                                            <td class="tg-031e">Back-end</td>
-                                            <td class="tg-031e">Desenvolver um relatório sobre tal coisa asim assim assado como descrito na reunião dos chefes bosses</td>
-                                            <td class="tg-031e"><p class="text-danger">Correção negada</p></td>
-                                        </tr> 
+                                        <c:forEach var="item" items="${edicoes}" >
+                                            <tr>
+                                                <td class="tg-031e col-md-3">${item.atividade.tipo.nome}</td>
+                                                <td class="tg-031e col-md-5">${item.descricao}</td>
+                                                <td class="tg-031e col-md-2">
+                                                    <jsp:useBean id="data" class="java.util.Date"/>
+                                                    <c:choose>
+                                                        <c:when test="${data.date == item.atividade.inicio.date && data.day == item.atividade.inicio.day}">
+                                                            <c:out value="Hoje,"/>
+                                                            <fmt:formatDate value="${item.atividade.inicio}" type="BOTH" pattern=" HH:mm"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <fmt:formatDate value="${item.atividade.inicio}" type="BOTH" pattern="dd/MM/yyy HH:mm"/>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td class="tg-031e">
+                                                    <c:choose>
+                                                        <c:when test="${item.statusAprovacao == 'PENDENTE'}"><p class="text-warning">Correção em andamento</p></c:when>
+                                                        <c:when test="${item.statusAprovacao == 'RECUSADO'}"><p class="text-danger">Correção Recusada</p></c:when>
+                                                        <c:when test="${item.statusAprovacao == 'APROVADO'}"><p class="text-success">Correção aprovada</p></c:when>
+                                                    </c:choose>
+                                                    
+                                                </td>
+                                            </tr> 
+                                        </c:forEach>
                                     </table>
                                 </div>
                             </div>

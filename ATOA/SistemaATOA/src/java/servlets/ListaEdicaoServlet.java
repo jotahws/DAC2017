@@ -6,6 +6,7 @@
 package servlets;
 
 import beans.EdicaoAtividade;
+import beans.Funcionario;
 import beans.TipoAtividade;
 import facede.Facade;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -54,7 +56,6 @@ public class ListaEdicaoServlet extends HttpServlet {
             rd.forward(request, response);
         } else if ("aprovada".equals(action)) {
             try {
-                
                 String idEdicao = request.getParameter("id");
                 facade.aprovarEdicao(facade.getEdicaoPorID(Integer.parseInt(idEdicao)));
             } catch (ClassNotFoundException | SQLException ex) {
@@ -70,6 +71,17 @@ public class ListaEdicaoServlet extends HttpServlet {
                 status = "error";
             }
             RequestDispatcher rd = getServletContext().getRequestDispatcher("/ListaEdicaoServlet?action=listaEdicao" );
+            rd.forward(request, response);
+        } else if ("listarPendentes".equals(action)) {
+            try{
+                HttpSession session = request.getSession(true);
+                Funcionario func = (Funcionario) session.getAttribute("funcionarioLogado");
+                List<EdicaoAtividade> edicoes = facade.listaEdicoesPorFunc(func);
+                request.setAttribute("edicoes", edicoes);
+            }catch (ClassNotFoundException | SQLException ex) {
+                status = "error";
+            }
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/atividades/atividadesPendentes.jsp" );
             rd.forward(request, response);
         }
     }

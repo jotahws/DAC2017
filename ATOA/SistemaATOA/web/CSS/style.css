@@ -95,3 +95,7 @@ textarea {
 .celula-corpo-tipo{
     padding: 10px 0px;
 }
+
+.table-big {
+    width: 800px;
+}

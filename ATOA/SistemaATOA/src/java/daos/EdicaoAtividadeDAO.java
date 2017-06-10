@@ -33,6 +33,7 @@ public class EdicaoAtividadeDAO {
 
     private final String insereCorrecao = "INSERT INTO EdicaoAtividade (idAtividade, descricao, statusAprovacao) VALUES (?,?,?);";
     private final String selectEdicoesPendentes = "SELECT * FROM EdicaoAtividade where statusAprovacao='PENDENTE'";
+    private final String selectEdicoesPorFunc = "SELECT * FROM EdicaoAtividade e, funcionarioatividade a where a.id=e.idAtividade AND a.idFuncionario=? ORDER BY a.fim DESC;";
     private final String selectEdicoes = "SELECT * FROM EdicaoAtividade;";
     private final String listaEdicaoPorID = "select * from EdicaoAtividade e where e.id=?;";
     private final String updateStatusAprovacao = "UPDATE EdicaoAtividade SET statusAprovacao=? WHERE id=?;";
@@ -112,6 +113,52 @@ public class EdicaoAtividadeDAO {
             List<EdicaoAtividade> lista = new ArrayList();
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(selectEdicoes);
+            rs = stmt.executeQuery();
+            Facade facade = new Facade();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int idAtividade = rs.getInt("idAtividade");
+                Atividade atividade = facade.listaAtividadePorID(idAtividade);
+                String descricao = rs.getString("descricao");
+                String statusAprovacao = rs.getString("statusAprovacao");
+                Date inicio = rs.getDate("inicio");
+                Timestamp timestampinicio = rs.getTimestamp("inicio");
+                if (timestampinicio != null) {
+                    inicio = new java.util.Date(timestampinicio.getTime());
+                }
+                Date fim = rs.getDate("fim");
+                Timestamp timestampfim = rs.getTimestamp("fim");
+                if (timestampfim != null) {
+                    inicio = new java.util.Date(timestampfim.getTime());
+                }
+                EdicaoAtividade edicao = new EdicaoAtividade();
+                edicao.setId(id);
+                edicao.setAtividade(atividade);
+                edicao.setDescricao(descricao);
+                edicao.setStatusAprovacao(statusAprovacao);
+                edicao.setInicio(inicio);
+                edicao.setFim(fim);
+                lista.add(edicao);
+            }
+            return lista;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public List<EdicaoAtividade> listaEdicoesPorFunc(Funcionario func) throws ClassNotFoundException, SQLException {
+
+        try {
+            List<EdicaoAtividade> lista = new ArrayList();
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(selectEdicoesPorFunc);
+            stmt.setInt(1, func.getId());
             rs = stmt.executeQuery();
             Facade facade = new Facade();
             while (rs.next()) {
