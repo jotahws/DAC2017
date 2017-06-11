@@ -66,8 +66,8 @@
                                             </div>                                        
                                         </div>
                                         <div class="text-right">
-                                            <a href="${pageContext.request.contextPath}/TipoAtividadeServlet?action=delete&id=${tipo.id}" class="btn btn-danger">Excluir Tipo</a>
-                                            <button type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
+                                            <a href="${pageContext.request.contextPath}/TipoAtividadeServlet?action=delete&id=${tipo.id}" class="btn btn-danger" onclick="return confirm('Você tem certeza que deseja excluir este tipo de atividade?');">Excluir Tipo</a>
+                                            <button onclick = "return confirm('Salvar alterações?')" type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
                                         </div>
                                     </form>
                                 </fieldset>

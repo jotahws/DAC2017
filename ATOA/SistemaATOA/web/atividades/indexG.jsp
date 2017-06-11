@@ -134,7 +134,7 @@
                                                     </div>
                                                     <div class="text-right">         
                                                         <a href="${pageContext.request.contextPath}/ListaAtividadeServlet?action=edit&id=${item.id}" class="btn btn-success">Editar Tipo</a>
-                                                        <a href="AtividadeServlet?action=EncerrarTudo&idTipo=${item.id}" class="btn btn-primary <c:if test="${item.atividades == '[]'}">disabled</c:if> ">Encerrar para todos</a>
+                                                        <a href="AtividadeServlet?action=EncerrarTudo&idTipo=${item.id}" class="btn btn-primary <c:if test="${item.atividades == '[]'}">disabled</c:if> " onclick="return confirm('Tem certeza que deseja encerrar atividade para todos os funcionarios?');">Encerrar para todos</a>
                                                     </div>
                                                 </div>
                                             </c:forEach>
