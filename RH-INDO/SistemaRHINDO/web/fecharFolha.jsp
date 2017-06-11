@@ -37,6 +37,20 @@
                             </div>
                             <!-- Row do cadastro: -->
                             <div class="row row-lista-corpo">
+                                <c:choose>
+                                    <c:when test="${param.status == 'success'}">
+                                        <div class="col-md-12 alert alert-success alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p> A folha de pagamento foi fechada com sucesso.</p>
+                                        </div>
+                                    </c:when>
+                                    <c:when test="${param.status == 'error'}">
+                                        <div class="col-md-12 alert alert-danger alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p> Ops! Ocorreu um erro ao fechar folha de pagamento.</p>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                                 <!-- corpo da página -->
                                 <div class="col-md-12 corpo">
                                     <legend>&nbsp;</legend>
@@ -45,7 +59,7 @@
                                     <div class="col-md-1"><h1>&nbsp;</h1></div>
                                     <div class="col-md-7 lista-lat">
                                         <fmt:formatDate value="${atividadeiniciada.inicio}" type="DATE" pattern="MM"/>
-                                        <form method="POST" action="${pageContext.request.contextPath}/ListaAtividadeServlet?action=atvMesFunc" >
+                                        <form method="POST" action="${pageContext.request.contextPath}/FolhaPagamentoServlet?action=fechar" >
                                             <div class="col-md-4">
                                                 <select name="mes" class="form-control">
                                                     <option value="01" <c:if test="${param.mes == '01'}">selected</c:if>>Janeiro</option>
@@ -70,15 +84,26 @@
                                             <div class=" panel panel-primary margin-topo">
                                                 <div class="panel-heading">Lista da folha de pagamento do mês:</div>
                                             <c:choose>
-                                                <c:when test="${empty atividades}"><h2 class="text-center unselectable cor-disabled">Selecione um mês e clique em "Fechar Folha"</h2></c:when>
+                                                <c:when test="${horas == null}"><h2 class="text-center unselectable cor-disabled">Selecione um mês e clique em "Fechar Folha"</h2></c:when>
                                                 <c:otherwise>
                                                     <table class="table">
                                                         <tr>
-                                                            <th>Tipo da Atividade</th>
-                                                            <th>Descrição</th>
-                                                            <th>Início</th>
-                                                            <th>Fim</th>
+                                                            <th>Funcionário</th>
+                                                            <th>Email</th>
+                                                            <th>Horas</th>
+                                                            <th>Departamento</th>
+                                                            <th>Cargo</th>
                                                         </tr>
+                                                        <jsp:useBean id="folha" class="beans.HorasTrabalhadas"/>
+                                                        <c:forEach var="item" items="${horas}">
+                                                            <tr>
+                                                                <td><c:out value="${item.func.nome}"/></td>
+                                                                <td><c:out value="${item.func.email}"/></td>
+                                                                <td><c:out value="${item.horasTrabalhadas}"/></td>
+                                                                <td><c:out value="${item.func.departamento.nome}"/></td>
+                                                                <td><c:out value="${item.func.cargo.nome}"/></td>
+                                                            </tr>
+                                                        </c:forEach>
                                                     </table>
                                                 </c:otherwise>
                                             </c:choose>

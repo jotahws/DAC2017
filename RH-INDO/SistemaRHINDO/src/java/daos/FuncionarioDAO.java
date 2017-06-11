@@ -38,6 +38,7 @@ public class FuncionarioDAO {
     private final String deleteFuncTemp = "DELETE FROM funcTemp;";
     private final String deleteHoraTemp = "DELETE FROM horasTemp;";
     private final String insertHoraTEMP = "INSERT INTO horasTemp (idFuncionario,nome, mes, horas,email) VALUES (?,?,?,?,?);";
+    private final String insertHora = "INSERT INTO folhaPagamento (idFuncionario, mes, horas) VALUES (?,?,?);";
     
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -333,6 +334,24 @@ public class FuncionarioDAO {
         try {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(deleteHoraTemp);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void fecharFolha(HorasTrabalhadas item) throws ClassNotFoundException, SQLException, NullPointerException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(insertHora);
+            stmt.setInt(1, item.getFunc().getId());
+            stmt.setInt(2, Integer.parseInt(item.getMes()));
+            stmt.setInt(3, item.getHorasTrabalhadas());
             stmt.executeUpdate();
         } finally {
             try {

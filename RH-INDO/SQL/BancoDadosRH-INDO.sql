@@ -90,6 +90,14 @@ mes varchar(5),
 primary key(id)
 );
 
+create table folhaPagamento(
+id int not null auto_increment,
+idFuncionario int,
+horas int,
+mes int,
+primary key(id),
+foreign key(idfuncionario) references funcionario(id)
+);
 
 ALTER TABLE `sistema_rhindo`.`Cargo` 
 CHANGE COLUMN `horasMinimas` `horasMinimas` INT NULL DEFAULT NULL ,

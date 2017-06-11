@@ -182,9 +182,16 @@ public class Facade {
             funcDAO.insereHoraTemp(hora);
         }
     }
-    
+
     public void deleteHorasPorMes() throws ClassNotFoundException, SQLException {
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         funcDAO.removeHorasTemp();
+    }
+
+    public void fecharFolha(List<HorasTrabalhadas> horas) {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        for (HorasTrabalhadas item : horas) {
+            funcDAO.fecharFolha(item); 
+        }
     }
 }
