@@ -7,6 +7,7 @@ package wsATOA;
 
 import beans.Departamento;
 import beans.Funcionario;
+import beans.HorasTrabalhadas;
 import facede.Facade;
 import java.sql.SQLException;
 import java.util.List;
@@ -46,7 +47,7 @@ public class FuncionariosResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{mes}")
-    public Response getDepto(@PathParam("mes") String mes) throws ClassNotFoundException, SQLException {
+    public Response getFunc(@PathParam("mes") String mes) throws ClassNotFoundException, SQLException {
         Facade facade = new Facade();
         List<Funcionario> funcs = facade.getHorasAtrasadasPorFunc(mes);
         GenericEntity<List<Funcionario>> lista = new GenericEntity<List<Funcionario>>(funcs) {
@@ -57,6 +58,23 @@ public class FuncionariosResource {
                 .build();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/horasTrabalhadas/{mesde}/{mesate}/{idFunc}")
+    public Response getHoras(@PathParam("mesde") String mesDe,
+                            @PathParam("mesate") String mesAte,
+                            @PathParam("idFunc") int idFunc) throws ClassNotFoundException, SQLException {
+        Facade facade = new Facade();
+        Funcionario func = facade.getfuncionarioID(idFunc);
+        List<HorasTrabalhadas> horas = facade.getHorasPorMes(mesDe, mesAte, func);
+        GenericEntity<List<HorasTrabalhadas>> lista = new GenericEntity<List<HorasTrabalhadas>>(horas) {
+        };
+        return Response
+                .ok()
+                .entity(lista)
+                .build();
+    }
+    
     /**
      * PUT method for updating or creating an instance of FuncionariosResource
      * @param content representation for the resource

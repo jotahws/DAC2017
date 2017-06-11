@@ -36,8 +36,24 @@
                             <!-- Row do cadastro: -->
                             <div class="row row-lista-corpo">
                                 <!-- corpo da página -->
-                                <div class="col-md-12 corpo">
-                                    <legend>Lista de Relatórios</legend>
+                                    <div class="col-md-12 corpo corpo-relatorio">
+                                        <legend>Relatório de horas trabalhadas</legend>  
+                                        <form method="POST" action="RelatoriosServlet?action=relFunc">
+                                            <div class="form-group col-md-4">
+                                                <label for="mesde">De</label>
+                                                <input type="calendar" name="mesde" class="form-control">(dd/mm/aaaa)
+                                                
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="mesate">Até</label>
+                                                <input type="calendar" name="mesate" class="form-control">(dd/mm/aaaa)
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <label>&nbsp;</label>
+                                                <input type="submit" class="btn btn-primary" value="Gerar Relatório"/>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>    

@@ -10,6 +10,7 @@ import beans.Departamento;
 import beans.Endereco;
 import beans.Estado;
 import beans.Funcionario;
+import beans.HorasTrabalhadas;
 import daos.CargoDAO;
 import daos.DepartamentoDAO;
 import daos.EnderecoDAO;
@@ -166,4 +167,24 @@ public class Facade {
         funcDAO.removeFuncTemporario();
     }
 
+    public List<HorasTrabalhadas> getHorastrabalhadas(String mesDe, String mesAte, Funcionario func) {
+        Client client = ClientBuilder.newClient();
+        Response res = client.target("http://localhost:8084/SistemaATOA/webresources/funcionarios/horasTrabalhadas/" + mesDe + "/" + mesAte + "/" + func.getId())
+                .request(MediaType.APPLICATION_JSON).get();
+
+        return res.readEntity(new GenericType<List<HorasTrabalhadas>>() {
+        });
+    }
+
+    public void insereHorasPorMes(List<HorasTrabalhadas> horas) throws ClassNotFoundException, SQLException {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        for (HorasTrabalhadas hora : horas) {
+            funcDAO.insereHoraTemp(hora);
+        }
+    }
+    
+    public void deleteHorasPorMes() throws ClassNotFoundException, SQLException {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        funcDAO.removeHorasTemp();
+    }
 }

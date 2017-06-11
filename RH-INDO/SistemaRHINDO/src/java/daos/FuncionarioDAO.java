@@ -11,6 +11,7 @@ import beans.Departamento;
 import beans.Endereco;
 import beans.Estado;
 import beans.Funcionario;
+import beans.HorasTrabalhadas;
 import conexao.ConnectionFactory;
 import facade.Facade;
 import java.sql.Connection;
@@ -35,6 +36,8 @@ public class FuncionarioDAO {
     private final String updateFunc = "UPDATE Funcionario SET idCargo=?, idDepartamento=?, idEndereco=?, nome=?, cpf=?, rg=?, email=?, celular=?, perfil=? WHERE id=?;";
     private final String deleteFunc = "DELETE FROM Funcionario WHERE id=?";
     private final String deleteFuncTemp = "DELETE FROM funcTemp;";
+    private final String deleteHoraTemp = "DELETE FROM horasTemp;";
+    private final String insertHoraTEMP = "INSERT INTO horasTemp (idFuncionario,nome, mes, horas,email) VALUES (?,?,?,?,?);";
     
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -295,6 +298,41 @@ public class FuncionarioDAO {
         try {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(deleteFuncTemp);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void insereHoraTemp(HorasTrabalhadas hora) throws ClassNotFoundException, SQLException, NullPointerException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(insertHoraTEMP);
+            stmt.setInt(1, hora.getFunc().getId());
+            stmt.setString(2, hora.getFunc().getNome());
+            stmt.setString(3, hora.getMes());
+            stmt.setInt(4, hora.getHorasTrabalhadas());
+            stmt.setString(5, hora.getFunc().getEmail());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void removeHorasTemp() throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(deleteHoraTemp);
             stmt.executeUpdate();
         } finally {
             try {

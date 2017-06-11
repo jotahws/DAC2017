@@ -9,9 +9,11 @@ import beans.Atividade;
 import beans.Departamento;
 import beans.EdicaoAtividade;
 import beans.Funcionario;
+import beans.HorasTrabalhadas;
 import beans.TipoAtividade;
 import daos.AtividadeDAO;
 import daos.EdicaoAtividadeDAO;
+import daos.HorasTrabalhadasDAO;
 import daos.TipoAtividadeDAO;
 import java.sql.SQLException;
 import java.util.List;
@@ -195,5 +197,10 @@ public class Facade {
     public List<Funcionario> getHorasAtrasadasPorFunc(String mes) throws ClassNotFoundException, SQLException {
         AtividadeDAO dao = new AtividadeDAO();
         return dao.selectHorasTrabalhadasAtrasadas(mes);
+    }
+
+    public List<HorasTrabalhadas> getHorasPorMes(String mesDe, String mesAte, Funcionario func) throws ClassNotFoundException, SQLException {
+        HorasTrabalhadasDAO dao = new HorasTrabalhadasDAO();
+        return dao.listaHoras(mesDe, mesAte, func);
     }
 }
