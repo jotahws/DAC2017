@@ -7,6 +7,7 @@ package servlets;
 
 import beans.Departamento;
 import beans.Funcionario;
+import beans.HorasTrabalhadas;
 import conexao.ConnectionFactory;
 import facade.Facade;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperRunManager;
 
@@ -127,10 +129,10 @@ public class RelatoriosServlet extends HttpServlet {
                 } catch (SQLException e) {
                 }
             }
-            try{
-                facade.deleteHorasDeptoTemp();   
-            }catch(Exception ex){
-                
+            try {
+                facade.deleteHorasDeptoTemp();
+            } catch (Exception ex) {
+
             }
         } else if ("RelatoriosGerente".equals(action)) {
             try {
@@ -183,10 +185,61 @@ public class RelatoriosServlet extends HttpServlet {
                 } catch (SQLException e) {
                 }
             }
-            try{
-                facade.deleteHorasFuncTemp();   
-            }catch(Exception ex){
-                
+            try {
+                facade.deleteHorasFuncTemp();
+            } catch (Exception ex) {
+
+            }
+        } else if ("relFunc".equals(action)) {
+            Facade facade = new Facade();
+            try {
+                String mesDe = request.getParameter("mesde");
+                String mesAte = request.getParameter("mesate");
+                HttpSession session = request.getSession(true);
+                Funcionario func = (Funcionario) session.getAttribute("funcionarioLogado");
+                List<HorasTrabalhadas> horas = facade.getHorastrabalhadas(mesDe, mesAte, func);
+                facade.insereHorasPorMes(horas);
+                con = new ConnectionFactory().getConnection();
+                String jasper = request.getContextPath()
+                        + "/RelatorioHorasDoFunc.jasper";
+                // Host onde o servlet esta executando
+                String host = "http://" + request.getServerName()
+                        + ":" + request.getServerPort();
+                // URL para acesso ao relatório
+                URL jasperURL = new URL(host + jasper);
+                // Parâmetros do relatório
+                HashMap params = new HashMap();
+                // Geração do relatório
+                byte[] bytes = JasperRunManager.runReportToPdf(
+                        jasperURL.openStream(), params, con);
+
+                if (bytes != null) {
+                    // A página será mostrada em PDF
+                    response.setContentType("application/pdf");
+                    // Envia o PDF para o Cliente
+                    OutputStream ops = response.getOutputStream();
+                    ops.write(bytes);
+                }
+            } catch (ClassNotFoundException ex) {
+                System.out.println("Erro ao conectar banco: " + ex.getMessage());
+            } catch (JRException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(ex.getMessage());
+                }
+            } catch (SQLException ex) {
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(ex.getMessage());
+                }
+            } finally {
+                try {
+                    con.close();
+                } catch (Exception e) {
+                }
+            }
+            try {
+                facade.deleteHorasPorMes();
+            } catch (Exception ex) {
+
             }
         }
     }

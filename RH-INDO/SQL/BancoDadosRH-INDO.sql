@@ -78,7 +78,19 @@ salario double,
 horas int,
 primary key(id)
 );
-select *from funcionario;
+
+
+create table horasTemp(
+id int auto_increment,
+idFuncionario int,
+nome varchar(100),
+email varchar(100),
+horas int,
+mes varchar(5),
+primary key(id)
+);
+
+
 ALTER TABLE `sistema_rhindo`.`Cargo` 
 CHANGE COLUMN `horasMinimas` `horasMinimas` INT NULL DEFAULT NULL ,
 CHANGE COLUMN `descontoImposto` `descontoImposto` DOUBLE NULL DEFAULT NULL ,
