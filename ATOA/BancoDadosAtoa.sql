@@ -1,3 +1,7 @@
+create table Departamento(
+	id int not null auto_increment,
+    primary key(id)
+);
 create table Funcionario(
 	id int not null,
     idDepartamento int,
@@ -5,15 +9,11 @@ create table Funcionario(
     foreign key(idDepartamento) references Departamento(id)
 );
 
-create table EdicaoAtividade(
+create table TipoAtividade(
 	id int not null auto_increment,
-    idAtividade int,
-    inicio date,
-    fim date,
-    descricao varchar(100),
-    statusAprovacao varchar(20),
-    primary key(id),
-    foreign key(idAtividade)references FuncionarioAtividade(id)
+    idDepartamento int,
+    nome varchar(50),
+    primary key(id)
 );
 
 create table FuncionarioAtividade(
@@ -28,12 +28,42 @@ create table FuncionarioAtividade(
     foreign key(idAtividade) references TipoAtividade(id)
 );
 
-create table TipoAtividade(
+create table EdicaoAtividade(
 	id int not null auto_increment,
-    idDepartamento int,
+    idAtividade int,
+    inicio date,
+    fim date,
+    descricao varchar(100),
+    statusAprovacao varchar(20),
+    primary key(id),
+    foreign key(idAtividade)references FuncionarioAtividade(id)
+);
+
+create table statusAtividade(
+	id int not null auto_increment,
     nome varchar(50),
     primary key(id)
 );
+
+create table funcTemp(
+id int,
+nome varchar(100),
+email varchar(50),
+cpf varchar(12),
+cargo varchar(50),
+departamento varchar(50),
+salario double,
+primary key(id)
+);
+
+create table departTemp(
+id int,
+nome varchar(60),
+localizacao varchar(25),
+primary key(id)
+);
+
+
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS sistema_atoa.str_empty$$
@@ -83,10 +113,7 @@ BEGIN
 END$$
 DELIMITER ;
 
-create table Departamento(
-	id int not null auto_increment,
-    primary key(id)
-);
+
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS sistema_atoa.str_empty_edicao$$
@@ -112,29 +139,7 @@ BEGIN
 END$$
 DELIMITER ;
 
-create table statusAtividade(
-	id int not null auto_increment,
-    nome varchar(50),
-    primary key(id)
-);
 
-create table funcTemp(
-id int,
-nome varchar(100),
-email varchar(50),
-cpf varchar(12),
-cargo varchar(50),
-departamento varchar(50),
-salario double,
-primary key(id)
-);
-
-create table departTemp(
-id int,
-nome varchar(60),
-localizacao varchar(25),
-primary key(id)
-);
 
 
 INSERT INTO statusAtividade (nome) VALUES ("INICIADO");

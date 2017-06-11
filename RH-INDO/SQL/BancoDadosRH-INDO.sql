@@ -18,6 +18,20 @@ create table Departamento(
     primary key(id)
 );
 
+create table Estado(
+	id int not null auto_increment,
+    uf varchar(2),
+    nome varchar(50),
+    primary key(id)
+);
+
+create table Cidade(
+	id int not null auto_increment,
+    idEstado int,
+    nome varchar(100) not null,
+    primary key(id),
+    foreign key(idEstado) references Estado(id)
+);
 
 create table Endereco(
 	id int not null auto_increment,
@@ -29,22 +43,6 @@ create table Endereco(
     primary key(id),
     foreign key(idCidade) references Cidade(id)
 );
-
-create table Cidade(
-	id int not null auto_increment,
-    idEstado int,
-    nome varchar(100) not null,
-    primary key(id),
-    foreign key(idEstado) references Estado(id)
-);
-
-create table Estado(
-	id int not null auto_increment,
-    uf varchar(2),
-    nome varchar(50),
-    primary key(id)
-);
-
 create table Funcionario(
 	id int not null auto_increment,
     idCargo int,
@@ -80,7 +78,7 @@ salario double,
 horas int,
 primary key(id)
 );
-
+select *from funcionario;
 ALTER TABLE `sistema_rhindo`.`Cargo` 
 CHANGE COLUMN `horasMinimas` `horasMinimas` INT NULL DEFAULT NULL ,
 CHANGE COLUMN `descontoImposto` `descontoImposto` DOUBLE NULL DEFAULT NULL ,
@@ -89,14 +87,13 @@ CHANGE COLUMN `requisitos` `requisitos` VARCHAR(1000) NULL DEFAULT NULL;
 ALTER TABLE `sistema_rhindo`.`Funcionario`
 ADD COLUMN `perfil` VARCHAR(45) NULL AFTER `celular`;
 
-ALTER TABLE `sistema_rhindo`.`Funcionario` 
-CHANGE COLUMN `senha` `senha` VARCHAR(100) NULL DEFAULT NULL ;
+ALTER TABLE `sistema_rhindo`.`Funcionario`
+ADD COLUMN `senha` VARCHAR(100) NULL AFTER `perfil`;
 
 ALTER TABLE `sistema_rhindo`.`Endereco` 
 CHANGE COLUMN `numero` `numero` INT NULL DEFAULT NULL ;
 
-ALTER TABLE `sistema_rhindo`.`Funcionario`
-ADD COLUMN `senha` VARCHAR(45) NULL AFTER `perfil`;
+
 
 ALTER TABLE funcionario CHARSET = UTF8 COLLATE utf8_general_ci;
 ALTER TABLE Departamento CHARSET = UTF8 COLLATE utf8_general_ci;
@@ -255,19 +252,25 @@ BEGIN
 END$$
 DELIMITER ;
 
+select *from cargo;
 
+ -- PRIMEIRO INSERT SISTEMA RHINDO
+ /*Inserir na ordem no sistema rhindo
+Popula cidade*/
+insert into cidade(idEstado,nome) values(18,'Curitiba');
+/*Insere um cargo*/
+insert into cargo(nome,salario,requisitos,horasMinimas,descontoImposto)
+values('Analista',6000,'Ser analista bem bao msm',120,11);
 
- -- ALGUNS INSERTS
-insert into funcionario(idCargo,idDepartamento,idEndereco,nome,cpf,rg,email,
-celular,perfil,senha) values (1,1,1,'Mauricio de Araujo','07094657935',
-'135034657','araujoito@gmail.com','99494401','GERENTE-RH','1234');
+/*Popula departamento*/
+insert into departamento(nome,localizacao) values('Desenvolvimento','Sala 4,5');
 
-insert into cidade(idEstado,nome) values(1,'Curitiba');
-
-insert into Endereco(idCidade,rua,numero,cep,bairro)
-values(1,'Rua das dores','860','82620130','Tingui');
-
-insert into cargo(nome,salario,requisitos,horasMinimas,descontoImposto)values
-('Analista',3900,'Ser alguma coisa pra analista',40,10);
-
-insert into Departamento(nome,localizacao) values('Desenvolvimento','3 Andar');
+/*Popula endereco*/
+insert into endereco(idCidade,rua,numero,cep,bairro)
+values(1,'Rua do razer',1234,82630239,'Meu bairro');
+/*Inserir f GERENTE DO SISTEMA, 
+login: razer@gmail.com
+senha: 1234     */
+insert into funcionario(idCargo,idDepartamento,idEndereco,nome,cpf,rg,email,celular,perfil,senha)
+values(1,1,1,'Razer Anthom Nizer','12345678998','987654321','razer@gmail.com','121223344556',
+'GERENTE-RH','03AC674216F3E15C761EE1A5E255F067953623C8B388B4459E13F978D7C846F4');
