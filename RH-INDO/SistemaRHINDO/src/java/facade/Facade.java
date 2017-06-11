@@ -145,4 +145,25 @@ public class Facade {
         deptoDAO.deletaHorasDeptoTemp();
     }
 
+    public List<Funcionario> getFuncHorasAtrasadas(String mes) {
+        Client client = ClientBuilder.newClient();
+        Response res = client.target("http://localhost:8084/SistemaATOA/webresources/funcionarios/" + mes)
+                .request(MediaType.APPLICATION_JSON).get();
+
+        return res.readEntity(new GenericType<List<Funcionario>>() {
+        });
+    }
+
+    public void insereHorasFuncTemp(List<Funcionario> funcs) throws ClassNotFoundException, SQLException {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        for (Funcionario func : funcs) {
+            funcDAO.insereHorasFuncTemp(func);
+        }
+    }
+
+    public void deleteHorasFuncTemp() throws ClassNotFoundException, SQLException {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        funcDAO.removeFuncTemporario();
+    }
+
 }

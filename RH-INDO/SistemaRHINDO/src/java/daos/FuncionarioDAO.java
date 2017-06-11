@@ -28,11 +28,13 @@ import java.util.List;
 public class FuncionarioDAO {
 
     private final String insertFunc = "insert into Funcionario (idCargo, idDepartamento, idEndereco, nome, cpf, rg, email, celular, perfil, senha) values(?,?,?,?,?,?,?,?,?,?)";
+    private final String insertFuncTEMP = "insert into funcTemp (id, nome, email, cpf, cargo, departamento, salario, horas) values(?,?,?,?,?,?,?,?)";
     private final String listFunc = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id ORDER BY f.nome;";
     private final String verificaLogin = "SELECT email, perfil, nome, id FROM funcionario WHERE email=? AND senha=?";
     private final String selectFuncID = "SELECT * FROM funcionario f, endereco e, cidade cid, estado est, cargo c, departamento d where f.idEndereco = e.id AND e.idCidade = cid.id AND cid.idEstado = est.id AND f.idCargo = c.id AND f.idDepartamento = d.id AND f.id=?";
     private final String updateFunc = "UPDATE Funcionario SET idCargo=?, idDepartamento=?, idEndereco=?, nome=?, cpf=?, rg=?, email=?, celular=?, perfil=? WHERE id=?;";
     private final String deleteFunc = "DELETE FROM Funcionario WHERE id=?";
+    private final String deleteFuncTemp = "DELETE FROM funcTemp;";
     
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -263,4 +265,45 @@ public class FuncionarioDAO {
             }
         }
     }
+
+    public void insereHorasFuncTemp(Funcionario funcionario) throws ClassNotFoundException, SQLException, NullPointerException {
+        try {
+            EnderecoDAO endDAO = new EnderecoDAO();
+            funcionario.setEndereco(endDAO.inserirEndereco(funcionario.getEndereco()));
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(insertFuncTEMP);
+            stmt.setInt(1, funcionario.getId());
+            stmt.setString(2, funcionario.getNome());
+            stmt.setString(3, funcionario.getEmail());
+            stmt.setString(4, funcionario.getCpf());
+            stmt.setString(5, funcionario.getCargo().getNome());
+            stmt.setString(6, funcionario.getDepartamento().getNome());
+            stmt.setDouble(7, funcionario.getCargo().getSalario());
+            stmt.setInt(8, funcionario.getDepartamento().getHorastrabalhadas());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void removeFuncTemporario() throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(deleteFuncTemp);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+    
 }

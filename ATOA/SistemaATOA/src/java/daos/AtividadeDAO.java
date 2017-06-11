@@ -42,7 +42,8 @@ public class AtividadeDAO {
     private final String deleteFuncTemp = "DELETE FROM funcTemp;";
     private final String deleteDepartTemp = "DELETE FROM departTemp;";
     private final String insereDepartamento = "insert INTO departTemp (id,nome,localizacao) VALUES (?,?,?)";
-
+    private final String horasPorFuncionario = "SELECT a.idFuncionario, sum(TIMESTAMPDIFF(hour,inicio,fim)) as horasTrabalhadas from FuncionarioAtividade a where month(inicio)=?  Group by a.idFuncionario; ";
+    
     private Connection con = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -381,6 +382,35 @@ public class AtividadeDAO {
             try {
                 stmt.close();
                 con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public List<Funcionario> selectHorasTrabalhadasAtrasadas(String mes) throws ClassNotFoundException, SQLException {
+        try {
+            List<Funcionario> lista = new ArrayList();
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(horasPorFuncionario);
+            stmt.setString(1, mes);
+            rs = stmt.executeQuery();
+            Facade facade = new Facade();
+            while (rs.next()) {
+                int idFunc = rs.getInt("a.idFuncionario");
+                int horasT = rs.getInt("horasTrabalhadas");
+                Funcionario func  = facade.getfuncionarioID(idFunc);
+                func.getDepartamento().setHorastrabalhadas(horasT);
+                if (horasT < func.getCargo().getCargaMinima()) {
+                    lista.add(func);
+                }
+            }
+            return lista;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
+                rs.close();
             } catch (SQLException ex) {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }

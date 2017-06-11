@@ -69,6 +69,18 @@ horas int,
 primary key(id)
 );
 
+create table funcTemp(
+id int,
+nome varchar(100),
+email varchar(50),
+cpf varchar(12),
+cargo varchar(50),
+departamento varchar(50),
+salario double,
+horas int,
+primary key(id)
+);
+
 ALTER TABLE `sistema_rhindo`.`Cargo` 
 CHANGE COLUMN `horasMinimas` `horasMinimas` INT NULL DEFAULT NULL ,
 CHANGE COLUMN `descontoImposto` `descontoImposto` DOUBLE NULL DEFAULT NULL ,

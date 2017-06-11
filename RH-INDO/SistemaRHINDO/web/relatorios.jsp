@@ -75,9 +75,9 @@
                                     <!-- Terceiro relatório -->
                                     <div class="corpo-relatorio">
                                         <legend>Funcionários com horário atrasado</legend>
-                                        <form>
+                                        <form method="POST" action="RelatoriosServlet?action=relAtrasados">
                                             <div class="form-group col-md-4">
-                                                <label for="depto">Mês</label>
+                                                <label for="mes">Mês</label>
                                                 <select class="form-control" id="depto" name="mes">
                                                     <option value="01">Janeiro</option>
                                                     <option value="02">Fevereiro</option>
@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label>&nbsp;</label>
-                                                <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-time"></span> Gerar Relatório</a>
+                                                <input type="submit" class="btn btn-primary" value="Gerar Relatório"/>
                                             </div>                                        
                                         </form>
                                     </div>

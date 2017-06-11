@@ -191,4 +191,9 @@ public class Facade {
         TipoAtividadeDAO dao = new TipoAtividadeDAO();
         return dao.selectHorasTrabalhadasPorMes(mes);
     }
+
+    public List<Funcionario> getHorasAtrasadasPorFunc(String mes) throws ClassNotFoundException, SQLException {
+        AtividadeDAO dao = new AtividadeDAO();
+        return dao.selectHorasTrabalhadasAtrasadas(mes);
+    }
 }
