@@ -11,6 +11,8 @@ $(document).ready(function () {
     $('#cep').mask('99999-999');
     $('#celular').mask('(99) 99999-9999');
     $('#rg').mask('99.999.999-9');
+    $('#salario').maskMoney();
+    
 
     $('#btnSubmitFunc').click(function (e) {
         var isValid = true;

@@ -61,9 +61,9 @@
                                                 <label for="nome">Nome:</label>
                                                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Ex. Marketing">
                                             </div>
-                                            <div class="form-group col-md-2">
+                                            <div class="form-group col-md-2"> 
                                                 <label for="salario">Salário:</label>
-                                                <input type="number" class="form-control" id="salario" name="salario" placeholder="R$:">
+                                                <input type="text" class="form-control" id="salario" name="salario" data-thousands="." data-decimal="," data-prefix="R$ " >
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="carga">Carga de Trabalho (Horas/Mês):</label>
