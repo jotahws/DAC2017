@@ -65,7 +65,7 @@ public class RelatorioServlet extends HttpServlet {
                     try {
                         con = new ConnectionFactory().getConnection();
                         String jasper = request.getContextPath()
-                                + "/RelatorioPorFunc.jasper";
+                                + "/RelatorioPorFuncionarioxml.jasper";
                         // Host onde o servlet esta executando
                         String host = "http://" + request.getServerName()
                                 + ":" + request.getServerPort();
