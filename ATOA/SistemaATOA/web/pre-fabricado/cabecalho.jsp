@@ -30,14 +30,14 @@
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <c:choose>
-                        <c:when test="${funcionarioLogado.perfil == 'GERENTE-RH'}">
+                        <c:when test="${(funcionarioLogado.perfil == 'GERENTE') || (funcionarioLogado.perfil == 'GERENTE-RH')}">
                             <ul class="nav navbar-nav">
                                 <li><a href="${pageContext.request.contextPath}/ListaAtividadeServlet?action=ListaAtividades">Atividades</a></li>
                                 <li><a href="${pageContext.request.contextPath}/ListaFuncionarioServlet?action=ListaFuncionarios">Relatórios</a></li>                        
                                 <li><a href="${pageContext.request.contextPath}/ListaEdicaoServlet?action=listaEdicao">Aprovar Correção</a></li>
                             </ul>
                         </c:when>
-                        <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO') || (funcionarioLogado.perfil == 'GERENTE')}">
+                        <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO')}">
                             <ul class="nav navbar-nav">
                                 <li><a href="${pageContext.request.contextPath}/ListaAtividadeServlet?action=QuadroAtividade">Home</a></li>
                                 <li><a href="${pageContext.request.contextPath}/atividades/historicoAtividades.jsp">Lista de Atividades</a></li>

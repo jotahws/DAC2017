@@ -24,10 +24,10 @@
             </c:when>
             <c:otherwise>
                 <c:choose>
-                    <c:when test="${(funcionarioLogado.perfil == 'GERENTE') || (funcionarioLogado.perfil == 'FUNCIONARIO')}">
+                    <c:when test="${(funcionarioLogado.perfil == 'FUNCIONARIO')}">
                         <c:redirect url="ListaAtividadeServlet?action=QuadroAtividade"/>
                     </c:when>
-                    <c:when test="${(funcionarioLogado.perfil == 'GERENTE-RH')}">
+                    <c:when test="${(funcionarioLogado.perfil == 'GERENTE-RH') || (funcionarioLogado.perfil == 'GERENTE')}">
                         <c:redirect url="ListaAtividadeServlet?action=ListaAtividades"/>
                     </c:when>
                     <c:otherwise> 

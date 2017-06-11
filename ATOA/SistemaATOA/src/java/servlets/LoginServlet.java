@@ -64,9 +64,9 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("funcionarioLogado", retorno);
 
-                if ("GERENTE-RH".equals(retorno.getPerfil())) {
+                if (("GERENTE-RH".equals(retorno.getPerfil())) || ("GERENTE".equals(retorno.getPerfil()))) {
                     response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades");
-                } else if (("GERENTE".equals(retorno.getPerfil())) || ("FUNCIONARIO".equals(retorno.getPerfil()))) {
+                } else if (("FUNCIONARIO".equals(retorno.getPerfil()))) {
                     response.sendRedirect("ListaAtividadeServlet?action=QuadroAtividade");
                 } else {
                     response.sendRedirect("index.jsp");

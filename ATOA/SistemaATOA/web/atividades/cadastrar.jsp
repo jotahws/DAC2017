@@ -18,7 +18,7 @@
             </c:when>
             <c:otherwise>
                 <c:choose>
-                    <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
+                    <c:when test="${(funcionarioLogado.perfil != 'GERENTE') && (funcionarioLogado.perfil != 'GERENTE-RH')}">
                         <div class="container">
                             <h1>Acesso Negado.</h1>
                             <h2>Você não pode acessar a essa página</h2>
