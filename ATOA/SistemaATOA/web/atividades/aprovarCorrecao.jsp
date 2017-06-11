@@ -88,8 +88,8 @@
                                                         </h4>
                                                     <div class=""><h4 class="col-md-12"><b class="text-danger">Descrição Adicionada:</b> "${item.descricao}"</h4></div>
                                                     <div class="text-right col-md-12">
-                                                        <a href="${pageContext.request.contextPath}/ListaEdicaoServlet?action=aprovada&id=${item.id}" class="btn btn-success">Aprovar Alteração</a>
-                                                        <a href="${pageContext.request.contextPath}/ListaEdicaoServlet?action=recusada&id=${item.id}" class="btn btn-danger">Recusar Alteração</a>
+                                                        <a href="${pageContext.request.contextPath}/ListaEdicaoServlet?action=aprovada&id=${item.id}" class="btn btn-success" onclick="return confirm('Você tem certeza que deseja aprovar as alterações?');">Aprovar Alteração</a>
+                                                        <a href="${pageContext.request.contextPath}/ListaEdicaoServlet?action=recusada&id=${item.id}" class="btn btn-danger" onclick="return confirm('Você tem certeza que deseja recusar as alterações?');">Recusar Alteração</a>
                                                     </div>
                                                 </div>
                                             </c:forEach>
