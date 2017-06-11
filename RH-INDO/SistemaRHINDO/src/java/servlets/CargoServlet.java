@@ -47,6 +47,8 @@ public class CargoServlet extends HttpServlet {
             //Cadastrar
             String nome = request.getParameter("nome");
             String salario = request.getParameter("salario");
+            salario = salario.replace("R$ ", "");
+            salario = salario.replace(",", ".");
             String cargaMinima = request.getParameter("carga");
             String requisitos = request.getParameter("requisitos");
             String descImposto = request.getParameter("imposto");
