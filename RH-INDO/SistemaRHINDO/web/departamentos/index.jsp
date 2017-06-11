@@ -102,7 +102,7 @@
                                                         </div>
                                                         <div class="text-right">
                                                             <input type="submit" id="botao" value="Salvar Alterações" class="btn btn-primary"/>  
-                                                            <a href="DeptoServlet?action=delete&idDepto=${item.id}" class="btn btn-danger">Excluir</a>  
+                                                            <a href="DeptoServlet?action=delete&idDepto=${item.id}" class="btn btn-danger" onclick="return confirm('Você tem certeza que deseja excluir este departamento?');">Excluir</a>  
                                                         </div>
                                                     </form>
                                                 </div>
