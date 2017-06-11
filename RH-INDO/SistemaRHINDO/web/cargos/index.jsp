@@ -111,7 +111,7 @@
                                                         </div>
                                                         <div class="text-right">
                                                             <button type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
-                                                            <a href="CargoServlet?action=delete&idCargo=${item.id}" class="btn btn-danger">Excluir</a>  
+                                                            <a href="CargoServlet?action=delete&idCargo=${item.id}" class="btn btn-danger" onclick="return confirm('Você tem certeza que deseja excluir este cargo?');">Excluir</a>  
                                                         </div>
                                                     </form>
                                                 </div>
