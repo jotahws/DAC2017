@@ -163,8 +163,8 @@
                                                 </div>
                                             </div>
                                             <div class="text-right">
-                                                <a id="deleteFunc" href="FuncionarioServlet?action=delete&idFunc=${func.id}" class="btn btn-danger">Excluir Funcionário</a>  
-                                                <input type="submit" id="btnSubmitFunc" class="btn btn-primary form-group" value="Salvar Alterações" />
+                                                <a href="FuncionarioServlet?action=delete&idFunc=${func.id}" class="btn btn-danger" onclick="return confirm('Você tem certeza que deseja excluir este funcionário?');">Excluir Funcionário</a>  
+                                                <input onclick = "return confirm('Alterar os dados deste funcionario?')" type="submit" id="btnSubmitFunc" class="btn btn-primary form-group" value="Salvar Alterações" />
                                             </div>
                                         </form>
                                     </fieldset>
