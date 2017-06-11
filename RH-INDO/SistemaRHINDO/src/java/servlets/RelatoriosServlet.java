@@ -194,7 +194,11 @@ public class RelatoriosServlet extends HttpServlet {
             Facade facade = new Facade();
             try {
                 String mesDe = request.getParameter("mesde");
+                String[] partsDe = mesDe.split("/");
+                mesDe = partsDe[2] + "-" + partsDe[1] + "-" + partsDe[0];
                 String mesAte = request.getParameter("mesate");
+                String[] partsAte = mesAte.split("/");
+                mesAte = partsAte[2] + "-" + partsAte[1] + "-" + partsAte[0];
                 HttpSession session = request.getSession(true);
                 Funcionario func = (Funcionario) session.getAttribute("funcionarioLogado");
                 List<HorasTrabalhadas> horas = facade.getHorastrabalhadas(mesDe, mesAte, func);
@@ -224,11 +228,11 @@ public class RelatoriosServlet extends HttpServlet {
                 System.out.println("Erro ao conectar banco: " + ex.getMessage());
             } catch (JRException ex) {
                 try (PrintWriter out = response.getWriter()) {
-                    out.println(ex.getMessage());
+                    out.println("JASPER: " + ex.getMessage());
                 }
             } catch (SQLException ex) {
                 try (PrintWriter out = response.getWriter()) {
-                    out.println(ex.getMessage());
+                    out.println("SQL: " + ex.getMessage());
                 }
             } finally {
                 try {

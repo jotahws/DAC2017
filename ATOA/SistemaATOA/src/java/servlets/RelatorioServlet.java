@@ -113,7 +113,8 @@ public class RelatorioServlet extends HttpServlet {
 
             int id = Integer.parseInt(request.getParameter("id"));
             String data = (request.getParameter("data"));
-
+            String[] partsData = data.split("/");
+            data = partsData[2] + "/" + partsData[1] + "/" + partsData[0];
             try {
                 boolean result = facade.verificaDepart(id);
                 if (result) {
