@@ -153,7 +153,7 @@
                                             </div>
                                             <div class="text-right">
 
-                                                <button type="submit" id="btnSubmitFunc btnSubmit" class="btn btn-primary form-group">Cadastrar</button>  
+                                                <button type="submit" id="btnSubmitFunc" class="btn btn-primary form-group">Cadastrar</button>  
 
                                             </div>
                                         </form>
