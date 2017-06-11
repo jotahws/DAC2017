@@ -12,6 +12,12 @@ $(document).ready(function () {
     $('#celular').mask('(99) 99999-9999');
     $('#rg').mask('99.999.999-9');
 
+    $("#deleteFunc").on("click", function (f) {
+        if(!confirm('Tem certeza que deseja excluir este funcionário?')){
+         event.preventDefault();
+     }
+    });
+
     $('#btnSubmitFunc').click(function (e) {
         var isValid = true;
         $('span.clear').remove();
@@ -158,5 +164,7 @@ $(document).ready(function () {
         if (isValid == false)
             e.preventDefault();
     });
+
+
 
 });

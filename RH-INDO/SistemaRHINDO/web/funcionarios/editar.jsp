@@ -163,8 +163,8 @@
                                                 </div>
                                             </div>
                                             <div class="text-right">
-                                                <a href="FuncionarioServlet?action=delete&idFunc=${func.id}" class="btn btn-danger">Excluir Funcionário</a>  
-                                                <input type="submit" class="btn btn-primary form-group" value="Salvar Alterações" />
+                                                <a id="deleteFunc" href="FuncionarioServlet?action=delete&idFunc=${func.id}" class="btn btn-danger">Excluir Funcionário</a>  
+                                                <input type="submit" id="btnSubmitFunc" class="btn btn-primary form-group" value="Salvar Alterações" />
                                             </div>
                                         </form>
                                     </fieldset>
