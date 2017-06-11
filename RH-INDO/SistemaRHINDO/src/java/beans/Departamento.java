@@ -18,7 +18,8 @@ public class Departamento implements Serializable {
     private String nome;
     private String localizacao;
     private List<Funcionario> funcionarios; 
-
+    private int horastrabalhadas;
+    
     public Departamento() {
     }
 
@@ -31,6 +32,14 @@ public class Departamento implements Serializable {
     public Departamento(String nome, String localizacao) {
         this.nome = nome;
         this.localizacao = localizacao;
+    }
+
+    public int getHorastrabalhadas() {
+        return horastrabalhadas;
+    }
+
+    public void setHorastrabalhadas(int horastrabalhadas) {
+        this.horastrabalhadas = horastrabalhadas;
     }
 
     public int getId() {

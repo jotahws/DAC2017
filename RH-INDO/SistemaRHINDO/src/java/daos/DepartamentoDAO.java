@@ -22,10 +22,12 @@ import java.util.List;
 public class DepartamentoDAO {
 
     private final String insertDepto = "INSERT INTO Departamento (nome, localizacao) VALUES (?,?)";
+    private final String insertDeptoTEMP = "INSERT INTO horasDepartTemp (id, localizacao, nome, horas) VALUES (?,?,?,?)";
     private final String listDeptos = "SELECT * FROM Departamento ORDER BY nome";
     private final String selectDeptoID = "SELECT * FROM Departamento WHERE id=?";
     private final String updateDepto = "UPDATE Departamento SET nome=?, localizacao=? WHERE id=?;";
     private final String deleteDepto = "DELETE FROM DEPARTAMENTO WHERE id=?;";
+    private final String deleteDeptoTEMP = "DELETE FROM horasDepartTemp;";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -123,6 +125,40 @@ public class DepartamentoDAO {
             con = new ConnectionFactory().getConnection();
             stmt = con.prepareStatement(deleteDepto, Statement.RETURN_GENERATED_KEYS);            
             stmt.setInt(1, idDepto);
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void insereHorasDeptoTemp(Departamento depto) throws ClassNotFoundException, SQLException, NullPointerException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(insertDeptoTEMP);
+            stmt.setInt(1, depto.getId());
+            stmt.setString(2, depto.getLocalizacao());
+            stmt.setString(3, depto.getNome());
+            stmt.setInt(4, depto.getHorastrabalhadas());
+            stmt.executeUpdate();
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public void deletaHorasDeptoTemp() throws SQLException, ClassNotFoundException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(deleteDeptoTEMP);
             stmt.executeUpdate();
         } finally {
             try {

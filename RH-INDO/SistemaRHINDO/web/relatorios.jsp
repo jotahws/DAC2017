@@ -48,19 +48,7 @@
                                     <!-- Segundo relatório -->
                                     <div class="corpo-relatorio">
                                         <legend>Relatório de horas trabalhadas</legend>  
-                                        <form>
-                                            <div class="form-group col-md-4">
-                                                <label for="depto">Departamento</label>
-                                                <select class="form-control" id="depto" name="depto">
-                                                    <jsp:useBean id="depto" class="beans.Departamento"/>
-                                                    <c:set var="lista" value="${deptos}"/>
-                                                    <c:forEach var="item" items="${lista}">
-                                                        <option value="${item.id}" <c:if test="${func.departamento.nome == item.nome}">selected</c:if> >
-                                                            <c:out value="${item.nome}"/>
-                                                        </option>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
+                                        <form method="POST" action="RelatoriosServlet?action=relMes">
                                             <div class="form-group col-md-4">
                                                 <label for="depto">Mês</label>
                                                 <select class="form-control" id="depto" name="mes">
@@ -80,7 +68,7 @@
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label>&nbsp;</label>
-                                                <a class="btn btn-md btn-primary"><span class="glyphicon glyphicon-calendar"></span> Gerar Relatório</a>
+                                                <input type="submit" class="btn btn-primary" value="Gerar Relatório"/>
                                             </div>
                                         </form>
                                     </div>

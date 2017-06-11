@@ -17,6 +17,11 @@ import daos.EstadoDAO;
 import daos.FuncionarioDAO;
 import java.sql.SQLException;
 import java.util.List;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -117,6 +122,27 @@ public class Facade {
     public Funcionario buscaFuncionarioPorID(int idFunc) throws ClassNotFoundException, SQLException {
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         return funcDAO.buscaFuncPorID(idFunc);
+    }
+
+    public List<Departamento> getHorasTrabalhadasPorMes(String mes) {
+        Client client = ClientBuilder.newClient();
+        Response res = client.target("http://localhost:8084/SistemaATOA/webresources/departamento/" + mes)
+                .request(MediaType.APPLICATION_JSON).get();
+
+        return res.readEntity(new GenericType<List<Departamento>>() {
+        });
+    }
+
+    public void insereHorasDeptoTemp(List<Departamento> deptos) throws ClassNotFoundException, SQLException {
+        DepartamentoDAO deptoDAO = new DepartamentoDAO();
+        for (Departamento depto : deptos) {
+            deptoDAO.insereHorasDeptoTemp(depto);
+        }
+    }
+
+    public void deleteHorasDeptoTemp() throws ClassNotFoundException, SQLException {
+        DepartamentoDAO deptoDAO = new DepartamentoDAO();
+        deptoDAO.deletaHorasDeptoTemp();
     }
 
 }

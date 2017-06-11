@@ -61,6 +61,13 @@ create table Funcionario(
     foreign key(idEndereco) references Endereco(id)
 );
 
+create table horasDepartTemp(
+id int,
+localizacao varchar(100),
+nome varchar(100),
+horas int,
+primary key(id)
+);
 
 ALTER TABLE `sistema_rhindo`.`Cargo` 
 CHANGE COLUMN `horasMinimas` `horasMinimas` INT NULL DEFAULT NULL ,

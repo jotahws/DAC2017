@@ -88,7 +88,49 @@ public class RelatoriosServlet extends HttpServlet {
             }
 
         } else if ("relMes".equals(action)) {
+            Facade facade = new Facade();
+            try {
+                String mes = request.getParameter("mes");
+                List<Departamento> deptos = facade.getHorasTrabalhadasPorMes(mes);
+                facade.insereHorasDeptoTemp(deptos);
+                con = new ConnectionFactory().getConnection();
+                String jasper = request.getContextPath()
+                        + "/RelatorioHorasPorDepto.jasper";
+                // Host onde o servlet esta executando
+                String host = "http://" + request.getServerName()
+                        + ":" + request.getServerPort();
+                // URL para acesso ao relatório
+                URL jasperURL = new URL(host + jasper);
+                // Parâmetros do relatório
+                HashMap params = new HashMap();
+                // Geração do relatório
+                byte[] bytes = JasperRunManager.runReportToPdf(
+                        jasperURL.openStream(), params, con);
 
+                if (bytes != null) {
+                    // A página será mostrada em PDF
+                    response.setContentType("application/pdf");
+                    // Envia o PDF para o Cliente
+                    OutputStream ops = response.getOutputStream();
+                    ops.write(bytes);
+                }
+            } catch (ClassNotFoundException ex) {
+                System.out.println("Erro ao conectar banco: " + ex.getMessage());
+            } catch (JRException ex) {
+                Logger.getLogger(RelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(RelatoriosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                }
+            }
+            try{
+                facade.deleteHorasDeptoTemp();   
+            }catch(Exception ex){
+                
+            }
         } else if ("RelatoriosGerente".equals(action)) {
             try {
                 Facade facade = new Facade();

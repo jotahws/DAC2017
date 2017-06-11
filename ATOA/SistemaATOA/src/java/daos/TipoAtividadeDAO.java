@@ -30,8 +30,8 @@ public class TipoAtividadeDAO {
     private final String deleteTipo = "DELETE FROM TipoAtividade WHERE id=?;";
     private final String listaTipos = "SELECT * FROM TipoAtividade ORDER BY nome";
     private final String buscaTipoID = "SELECT * FROM TipoAtividade WHERE id=?";
-    private final String verDepartamento = "select *from TipoAtividade where idDepartamento =?;";
-    
+    private final String verDepartamento = "select * from TipoAtividade where idDepartamento =?;";
+    private final String horasPorDepartamento = "SELECT t.idDepartamento, sum(TIMESTAMPDIFF(hour,inicio,fim)) as horasTrabalhadas from FuncionarioAtividade a, TipoAtividade t where month(inicio)=? AND a.idAtividade = t.id Group by t.idDepartamento; ";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
@@ -166,6 +166,34 @@ public class TipoAtividadeDAO {
             try {
                 stmt.close();
                 con.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+    }
+
+    public List<Departamento> selectHorasTrabalhadasPorMes(String mes) throws ClassNotFoundException, SQLException {
+
+        try {
+            List<Departamento> lista = new ArrayList();
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(horasPorDepartamento);
+            stmt.setString(1, mes);
+            rs = stmt.executeQuery();
+            Facade facade = new Facade();
+            while (rs.next()) {
+                int idDepto = rs.getInt("t.idDepartamento");
+                int horasT = rs.getInt("horasTrabalhadas");
+                Departamento depto  = facade.getDeptoPorID(idDepto);
+                depto.setHorastrabalhadas(horasT);
+                lista.add(depto);
+            }
+            return lista;
+        } finally {
+            try {
+                con.close();
+                stmt.close();
                 rs.close();
             } catch (SQLException ex) {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
