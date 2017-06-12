@@ -87,7 +87,7 @@
                                             </div>
                                         </c:when>
                                     </c:choose>
-                                    <h4 class="col-md-12">Selecione um Dia:</h4>
+                                    <h4 class="btnSubmitData col-md-12">Selecione um Dia:</h4>
                                     <form action="RelatorioServlet?action=relDepartamento" method="POST">
                                         <div class="col-md-5">
                                             <input class="form-control data" id="data" name="data" type="date"/>
@@ -114,7 +114,7 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td>                                                        
-                                                    <input type="submit" name="" value="Emitir Relatório" class="form-control btn btn-success"  />
+                                                    <input type="submit" id="btnSubmitData" name="" value="Emitir Relatório" class="btnSubmitData form-control btn btn-success"  />
                                                 </td>
                                             </table>
                                         </div>

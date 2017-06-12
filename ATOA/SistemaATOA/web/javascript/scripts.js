@@ -13,7 +13,7 @@ $(document).ready(function () {
     $('#rg').mask('99.999.999-9');
     $('.data').mask('99/99/9999');
     $('#salario').maskMoney();
-    
+
 
     $('#btnSubmitTipo').click(function (e) {
         var isValid = true;
@@ -33,7 +33,7 @@ $(document).ready(function () {
                     "background": ""
                 });
             }
-        });        
+        });
         if (isValid == false)
             e.preventDefault();
     });
@@ -115,6 +115,26 @@ $(document).ready(function () {
             e.preventDefault();
     });
 
+    $('.btnSubmitData').click(function (e) {
+        var isValid = true;
+        $('input[type="date"]').each(function () {
+            if ($.trim($(this).val()) === '') {
+                isValid = false;
+                $(this).css({
+                    "border": "1px solid red",
+                    "background": "#FFCECE"
+                });
 
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
+            } else {
+                $(this).css({
+                    "border": "",
+                    "background": ""
+                });
+            }
+        });
+        if (isValid == false)
+            e.preventDefault();
+    });
 
 });

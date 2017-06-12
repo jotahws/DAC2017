@@ -49,16 +49,16 @@
                                         <form method="POST" action="RelatoriosServlet?action=relFunc">
                                             <div class="form-group col-md-4">
                                                 <label for="mesde">De</label>
-                                                <input type="calendar" name="mesde" class="mes form-control">(dd/mm/aaaa)
+                                                <input type="date" name="mesde" class="mes form-control"> (dd/mm/aaaa)
                                                 
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="mesate">Até</label>
-                                                <input type="calendar" name="mesate" class="mes form-control">(dd/mm/aaaa)
+                                                <input type="date" name="mesate" class="mes form-control"> (dd/mm/aaaa)
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label>&nbsp;</label>
-                                                <input type="submit" class="btn btn-primary" value="Gerar Relatório"/>
+                                                <input type="submit" class="btnSubmitData btn btn-primary" value="Gerar Relatório"/>
                                             </div>
                                         </form>
                                     </div>
