@@ -14,6 +14,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/javascript/jquery.maskedinput.js"></script>
+        <script src="${pageContext.request.contextPath}/javascript/jquery.maskMoney.js"></script>
+        <script src="${pageContext.request.contextPath}/javascript/scripts.js"></script>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/style.css"/>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.min.css"/>     
     </head>

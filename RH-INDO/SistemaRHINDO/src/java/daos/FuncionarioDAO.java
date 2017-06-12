@@ -254,7 +254,9 @@ public class FuncionarioDAO {
                 //instanciar                
                 Departamento depto = new Departamento(nomeDepto);
                 Cargo cargo = new Cargo(nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
-                Funcionario func = new Funcionario(idFunc, nome, cpf, email, cargo, depto);                
+                Funcionario func = buscaFuncPorID(idFunc);
+                func.setCargo(cargo);
+                func.setDepartamento(depto);
                 HorasTrabalhadas hrsTrab = new HorasTrabalhadas(horas,mesEscolhido,func);
                 return hrsTrab;
             }

@@ -103,8 +103,7 @@
                                                     <p class="col-md-6">Cidade: ${item.endereco.cidade.nome}</p>
                                                     <p class="col-md-6">Estado: ${item.endereco.cidade.estado.nome}</p>
                                                     <div class="text-right">
-                                                        <a href="CarregaListaFuncServlet?action=edit&id=${item.id}" class="btn btn-primary">Editar</a>
-                                                        <a class="btn btn-success">Folha de Pagamento</a>
+                                                        <a href="CarregaListaFuncServlet?action=edit&id=${item.id}" class="btn btn-primary">Editar Funcionário</a>
                                                     </div>
                                                 </div>
                                             </c:forEach>

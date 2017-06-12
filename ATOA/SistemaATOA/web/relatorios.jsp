@@ -30,7 +30,7 @@
                         <div class="container">
                             <div class="row row-busca-titulo">
                                 <div class="col-md-8 titulo">
-                                    <h1 class="col-md-10">Relatórios
+                                    <h1 class="col-md-10">Relatórios de Atividades</h1>
                                 </div>
                             </div>
                             <c:choose>
@@ -40,16 +40,10 @@
                                         <p> <strong>Ops!</strong> O funcionário não contém nenhuma atividade.</p>
                                     </div>
                                 </c:when>
-                                <c:when test="${(param.status == 'erroDepart')}">
-                                    <div class="alert alert-danger alert-dismissable">
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        <p> <strong>Ops!</strong> O Departamento não contém nenhuma atividade.</p>
-                                    </div>
-                                </c:when>
                             </c:choose>
                             <div class="col-md-12 corpo">
                                 <div class="col-md-6">
-                                    <h3 class="text-center ">Por Funcionários Consolidado</h3>
+                                    <h3 class="text-center ">Por Funcionários</h3>
                                     <div class=" panel panel-primary">
                                         <table class="table">
                                             <tr>
@@ -72,11 +66,31 @@
 
                                 </div>
                                 <div  class="col-md-6 relatorio-dep">
-                                    <h3 class="text-center">Por Departamentos Consolidados</h3>
+                                    <h3 class="text-center">Por Departamentos</h3>
+                                    <c:choose>
+                                        <c:when test="${(param.status == 'errorDate')}">
+                                            <div class="alert alert-danger alert-dismissable">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <p><strong>Ops!</strong> Escolha uma data para poder gerar o relatório.</p>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${(param.status == 'errorSelect')}">
+                                            <div class="alert alert-danger alert-dismissable">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <p><strong>Ops!</strong> Selecione um departamento para poder gerar o relatório.</p>
+                                            </div>
+                                        </c:when>
+                                        <c:when test="${(param.status == 'erroDepart')}">
+                                            <div class="alert alert-danger alert-dismissable">
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <p> <strong>Ops!</strong> O Departamento não contém nenhuma atividade.</p>
+                                            </div>
+                                        </c:when>
+                                    </c:choose>
                                     <h4 class="col-md-12">Selecione um Dia:</h4>
                                     <form action="RelatorioServlet?action=relDepartamento" method="POST">
                                         <div class="col-md-5">
-                                            <input class="form-control" id="data" name="data" type="date"/>
+                                            <input class="form-control data" id="data" name="data" type="date"/>
                                             <input class="form-control"  value="" type="hidden"/>
                                         </div>
                                         <div class="col-md-7">
@@ -85,21 +99,23 @@
                                         <div class=" panel panel-primary">
                                             <table class="table">
                                                 <tr>
+                                                    <th></th>
                                                     <th>Departamento</th>
                                                     <th>Localização</th>
-                                                    <th></th>
                                                 </tr>
                                                 <!--<c:set var="listaDepart" value="${listaDepart}"/>-->
                                                 <c:forEach var="item" items="${listaDepart}">
                                                     <tr>
+                                                        <td><input type="radio" name="id" value="${item.id}"/></td>
                                                         <td class="tg-031e"><c:out value="${item.nome}"/></td>
-                                                        <td class="tg-031e"><c:out value="${item.localizacao}"/></td>                                                    
-                                                        <td class="tg-031e">                                                        
-                                                            <input type="submit" class="form-control btn btn-success"  />
-                                                            <input type="hidden" class="form-control btn btn-success" value="${item.id}" name="id"/>
-                                                        </td>
+                                                        <td class="tg-031e"><c:out value="${item.localizacao}"/></td> 
                                                     </tr>
                                                 </c:forEach>
+                                                <td></td>
+                                                <td></td>
+                                                <td>                                                        
+                                                    <input type="submit" name="" value="Emitir Relatório" class="form-control btn btn-success"  />
+                                                </td>
                                             </table>
                                         </div>
                                     </form>

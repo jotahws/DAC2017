@@ -30,23 +30,31 @@
                             <!-- Row do input pesquisar: -->
                             <div class="row row-busca-titulo">
                                 <div class="col-md-8 titulo">
-                                    <h1 class="col-md-10">Relatórios Funcionário</h1>
+                                    <h1 class="col-md-10">Meus Relatórios</h1>
                                 </div>
                             </div>
                             <!-- Row do cadastro: -->
                             <div class="row row-lista-corpo">
+                                <c:choose>
+                                    <c:when test="${(param.status == 'error')}">
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p><strong>Ops!</strong> Selecione um período de datas para gerar o relatório.</p>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                                 <!-- corpo da página -->
                                     <div class="col-md-12 corpo corpo-relatorio">
                                         <legend>Relatório de horas trabalhadas</legend>  
                                         <form method="POST" action="RelatoriosServlet?action=relFunc">
                                             <div class="form-group col-md-4">
                                                 <label for="mesde">De</label>
-                                                <input type="calendar" name="mesde" class="form-control">(dd/mm/aaaa)
+                                                <input type="calendar" name="mesde" class="mes form-control">(dd/mm/aaaa)
                                                 
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="mesate">Até</label>
-                                                <input type="calendar" name="mesate" class="form-control">(dd/mm/aaaa)
+                                                <input type="calendar" name="mesate" class="mes form-control">(dd/mm/aaaa)
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label>&nbsp;</label>

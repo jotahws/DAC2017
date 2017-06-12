@@ -88,3 +88,7 @@ textarea {
 .margin-topo{
     margin: 20px 0px;
 }
+
+.margin-esq{
+    margin: 0px 0px 0px 10px;
+}

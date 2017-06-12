@@ -83,8 +83,8 @@ public class TipoAtividadeServlet extends HttpServlet {
                 status = "successDelete";
                 response.sendRedirect("ListaAtividadeServlet?action=ListaAtividades&status=" + status);
             } catch (Exception ex) {
-                status = "error";
-                response.sendRedirect("TipoAtividadeServlet?action=delete&id=" + id + "&status=" + status);
+                status = "errorDe";
+                response.sendRedirect("TipoAtividadeServlet?action=edit&id=" + id + "&status=" + status);
             }
         } 
 

@@ -38,7 +38,13 @@
                                 <c:when test="${(param.status == 'error')}">
                                     <div class="alert alert-danger alert-dismissable">
                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                        <p> <strong>Ops!</strong> Ocorreu um erro ao cadastrar o Tipo. Tente novamente.</p>
+                                        <p> <strong>Ops!</strong> Ocorreu um erro ao editar o Tipo. Tente novamente.</p>
+                                    </div>
+                                </c:when>
+                                <c:when test="${(param.status == 'errorDelete')}">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <p> <strong>Ops!</strong> Você não pode excluir um tipo que já tenha atividades realizadas.</p>
                                     </div>
                                 </c:when>
                             </c:choose>
@@ -67,7 +73,7 @@
                                         </div>
                                         <div class="text-right">
                                             <a href="${pageContext.request.contextPath}/TipoAtividadeServlet?action=delete&id=${tipo.id}" class="btn btn-danger" onclick="return confirm('Você tem certeza que deseja excluir este tipo de atividade?');">Excluir Tipo</a>
-                                            <button onclick = "return confirm('Salvar alterações?')" type="submit" id="botao" class="btn btn-primary">Salvar Alterações</button>  
+                                            <button onclick = "return confirm('Salvar alterações?')" type="submit" id="btnSubmitTipo" class="btn btn-primary">Salvar Alterações</button>  
                                         </div>
                                     </form>
                                 </fieldset>

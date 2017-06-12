@@ -11,6 +11,7 @@ $(document).ready(function () {
     $('#cep').mask('99999-999');
     $('#celular').mask('(99) 99999-9999');
     $('#rg').mask('99.999.999-9');
+    $('.mes').mask('99/99/9999');
     $('#salario').maskMoney();
     
 
@@ -25,7 +26,7 @@ $(document).ready(function () {
                     "background": "#FFCECE"
                 });
 
-                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatório</span>');
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
             } else {
                 $(this).css({
                     "border": "",
@@ -41,7 +42,7 @@ $(document).ready(function () {
                     "background": "#FFCECE"
                 });
 
-                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatório</span>');
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
             } else {
                 $(this).css({
                     "border": "",
@@ -56,7 +57,7 @@ $(document).ready(function () {
                     "border": "1px solid red",
                     "background": "#FFCECE"
                 });
-                $(this).after('<span class="clear" style="font-size:0.8em;">Formato de número inválido</span>');
+                $(this).after('<span class="clear" style="font-size:0.8em;">Formato de número invalido</span>');
             } else {
                 $(this).css({
                     "border": "",
@@ -72,7 +73,7 @@ $(document).ready(function () {
                     "background": "#FFCECE"
                 });
 
-                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatório</span>');
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
             } else {
                 $(this).css({
                     "border": "",
@@ -95,7 +96,84 @@ $(document).ready(function () {
                     "background": "#FFCECE"
                 });
 
-                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatório</span>');
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
+            } else {
+                $(this).css({
+                    "border": "",
+                    "background": ""
+                });
+            }
+        });
+        if (isValid == false)
+            e.preventDefault();
+    });
+
+    $('.btnSubmitDepto').click(function (e) {
+        var isValid = true;
+        $('span.clear').remove();
+        $('input[type="text"]').each(function () {
+            if ($.trim($(this).val()) == '') {
+                isValid = false;
+                $(this).css({
+                    "border": "1px solid red",
+                    "background": "#FFCECE"
+                });
+
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
+            } else {
+                $(this).css({
+                    "border": "",
+                    "background": ""
+                });
+            }
+        });
+        if (isValid == false)
+            e.preventDefault();
+    });
+
+    $('.btnSubmitCargo').click(function (e) {
+        var isValid = true;
+        $('span.clear').remove();
+        $('input[type="text"]').each(function () {
+            if ($.trim($(this).val()) == '') {
+                isValid = false;
+                $(this).css({
+                    "border": "1px solid red",
+                    "background": "#FFCECE"
+                });
+
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
+            } else {
+                $(this).css({
+                    "border": "",
+                    "background": ""
+                });
+            }
+        });
+        $('textarea').each(function () {
+            if ($.trim($(this).val()) == '') {
+                isValid = false;
+                $(this).css({
+                    "border": "1px solid red",
+                    "background": "#FFCECE"
+                });
+
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
+            } else {
+                $(this).css({
+                    "border": "",
+                    "background": ""
+                });
+            }
+        });
+        $('input[type="number"]').each(function () {
+            if (($.trim($(this).val()) == '')) {
+                isValid = false;
+                $(this).css({
+                    "border": "1px solid red",
+                    "background": "#FFCECE"
+                });
+                $(this).after('<span class="clear" style="font-size:0.8em;">Formato de numero invalido</span>');
             } else {
                 $(this).css({
                     "border": "",
@@ -118,7 +196,7 @@ $(document).ready(function () {
                     "background": "#FFCECE"
                 });
 
-                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatório</span>');
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
             } else {
                 $(this).css({
                     "border": "",
@@ -134,7 +212,7 @@ $(document).ready(function () {
                     "background": "#FFCECE"
                 });
 
-                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatório</span>');
+                $(this).after('<span class="clear" style="font-size:0.8em;">Campo Obrigatorio</span>');
             } else {
                 $(this).css({
                     "border": "",
@@ -149,7 +227,7 @@ $(document).ready(function () {
                     "border": "1px solid red",
                     "background": "#FFCECE"
                 });
-                $(this).after('<span class="clear" style="font-size:0.8em;">Formato de número inválido</span>');
+                $(this).after('<span class="clear" style="font-size:0.8em;">Formato de numero invalido</span>');
             } else {
                 $(this).css({
                     "border": "",
@@ -160,7 +238,6 @@ $(document).ready(function () {
         if (isValid == false)
             e.preventDefault();
     });
-
 
 
 });

@@ -110,12 +110,12 @@ public class RelatorioServlet extends HttpServlet {
                 Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if ("relDepartamento".equals(action)) {
-
-            int id = Integer.parseInt(request.getParameter("id"));
-            String data = (request.getParameter("data"));
-            String[] partsData = data.split("/");
-            data = partsData[2] + "/" + partsData[1] + "/" + partsData[0];
             try {
+                int id = Integer.parseInt(request.getParameter("id"));
+                String data = (request.getParameter("data"));
+                String[] partsData = data.split("/");
+                data = partsData[2] + "/" + partsData[1] + "/" + partsData[0];
+
                 boolean result = facade.verificaDepart(id);
                 if (result) {
                     Departamento depart = facade.getDeptoPorID(id);
@@ -145,10 +145,8 @@ public class RelatorioServlet extends HttpServlet {
                             ops.write(bytes);
                         }
 
-                    } catch (ClassNotFoundException ex) {
-                        System.out.println("Erro ao conectar banco: " + ex.getMessage());
-                    } catch (JRException ex) {
-                        Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ClassNotFoundException | JRException | ArrayIndexOutOfBoundsException | NumberFormatException ex) {
+                        response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios");
                     } finally {
                         con.close();
 
@@ -159,8 +157,10 @@ public class RelatorioServlet extends HttpServlet {
                     response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios&status=" + status);
                 }
 
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(RelatorioServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException | SQLException | ArrayIndexOutOfBoundsException ex) {
+                response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios&status=errorDate");
+            } catch(NumberFormatException ex){
+                response.sendRedirect("ListaFuncionarioServlet?action=ListaFuncionarios&status=errorSelect");
             }
             //Removendo dados tabela temporaria
             try {

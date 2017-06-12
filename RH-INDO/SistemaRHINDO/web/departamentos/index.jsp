@@ -101,7 +101,7 @@
                                                             </div>                                
                                                         </div>
                                                         <div class="text-right">
-                                                            <input onclick = "return confirm('Alterar os dados deste departamento?')" type="submit" id="botao" value="Salvar Alterações" class="btn btn-primary"/>  
+                                                            <input onclick = "return confirm('Alterar os dados deste departamento?')" type="submit" id="btnSubmitDepto" value="Salvar Alterações" class="btnSubmitDepto btn btn-primary"/>  
                                                             <a href="DeptoServlet?action=delete&idDepto=${item.id}" class="btn btn-danger" onclick="return confirm('Você tem certeza que deseja excluir este departamento?');">Excluir</a>  
                                                         </div>
                                                     </form>

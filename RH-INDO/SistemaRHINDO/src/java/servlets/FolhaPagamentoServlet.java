@@ -12,6 +12,7 @@ import facade.Facade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -77,22 +78,31 @@ public class FolhaPagamentoServlet extends HttpServlet {
             String mes = request.getParameter("mes");
 
             try {
+                DecimalFormat df = new DecimalFormat("#.00");
                 HorasTrabalhadas hTrab = facade.buscaHoleriteFuncionario(id, mes);
+
+                //conferir se horas trabalhadas é menoir que hora minina do cargo
+                if (hTrab.getFunc().getCargo().getCargaMinima() > hTrab.getHorasTrabalhadas()) {
+                    hTrab.getFunc().getCargo().setSalario(Math.round(
+                            ((hTrab.getFunc().getCargo().getSalario() * hTrab.getHorasTrabalhadas())
+                            / hTrab.getFunc().getCargo().getCargaMinima())
+                    )
+                    );
+                }
                 //Calculo liquido = bruto * imposto/10
                 hTrab.getFunc().getCargo().setLiquido((hTrab.getFunc().getCargo().getSalario()
                         * hTrab.getFunc().getCargo().getDescImposto()) / 10);
-                //conferir se horas trabalhadas é menoir que hora minina do cargo
-                if (hTrab.getFunc().getCargo().getCargaMinima() < hTrab.getHorasTrabalhadas()) {
-                    hTrab.getFunc().getCargo().setSalario((hTrab.getFunc().getCargo().getSalario()
-                            * hTrab.getHorasTrabalhadas()) / hTrab.getFunc().getCargo().getCargaMinima());
-                }
                 request.setAttribute("func", hTrab);
 
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/contraCheque.jsp");
                 rd.forward(request, response);
 
+            } catch (NullPointerException ex) {
+                response.sendRedirect("contraCheque.jsp?status=error");
             } catch (ClassNotFoundException | SQLException ex) {
-                status = "erroH";
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(ex.getMessage());
+                }
             }
         }
     }

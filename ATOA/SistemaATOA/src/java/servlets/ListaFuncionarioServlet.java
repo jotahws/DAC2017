@@ -40,9 +40,11 @@ public class ListaFuncionarioServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         Facade facade = new Facade();
-
+        String status = "";
+        
         if ("ListaFuncionarios".equals(action)) {
             try {
+                status = request.getParameter("status");
                 List<Funcionario> funcionarios = facade.listaFuncionarios();
                 request.setAttribute("listaFunc", funcionarios);
                 
@@ -59,7 +61,7 @@ public class ListaFuncionarioServlet extends HttpServlet {
             
             
             
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorios.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/relatorios.jsp?status="+status);
             rd.forward(request, response);
         }
     }

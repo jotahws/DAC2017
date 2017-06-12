@@ -224,16 +224,8 @@ public class RelatoriosServlet extends HttpServlet {
                     OutputStream ops = response.getOutputStream();
                     ops.write(bytes);
                 }
-            } catch (ClassNotFoundException ex) {
-                System.out.println("Erro ao conectar banco: " + ex.getMessage());
-            } catch (JRException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("JASPER: " + ex.getMessage());
-                }
-            } catch (SQLException ex) {
-                try (PrintWriter out = response.getWriter()) {
-                    out.println("SQL: " + ex.getMessage());
-                }
+            } catch (ClassNotFoundException | JRException | SQLException | ArrayIndexOutOfBoundsException ex) {
+                response.sendRedirect("relatoriosF.jsp?status=error");
             } finally {
                 try {
                     con.close();

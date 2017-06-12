@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -35,6 +37,14 @@
                             </div>
                             <!-- Row do cadastro: -->
                             <div class="row row-lista-corpo">
+                                <c:choose>
+                                    <c:when test="${(param.status == 'error')}">
+                                        <div class="alert alert-danger alert-dismissable">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <p><strong>Ops!</strong> Parece que a folha de pagamento para esse mês ainda não foi fechada.</p>
+                                        </div>
+                                    </c:when>
+                                </c:choose>
                                 <!-- corpo da página -->
                                 <div class="col-md-12 corpo">
                                     <legend>Emitir Contra-cheque</legend>
@@ -58,48 +68,45 @@
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label>&nbsp;</label>
-                                            <input type="submit" class="btn btn-primary" value="Emitir Holêrite"/>
+                                            <input type="submit" class="btn btn-primary" value="Emitir Holerite"/>
                                         </div>
                                     </form>
                                     <c:choose>
-                                        <c:when test="${func == null}"><h2 class="text-center unselectable cor-disabled">Selecione um mês e clique em "Fechar Folha"</h2></c:when>
+                                        <c:when test="${func == null}"><h2 class="col-md-7 text-center unselectable cor-disabled">Selecione um mês e clique em "Emitir Holerite"</h2></c:when>
                                         <c:otherwise>
+                                            <div class="col-md-8"><h1>&nbsp;</h1></div>
                                             <c:set var="item" value="${func}"/>
-                                            <table class="table">
-                                                <tr>
-                                                    <th>Funcionário</th>
-                                                    <th>Email</th>
-                                                    <th>Cpf</th>                                                    
-                                                    <th>Departamento</th>
-                                                </tr>
-
-                                                <tr>
-                                                    <td><c:out value="${item.func.nome}"/></td>
-                                                    <td><c:out value="${item.func.email}"/></td>
-                                                    <td><c:out value="${item.func.cpf}"/></td>
-                                                    <td><c:out value="${item.func.departamento.nome}"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Cargo</th>
-                                                    <th>Salário bruto</th>
-                                                    <th>Salário liquido</th>                                                    
-                                                    <th>Carga minima</th>
-                                                </tr>
-                                                <tr>
-                                                    <td><c:out value="${item.func.cargo.nome}"/></td>
-                                                    <td><c:out value="${item.func.cargo.salario}"/></td>
-                                                    <td><c:out value="${item.func.cargo.liquido}"/></td>
-                                                    <td><c:out value="${item.func.cargo.cargaMinima}"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Horas Trabalhadas</th>
-                                                    <th>Mês de:</th>
-                                                </tr>
-                                                <tr>
-                                                    <td><c:out value="${item.func.cargo.nome}"/></td>
-                                                    <td><c:out value="${item.func.cargo.salario}"/></td>
-                                                </tr>
-                                            </table>
+                                            <div class="col-md-12">
+                                                <div class="panel col-md-4 panel-info">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title">Seus dados</h3>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <p><b>Nome: </b><c:out value="${item.func.nome}"/></p>
+                                                        <p><b>Email: </b><c:out value="${item.func.email}"/></p>
+                                                        <p><b>Celular:</b> <c:out value="${item.func.celular}"/></p>
+                                                        <p><b>Cpf: </b><c:out value="${item.func.cpf}"/></p>                                                    
+                                                        <p><b>Bairro:</b> <c:out value="${item.func.endereco.bairro}"/></p>                                                    
+                                                        <p><b>Departamento:</b> <c:out value="${item.func.departamento.nome}"/></p>
+                                                    </div>
+                                                </div>
+                                                <div class="panel col-md-7 margin-esq panel-info">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title">Holerite</h3>
+                                                    </div>
+                                                    <jsp:useBean id="data" class="java.util.Date"/>
+                                                    <fmt:formatDate var="ano" value="${data}" pattern="yyyy" />
+                                                    <div class="panel-body">
+                                                        <p class="col-md-6"><b>Mês:</b> <c:out value="${item.mes}"/>/${ano}</p>
+                                                        <p class="col-md-6"><b>Cargo:</b> <c:out value="${item.func.cargo.nome}"/></p>
+                                                        <p class="col-md-6"><b>Carga Horária Mínima:</b> <c:out value="${item.func.cargo.cargaMinima}"/> horas</p>
+                                                        <p class="col-md-6"><b>Horas Trabalhadas:</b> <c:out value="${item.horasTrabalhadas}"/> horas</p>
+                                                        <p class="col-md-6"><b>Salario Bruto:</b> R$ <c:out value="${item.func.cargo.salario}"/></p>
+                                                        <p class="col-md-6"><b>Salario Líquido:</b> R$ <c:out value="${item.func.cargo.liquido}"/></p>                                                    
+                                                        <p class="col-md-6"><b>Desconto de Impostos:</b> <c:out value="${item.func.cargo.descImposto}"/>%</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
