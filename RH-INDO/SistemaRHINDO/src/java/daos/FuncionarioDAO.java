@@ -40,11 +40,7 @@ public class FuncionarioDAO {
     private final String insertHoraTEMP = "INSERT INTO horasTemp (idFuncionario,nome, mes, horas,email) VALUES (?,?,?,?,?);";
     private final String insertHora = "INSERT INTO folhaPagamento (idFuncionario, mes, horas) VALUES (?,?,?);";
 
-    private final String selectFechaHolerite = "select f.nome, f.email, f.cpf, c.nome,c.salario,c.requisitos, p.horas,"
-            + "p.mes, c.horasMinimas, c.descontoImposto, d.nome"
-            + "from funcionario f, folhaPagamento p, cargo c, departamento d"
-            + "where f.id = p.idFuncionario and f.idCargo = c.id and"
-            + "f.idDepartamento = d.id and f.id=? and p.mes=?";
+    private final String selectFechaHolerite = "select f.nome, f.email, f.cpf, c.nome,c.salario,c.requisitos, p.horas, p.mes, c.horasMinimas, c.descontoImposto, d.nome from funcionario f, folhaPagamento p, cargo c, departamento d where f.id = p.idFuncionario and f.idCargo = c.id and f.idDepartamento = d.id and f.id=? and p.mes=?;";
 
     private Connection con = null;
     private PreparedStatement stmt = null;
