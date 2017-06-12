@@ -18,6 +18,7 @@ public class Cargo implements Serializable {
     private int id;
     private String nome;
     private double salario;
+    private double liquido;
     private String requisitos;
     private int cargaMinima;
     private double descImposto;
@@ -82,6 +83,13 @@ public class Cargo implements Serializable {
 
     public void setSalario(double salario) {
         this.salario = salario;
+    }
+    public double getLiquido() {
+        return liquido;
+    }
+
+    public void setLiquido(double liquido) {
+        this.liquido = liquido;
     }
 
     public String getRequisitos() {

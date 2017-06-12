@@ -58,6 +58,10 @@ public class Funcionario implements Serializable {
     public Funcionario() {
     }
 
+    public Funcionario(int idFunc, String nome, String cpf, String email, Cargo cargo, Departamento depto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getId() {
         return id;
     }

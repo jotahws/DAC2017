@@ -39,7 +39,13 @@ public class FuncionarioDAO {
     private final String deleteHoraTemp = "DELETE FROM horasTemp;";
     private final String insertHoraTEMP = "INSERT INTO horasTemp (idFuncionario,nome, mes, horas,email) VALUES (?,?,?,?,?);";
     private final String insertHora = "INSERT INTO folhaPagamento (idFuncionario, mes, horas) VALUES (?,?,?);";
-    
+
+    private final String selectFechaHolerite = "select f.nome, f.email, f.cpf, c.nome,c.salario,c.requisitos, p.horas,"
+            + "p.mes, c.horasMinimas, c.descontoImposto, d.nome"
+            + "from funcionario f, folhaPagamento p, cargo c, departamento d"
+            + "where f.id = p.idFuncionario and f.idCargo = c.id and"
+            + "f.idDepartamento = d.id and f.id=? and p.mes=?";
+
     private Connection con = null;
     private PreparedStatement stmt = null;
     private ResultSet rs = null;
@@ -70,6 +76,66 @@ public class FuncionarioDAO {
                 System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
             }
         }
+    }
+
+    public Funcionario buscaFuncPorID(int idFunc) throws ClassNotFoundException, SQLException {
+        try {
+            con = new ConnectionFactory().getConnection();
+            stmt = con.prepareStatement(selectFuncID);
+            stmt.setInt(1, idFunc);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                //funcionario
+                String nome = rs.getString("f.nome");
+                String cpf = rs.getString("f.cpf");
+                String rg = rs.getString("f.rg");
+                String email = rs.getString("f.email");
+                String celular = rs.getString("f.celular");
+                String perfil = rs.getString("f.perfil");
+                String senha = rs.getString("f.senha");
+                //Endereco
+                int idEnd = rs.getInt("e.id");
+                String rua = rs.getString("e.rua");
+                int numero = rs.getInt("e.numero");
+                String cep = rs.getString("e.cep");
+                String bairro = rs.getString("e.bairro");
+                //Cidade
+                int idCidade = rs.getInt("cid.id");
+                String nomeCidade = rs.getString("cid.nome");
+                //Estado
+                int idEstado = rs.getInt("est.id");
+                String nomeEstado = rs.getString("est.nome");
+                String uf = rs.getString("est.uf");
+                //Depto
+                int idDepto = rs.getInt("d.id");
+                String nomeDepto = rs.getString("d.nome");
+                String localizacao = rs.getString("d.localizacao");
+                //Cargo
+                int idCargo = rs.getInt("c.id");
+                String nomeCargo = rs.getString("c.nome");
+                double salario = rs.getDouble("c.salario");
+                String requisitos = rs.getString("c.requisitos");
+                int horasMinimas = rs.getInt("c.horasMinimas");
+                double descontoImposto = rs.getDouble("c.descontoImposto");
+                //instanciar
+                Estado estado = new Estado(idEstado, nomeEstado, uf);
+                Cidade cidade = new Cidade(idCidade, nomeCidade, estado);
+                Endereco endereco = new Endereco(idEnd, rua, cep, numero, bairro, cidade);
+                Departamento depto = new Departamento(idDepto, nomeDepto, localizacao);
+                Cargo cargo = new Cargo(idCargo, nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
+                Funcionario func = new Funcionario(idFunc, nome, rg, cpf, celular, email, endereco, cargo, depto, perfil, senha);
+                return func;
+            }
+        } finally {
+            try {
+                stmt.close();
+                con.close();
+                rs.close();
+            } catch (SQLException ex) {
+                System.out.println("Erro ao fechar parâmetros: " + ex.getMessage());
+            }
+        }
+        return null;
     }
 
     public List<Funcionario> listaFuncionarios() throws NullPointerException, ClassNotFoundException, SQLException {
@@ -138,7 +204,7 @@ public class FuncionarioDAO {
     public Funcionario fazLogin(String login, String senha) throws ClassNotFoundException, SQLException {
         try {
             con = new ConnectionFactory().getConnection();
-            stmt = con.prepareStatement(verificaLogin,Statement.RETURN_GENERATED_KEYS);
+            stmt = con.prepareStatement(verificaLogin, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, login);
             stmt.setString(2, senha);
             rs = stmt.executeQuery();
@@ -166,53 +232,35 @@ public class FuncionarioDAO {
         return null;
     }
 
-    public Funcionario buscaFuncPorID(int idFunc) throws ClassNotFoundException, SQLException {
+    public HorasTrabalhadas buscaHolerite(int idFunc, String mes) throws ClassNotFoundException, SQLException {
         try {
             con = new ConnectionFactory().getConnection();
-            stmt = con.prepareStatement(selectFuncID);
+            stmt = con.prepareStatement(selectFechaHolerite);
             stmt.setInt(1, idFunc);
+            stmt.setString(2, mes);
             rs = stmt.executeQuery();
             if (rs.next()) {
                 //funcionario
                 String nome = rs.getString("f.nome");
                 String cpf = rs.getString("f.cpf");
-                String rg = rs.getString("f.rg");
                 String email = rs.getString("f.email");
-                String celular = rs.getString("f.celular");
-                String perfil = rs.getString("f.perfil");
-                String senha = rs.getString("f.senha");
-                //Endereco
-                int idEnd = rs.getInt("e.id");
-                String rua = rs.getString("e.rua");
-                int numero = rs.getInt("e.numero");
-                String cep = rs.getString("e.cep");
-                String bairro = rs.getString("e.bairro");
-                //Cidade
-                int idCidade = rs.getInt("cid.id");
-                String nomeCidade = rs.getString("cid.nome");
-                //Estado
-                int idEstado = rs.getInt("est.id");
-                String nomeEstado = rs.getString("est.nome");
-                String uf = rs.getString("est.uf");
                 //Depto
-                int idDepto = rs.getInt("d.id");
                 String nomeDepto = rs.getString("d.nome");
-                String localizacao = rs.getString("d.localizacao");
+                //HorasTRABALHADAS
+                String mesEscolhido = rs.getString("p.mes");
+                int horas = rs.getInt("p.horas");
                 //Cargo
-                int idCargo = rs.getInt("c.id");
                 String nomeCargo = rs.getString("c.nome");
                 double salario = rs.getDouble("c.salario");
                 String requisitos = rs.getString("c.requisitos");
                 int horasMinimas = rs.getInt("c.horasMinimas");
                 double descontoImposto = rs.getDouble("c.descontoImposto");
-                //instanciar
-                Estado estado = new Estado(idEstado, nomeEstado, uf);
-                Cidade cidade = new Cidade(idCidade, nomeCidade, estado);
-                Endereco endereco = new Endereco(idEnd, rua, cep, numero, bairro, cidade);
-                Departamento depto = new Departamento(idDepto, nomeDepto, localizacao);
-                Cargo cargo = new Cargo(idCargo, nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
-                Funcionario func = new Funcionario(idFunc, nome, rg, cpf, celular, email, endereco, cargo, depto, perfil, senha);
-                return func;
+                //instanciar                
+                Departamento depto = new Departamento(nomeDepto);
+                Cargo cargo = new Cargo(nomeCargo, salario, requisitos, horasMinimas, descontoImposto);
+                Funcionario func = new Funcionario(idFunc, nome, cpf, email, cargo, depto);                
+                HorasTrabalhadas hrsTrab = new HorasTrabalhadas(horas,mesEscolhido,func);
+                return hrsTrab;
             }
         } finally {
             try {
@@ -362,5 +410,5 @@ public class FuncionarioDAO {
             }
         }
     }
-    
+
 }

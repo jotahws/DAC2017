@@ -11,13 +11,19 @@ import java.io.Serializable;
  *
  * @author JotaWind
  */
-public class HorasTrabalhadas implements Serializable{
+public class HorasTrabalhadas implements Serializable {
 
     private int horasTrabalhadas;
     private Funcionario func;
     private String mes;
 
     public HorasTrabalhadas() {
+    }
+
+    public HorasTrabalhadas(int horas, String mesEscolhido, Funcionario func) {
+        this.horasTrabalhadas = horas;
+        this.mes = mesEscolhido;
+        this.func = func;
     }
 
     public int getHorasTrabalhadas() {

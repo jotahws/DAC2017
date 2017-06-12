@@ -34,6 +34,10 @@ public class Departamento implements Serializable {
         this.localizacao = localizacao;
     }
 
+    public Departamento(String nomeDepto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getHorastrabalhadas() {
         return horastrabalhadas;
     }

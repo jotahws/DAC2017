@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import beans.Cargo;
 import beans.Funcionario;
 import beans.HorasTrabalhadas;
 import facade.Facade;
@@ -22,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -61,13 +63,37 @@ public class FolhaPagamentoServlet extends HttpServlet {
                 facade.fecharFolha(horas);
                 request.setAttribute("horas", horas);
                 status = "success";
-                
+
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/fecharFolha.jsp?status=" + status);
                 rd.forward(request, response);
             } catch (NullPointerException | ClassNotFoundException | SQLException ex) {
                 status = "errorEx";
             }
 
+        } else if ("holeriteFunc".equals(action)) {
+            HttpSession session = request.getSession();
+            Funcionario func = (Funcionario) session.getAttribute("funcionarioLogado");
+            int id = func.getId();
+            String mes = request.getParameter("mes");
+
+            try {
+                HorasTrabalhadas hTrab = facade.buscaHoleriteFuncionario(id, mes);
+                //Calculo liquido = bruto * imposto/10
+                hTrab.getFunc().getCargo().setLiquido((hTrab.getFunc().getCargo().getSalario()
+                        * hTrab.getFunc().getCargo().getDescImposto()) / 10);
+                //conferir se horas trabalhadas é menoir que hora minina do cargo
+                if (hTrab.getFunc().getCargo().getCargaMinima() < hTrab.getHorasTrabalhadas()) {
+                    hTrab.getFunc().getCargo().setSalario((hTrab.getFunc().getCargo().getSalario()
+                            * hTrab.getHorasTrabalhadas()) / hTrab.getFunc().getCargo().getCargaMinima());
+                }
+                request.setAttribute("func", hTrab);
+
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/contraCheque.jsp");
+                rd.forward(request, response);
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                status = "erroH";
+            }
         }
     }
 

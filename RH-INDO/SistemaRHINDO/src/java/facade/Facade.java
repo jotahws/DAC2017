@@ -188,10 +188,15 @@ public class Facade {
         funcDAO.removeHorasTemp();
     }
 
-    public void fecharFolha(List<HorasTrabalhadas> horas) {
+    public void fecharFolha(List<HorasTrabalhadas> horas) throws ClassNotFoundException, SQLException {
         FuncionarioDAO funcDAO = new FuncionarioDAO();
         for (HorasTrabalhadas item : horas) {
             funcDAO.fecharFolha(item); 
         }
+    }
+    
+    public HorasTrabalhadas buscaHoleriteFuncionario(int idFunc, String mes) throws ClassNotFoundException, SQLException {
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        return funcDAO.buscaHolerite(idFunc,mes);
     }
 }
