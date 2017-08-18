@@ -1,0 +1,110 @@
+<%-- 
+    Document   : relatorios
+    Created on : May 4, 2017, 4:20:51 PM
+    Author     : JotaWind
+--%>
+
+<%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <title>Relatórios - Sistema RHINDO</title>
+    </head>
+    <body>
+        <%@include file="/pre-fabricado/cabecalho.jsp" %>
+        <c:choose>
+            <c:when test="${funcionarioLogado.email == null}">
+                <c:redirect url="/login.jsp"/>
+            </c:when>
+            <c:otherwise>
+                <c:choose>
+                    <c:when test="${(funcionarioLogado.perfil != 'GERENTE-RH')}">
+                        <div class="container">
+                            <h1>Acesso Negado.</h1>
+                            <h2>Você não pode acessar a essa página</h2>
+                        </div>
+                    </c:when>
+                    <c:otherwise> 
+                        <div class="container">
+                            <!-- Row do input pesquisar: -->
+                            <div class="row row-busca-titulo">
+                                <div class="col-md-8 titulo">
+                                    <h1 class="col-md-10">Relatórios</h1>
+                                </div>
+                            </div>
+                            <!-- Row do relatório: -->
+                            <div class="row row-lista-corpo">
+                                <!-- corpo da página -->
+                                <div class="col-md-12 corpo corpo-relatorio">
+                                    <!-- Primeiro relatório -->
+                                    <div class="corpo-relatorio">
+                                        <legend>Lista de todos os Funcionários da empresa</legend>
+                                        <div class="form-group col-md-2">
+                                            <a href="RelatoriosServlet?action=relFuncionarios" class="btn btn-md btn-primary"><span class="glyphicon glyphicon-user"></span> Gerar Relatório</a>
+                                        </div>                                    </div >
+                                    <!-- Segundo relatório -->
+                                    <div class="corpo-relatorio">
+                                        <legend>Relatório de horas trabalhadas</legend>  
+                                        <form method="POST" action="RelatoriosServlet?action=relMes">
+                                            <div class="form-group col-md-4">
+                                                <label for="depto">Mês</label>
+                                                <select class="form-control" id="depto" name="mes">
+                                                    <option value="01">Janeiro</option>
+                                                    <option value="02">Fevereiro</option>
+                                                    <option value="03">Março</option>
+                                                    <option value="04">Abril</option>
+                                                    <option value="05">Maio</option>
+                                                    <option value="06">Junho</option>
+                                                    <option value="07">Julho</option>
+                                                    <option value="08">Agosto</option>
+                                                    <option value="09">Setembro</option>
+                                                    <option value="10">Outubro</option>
+                                                    <option value="11">Novembro</option>
+                                                    <option value="12">Dezembro</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <label>&nbsp;</label>
+                                                <input type="submit" class="btn btn-primary" value="Gerar Relatório"/>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- Terceiro relatório -->
+                                    <div class="corpo-relatorio">
+                                        <legend>Funcionários com horário atrasado</legend>
+                                        <form method="POST" action="RelatoriosServlet?action=relAtrasados">
+                                            <div class="form-group col-md-4">
+                                                <label for="mes">Mês</label>
+                                                <select class="form-control" id="depto" name="mes">
+                                                    <option value="01">Janeiro</option>
+                                                    <option value="02">Fevereiro</option>
+                                                    <option value="03">Março</option>
+                                                    <option value="04">Abril</option>
+                                                    <option value="05">Maio</option>
+                                                    <option value="06">Junho</option>
+                                                    <option value="07">Julho</option>
+                                                    <option value="08">Agosto</option>
+                                                    <option value="09">Setembro</option>
+                                                    <option value="10">Outubro</option>
+                                                    <option value="11">Novembro</option>
+                                                    <option value="12">Dezembro</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <label>&nbsp;</label>
+                                                <input type="submit" class="btn btn-primary" value="Gerar Relatório"/>
+                                            </div>                                        
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </c:otherwise>
+        </c:choose>
+    </body> 
+</html>

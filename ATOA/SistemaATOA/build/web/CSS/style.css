@@ -1,0 +1,105 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10/05/2017, 10:20:41
+    Author     : MauMau
+
+*/
+
+/* TELA LOGIN */
+.page-title {
+    text-align:center;
+}
+.panel-default {
+    opacity: 0.9;
+    margin-top:100px;
+}
+
+/* CSS DOS CONTEUDOS MEIO*/
+.row-busca-titulo {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.row-busca-titulo h1 {
+    margin: 0px;
+    padding: 0px;
+}
+.row-lista-corpo {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.form-group.last { 
+    margin-bottom:0px; 
+}
+
+#textologin{
+    margin-left:20px ;
+}
+
+.lista-lat {
+}
+
+.corpo{
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    background-color: #f8f8f8;
+}
+
+.corpo-relatorio{
+    padding: 20px;
+}
+
+.corpo legend h2 {
+    padding-top: 10px;
+}
+
+.legenda{
+    padding-top: 10px;
+}
+
+.cadastro { 
+    margin: 20px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.cor-disabled{
+    color: #ddd;
+}
+
+.gi-5x{
+    font-size: 4em;
+
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.relatorio-dep{
+    border-left: 1px solid #ddd;
+}
+
+.celula-corpo-tipo{
+    padding: 10px 0px;
+}
+
+.table-big {
+    width: 800px;
+}
+
+.margin-topo{
+    margin: 20px 0px;
+}
