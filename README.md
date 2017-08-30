@@ -1,5 +1,5 @@
 
-# Matéria: Desenvolvimento de Aplicações Corporativas
+# Desenvolvimento de Aplicações Corporativas
 
 Atividade desenvolvida como requisito do curso de Análise e Desenvolvimento de Sistemas da UFPR. 
 
